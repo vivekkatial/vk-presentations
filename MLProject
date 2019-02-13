@@ -1,0 +1,10 @@
+name: auckland_ml_summit
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      C: float
+      solver: str
+    command: "python train.py {C} {solver}"
