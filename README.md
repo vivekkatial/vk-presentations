@@ -1,3 +1,8 @@
-# Example ML Flow Functionality
+# Presentations, Seminars, etc.
 
-Here is the code I used for producing the output you observed at the Auckland Machine Learning Summit 14/02/2019
+![Maintenance](https://img.shields.io/maintenance/yes/2019.svg?style=flat-square)
+
+This repository contains slides and demo-stuff used in talks given by me.
+
+
+
