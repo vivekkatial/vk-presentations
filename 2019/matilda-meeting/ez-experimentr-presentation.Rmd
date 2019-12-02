@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Slides
-- Check out the slides at https://tinyurl.com/rpoe9jw
+- Check out the slides at https://tinyurl.com/scnb3va
 
 
 ## About Me
@@ -32,53 +32,54 @@ knitr::include_graphics('./research-flow.png')
 
 ## Issues
 
-1. Data Prep:
-    + Want to test many different parameters
-2. Simulating,Training, Solving:
-    + Track various metrics
-    + Use different algorithms or solvers
-3. Analysis:
-    + Work needs to be reproducible
-4. Re-iterate:
-    + Need to be able to track parameters, metrics, etc...
+>1. Data Prep:
+>    + Want to test many different parameters
+>2. Simulating,Training, Solving:
+>    + Track various metrics
+>    + Use different algorithms or solvers
+>3. Analysis:
+>    + Work needs to be reproducible
+>4. Re-iterate:
+>    + Need to be able to track parameters, metrics, etc...
 
-- Other issue is that this all needs to **scale**
+>- Other issue is that this all needs to **scale**
 
 ## Introducing "EZ-EXPERIMENTr"
 
-- **EZ-EXPERIMENTr** is a toolkit under-development with the aim to help researchers run automated experiments on an HPC cluster.
-- How it works?
-    - *SPARTAN* to run heavy-duty experiment code
-    - *Melbourne Research Cloud (MRC)* to host server that tracks experiments
-    - *Singularity Containers* to make each experimental run fully reproducible
-    - *GitHub* to manage and version code
-    - `yaml` to configure and specify a run of each experiment
-   - *mlflow* to track parameters, metrics at scale
+>- **EZ-EXPERIMENTr** is a toolkit under-development with the aim to help researchers run automated experiments on an HPC cluster.
+>- How it works?
+>    - *SPARTAN* to run heavy-duty experiment code
+>    - *Melbourne Research Cloud (MRC)* to host server that tracks experiments
+>    - *Singularity Containers* to make each experimental run fully reproducible
+>    - *GitHub* to manage and version code
+>    - `yaml` to configure and specify a run of each experiment
+>   - *mlflow* to track parameters, metrics at scale
 
 ## Cloud Infrastructure
 
 ### SPARTAN and MRC
 
-- Spartan is High Performance Computing (HPC) system operated by Research Platform Services (ResPlat) at The University of Melbourne.
-- Why?
-    - Computing takes too long!
-    - Lack of memory and speed
+>- Spartan is High Performance Computing (HPC) system operated by Research Platform Services (ResPlat) at The University of Melbourne.
+>- Why?
+>    - Computing takes too long!
+>    - Lack of memory and speed
 
-- The Melbourne Research Cloud (MRC) provides Infrastructure-as-a-Service (IaaS) cloud computing to the University of Melbourne researchers.
-- Why?
-    - Quickly deploy virtual machines
-    - Similar to AWS, Microsoft Azure, GCP
+>- The Melbourne Research Cloud (MRC) provides Infrastructure-as-a-Service (IaaS) cloud computing to the University of Melbourne researchers.
+>- Why?
+>    - Quickly deploy virtual machines
+>    - Similar to AWS, Microsoft Azure, GCP
 
 ## Singularity Containers
 
-- Singularity is a container technology. Essentially a container is a curated collection of resource requirements to run an application.
-- Specified by a simple text file which is easily documented and version-controlled through tools like Git. 
-- Allow for the reproducibility of entire environments and also make applications portable. 
-- Container technologies like Docker are widely used in industry, however often in research environments (where arguably reproducibility is most important) users don't have root access to the computing resources they use (particularly in HPC).
-- Singularity is a container-technology designed for use in HPC environments. 
+>- Singularity is a container technology. Essentially a container is a curated collection of resource requirements to run an application.
+>- Specified by a simple text file which is easily documented and version-controlled through tools like Git. 
+>- Allow for the reproducibility of entire environments and also make applications portable. 
+>- Container technologies like Docker are widely used in industry, however often in research environments (where arguably reproducibility is most important) users don't have root access to the computing resources they use (particularly in HPC).
+>- Singularity is a container-technology designed for use in HPC environments. 
 
 ## Example Container
 
+\small
 ```{bash, eval=FALSE,}
 BootStrap: library
 From: ubuntu:16.04
@@ -96,8 +97,42 @@ From: ubuntu:16.04
 %labels
     Author 'Vivek Katial'
 ```
+\normalsize
+
+Check it out at: https://sylabs.io/singularity/
 
 
+## GitHub
+>- A version control system designed to keep track of all your changes
+>- Enables you to revert any changes and go back to a previous state
+>- Git versions the project not files
+>- Git enables you to work on many different features simultaneously 
+
+>Check it out at: https://www.github.com/
+
+
+## YAML
+
+>- A recursive acronym for: *YAML Ain't Markup Language*
+>- Often used in configuration files
+
+>
+```{r, eval=F, echo=T}
+experiment: 
+  name: "three-sat"
+  author: "vivek"
+  tracking-uri: "http://localhost:5000"
+  seed: 1032918
+```
+
+## MLFlow
+
+>- MLFlow is an open-source tool developed in industry to help manage the development life-cycle of R&D projects (in particular machine learning)
+>- The MLflow Tracking component is an API and UI for logging parameters, code versions, metrics, and output files when running your machine learning code and for later visualizing the results.
+>- MLflow Tracking lets you log and query experiments using Python, REST, R API, and Java.
+>- Easily integrates with workflow
+
+>- Example: "https://localhost:5000"
 
 
 ## Architecture
