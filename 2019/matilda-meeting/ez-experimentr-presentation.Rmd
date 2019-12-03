@@ -6,11 +6,9 @@ date: "09/12/2019"
 output: 
   beamer_presentation:
     slide_level: 2
+    theme: "Singapore"
+    colortheme: "whale"
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
 
 ## Slides
 - Check out the slides at https://tinyurl.com/scnb3va
@@ -44,7 +42,9 @@ knitr::include_graphics('./research-flow.png')
 
 >- Other issue is that this all needs to **scale**
 
-## Introducing "EZ-EXPERIMENTr"
+# Introducing "EZ-EXPERIMENTr"
+
+## Overview
 
 >- **EZ-EXPERIMENTr** is a toolkit under-development with the aim to help researchers run automated experiments on an HPC cluster.
 >- How it works?
@@ -80,7 +80,7 @@ knitr::include_graphics('./research-flow.png')
 ## Example Container
 
 \small
-```{bash, eval=FALSE,}
+```{bash, eval=FALSE, echo=T}
 BootStrap: library
 From: ubuntu:16.04
 
@@ -99,7 +99,7 @@ From: ubuntu:16.04
 ```
 \normalsize
 
-Check it out at: https://sylabs.io/singularity/
+>- Check it out at: https://sylabs.io/singularity/
 
 
 ## GitHub
@@ -108,7 +108,7 @@ Check it out at: https://sylabs.io/singularity/
 >- Git versions the project not files
 >- Git enables you to work on many different features simultaneously 
 
->Check it out at: https://www.github.com/
+>- Check it out at: https://www.github.com/
 
 
 ## YAML
@@ -116,7 +116,7 @@ Check it out at: https://sylabs.io/singularity/
 >- A recursive acronym for: *YAML Ain't Markup Language*
 >- Often used in configuration files
 
->
+\pause
 ```{r, eval=F, echo=T}
 experiment: 
   name: "three-sat"
@@ -145,25 +145,26 @@ knitr::include_graphics('./ez-experimentr-workflow-simple.png')
 
 ### Experiments and Runs
 
-- The tool is organized around the concept of *experiments* and *runs*. 
-- An experiment can be considered the wider project.
-    - Each experiment is defined by a **GitHub** repository
-- A run is an execution of one-configuration of that experiment. A run consists of:
-    - Code Version
-    - Parameters
-    - Metrics
-    - Artifacts
+>- The tool is organized around the concept of *experiments* and *runs*. 
+>- An experiment can be considered the wider project.
+>    - Each experiment is defined by a **GitHub** repository
+>- A run is an execution of one-configuration of that experiment. A run consists of:
+>    - Code Version
+>    - Parameters
+>    - Metrics
+>    - Artifacts
 
 ## Define an Experiment
 
-- Each experiment is defined by a text file
-- The text file specifies:
-    - One configuration of the experiment
-    - Parameters
-    - Path to scripts
-- Easy to understand 
+>- Each experiment is defined by a text file
+>- The text file specifies:
+>    - Where to run the experiment
+>    - Where to store data
+>    - Link to source code
+>- Easy to understand 
 \newline
 
+\pause
 \tiny
 ```{r, eval=F, echo=T}
 experiment:
@@ -182,7 +183,7 @@ experiment:
 ::: {.column width="40%"}
 - Each experiment is defined by a text file
 - The text file specifies:
-    - One configuration of the experiment
+    - One run configuration of the experiment
     - Parameters
     - Path to scripts
 - Easy to understand
@@ -200,16 +201,16 @@ experiment:
 initialise:
   source: "src/generate-instances.R"
   params:
-    n_qubits: "5"
-    k: "4"
-    n_sat: "3"
+    n_qubits: "{{n_qubits}}"
+    k: "{{k}}"
+    n_sat: "{{n_sat}}"
     
 build_hamiltonians:
   source: "src/run-time-evolution.R"
   params:
-    time_T: "100"
-    t_step: "0.1"
-    num_energy_levels: "4"
+    time_T: "{{time_T}}"
+    t_step: "{{t_step}}"
+    num_energy_levels: "{{num_energy_levels}}"
 
 results:
   source: "src/produce-plots"
@@ -218,7 +219,41 @@ results:
 :::
 ::::::::::::::
 
+## Generating Experiments
+
+>- Each experiment has a `make-templates` script
+>- This script generates all configurations of your experiment
+>    - Based on a yaml file: `params_spec.yml`
+
+\pause
+\small
+```{r, eval=F, echo=T}
+n_qubits:
+  1:20
+t_step:
+  0.01
+  0.1
+k:
+  1:20
+```
+\normalsize
 
 
+## Parallelising with SPARTAN
+
+>- We now have *many* experimental run configurations
+>- We build a Singularity Container that specifies all requirements to run the experiment down to an OS-level
+>- We pass each run configuration as an argument to our Container
+\newline
+\pause
+>- `singularity run example-image.img PARAMETER_FILE_NAME.yml`
+
+## Putting it all together
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics('./ez-experimentr-workflow-detail.png')
+```
+
+# Thank You!
 
 
