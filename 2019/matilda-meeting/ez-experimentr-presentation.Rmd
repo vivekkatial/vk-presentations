@@ -170,7 +170,7 @@ knitr::include_graphics('./ez-experimentr-workflow-simple.png')
 experiment:
   repository: "aqc-three-sat-sim" # GitHub Repostiry
   github_url: "https://github.com/vivekkatial/aqc-three-sat-sim"
-  cluster_uri: "/data/cephfs/punim1074/"
+  cluster_uri: "/data/cephfs/punim1074/" # Where to run code
   cluster_scratch_dir: "/scratch/punim1074/"
   cluster_provider: "unimelb_SPARTAN"
   singularity_image_uri: "ubuntu@115.146.94.33:aqc-three-sat-sim/portable-image.img"
