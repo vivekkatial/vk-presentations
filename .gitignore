@@ -125,3 +125,5 @@ dmypy.json
 mlruns/*
 **/mlruns/*
 .Rproj.user
+**.DS_Store
+**.Rhistory
