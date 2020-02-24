@@ -1,0 +1,224 @@
+---
+title: "Optimisation via Adiabatic Quantum Computing"
+author: 
+    - "Vivek Katial"
+date: "22/01/2020"
+bibliography: "main.bib"
+csl: aims-mathematics.csl
+header-includes: 
+    - \usepackage{amssymb}
+    - \usepackage{amsmath}
+    - \usepackage{amsthm}
+    - \usepackage{braket}
+    - \usepackage{xcolor}
+output: 
+  beamer_presentation:
+    slide_level: 2
+    theme: "Singapore"
+    colortheme: "whale"
+---
+
+# Introduction
+
+## Main Research Question
+
+- What instances characteristics of optimisation problems make them predisposed to being solved on a Quantum Computer?
+
+# Background
+
+## Quantum Bits (Qubits)
+
+>- In normal computation, bits have a *state* which is either 0 or 1. Similarly in qubits, states are either $\ket{0}$ or $\ket{1}$. In Linear Algebra we may represent the states as follows:
+
+>- $$
+\ket{0} = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \qquad \text{and} \qquad \ket{1} = \begin{pmatrix} 0 \\  1 \end{pmatrix}
+$$
+
+>- A single qubit may be represented by as follows:
+
+>- $$
+  \ket{\psi} = \alpha \ket{0} +  \beta \ket{1} \qquad \text{where} \enspace \alpha,\beta \in \mathbb{C}
+$$
+
+>- Also, $|\alpha|^2$ and $|\beta|^2$ correspond to the probability associated with measuring either $\ket{0}$ or $\ket{1}$,
+
+## Quantum Bits (Qubits)
+
+>- The state $$\ket{+} = \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}$$
+>- This state corresponds to a 50% chance of being in  $\ket{0}$ or $\ket{1}$ as $\alpha^2 = \beta^2=0.5$
+
+## Extending to More Qubits
+
+>- Classically for **2-bit** system we have 4 possible bits $00$, $01$, $10$ and $11$.
+>- In quantum computing these can be specified as the following: $\ket{00}$, $\ket{01}$, $\ket{10}$, $\ket{11}$. Using Linear Algebra the state can be represented by a vector of length $2^2=4$. For example:
+
+>- $$
+\ket{00} = \begin{pmatrix}1 \\ 0 \\ 0 \\ 0 \end{pmatrix} \quad \text{also,} \sum_{x \in \{0,1\}^2}|\alpha_x|^2 = 1
+$$
+>- The state $\ket{\psi} = \frac{1}{2}\ket{00} + \frac{1}{2}\ket{01} + \frac{1}{2}\ket{10} + \frac{1}{2}\ket{11}$ corresponds to an equal likelhood of being any of the basis states.
+>- To extend this framework to $n$ qubits, we must represent that state by a $2^n$ vector. A shorthand notation has been developed where $\ket{0}^{\otimes2}$ corresponds to the state $\ket{00}$
+
+## Adiabatic Quantum Computing (AQC)
+
+>- Adiabatic Quantum Computation is a computational model which relies on the *adiabatic thereom* of quantum mechanics to compute calculations.
+>- The famous *Schrödinger Equation* is well-known to describe the time evolution of a quantum state:
+
+>- $$
+i\hbar \frac{d}{dt} \ket{\psi (t)} = H(t) \ket{\psi{t}}
+$$
+
+>- $\ket{\psi(t)}$ is our state vector, $H(t)$ is the time dependent Hamiltonian. A Hamiltonian of an $n$-qubit system $H(t)$ is given by  $2^n \times 2^n$ matrix.
+
+## Adiabatic Quantum Computing (AQC)
+
+>- An adiabatic computation can be expressed by specifying two Hamiltonians, denoted by $H_B$ and $H_P$ where $H_B$ is our *initial* Hamiltonian and $H_P$ is the *final* or *problem* Hamiltonian.
+>- $$\begin{matrix}
+  H_B &  \xrightarrow{\hspace*{3cm}} & H_P \\
+\ket{\psi_B} &  \text{transform } H(t) &  \ket{\psi_P} \\ 
+\text{known state} &  &  \text{unknown}
+\end{matrix}
+$$
+>- Loosely speaking, the adiabatic theorem tells us that if we vary from $H_B$ to $H_P$ *slowly enough* the system will remain in its ground state. This fact is a direct result of the Adiabatic Theorem.
+
+
+## Adiabatic Quantum Computing (AQC)
+
+>- To conduct the computation we evolve $\ket{\psi(t)}$ till time $t=T$ such that $\ket{\psi(t=T)}$ encodes the answer. The computation is done using a Hamiltonian which linearly interpolates between $H_B$ and $H_P$. Specifically as below:
+
+>- $$
+H(t) = \left(1 - \frac{t}{T}\right)H_B + \frac{t}{T}H_P
+$$
+>- How fast? 
+>- $$
+ T =  \frac{1}{\min_t  g(t)^2}
+$$
+>- Where $g(t)$ is the difference between the first two smallest eigenvalues of $H(t)$
+
+
+## 3SAT (Exact Cover)
+
+>- The satisfiability problem, abbreviated SAT, is a classic example of an NP-complete problem [@Cook1971]
+>- The basic SAT formulation can be described as follows: Given a boolean formula (AND $\land$, OR $\lor$ , NOT $\neg$) over $n$ variables ($z_1, z_2, ... , z_n$). Can one set $z_i$'s in a manner such that the Boolean formula is true?
+>- A clause is an expression which the variables must satisfy. For example $z_1 \land z_2 \implies z_1 = z_2 = 1$
+
+
+## 3SAT (Exact Cover Example)
+
+>- Consider a 3-bit number with two clauses:
+>    - $z_1 + z_2 = 1$
+>    - $z_1 + z_3 = 1$
+>- Here we have 8 possible assignments, namely $\{000, 001, 010, 011, 100, 101, 110, 111\}$
+>- However, our **satisfying assignments** are $z_1 = 1, z_2 = 0, z_3 = 0$ or $z_1 = 0, z_2 = 1, z_3 =1$
+>- The 3-SAT problem in particular is a problem where each clause is comprised of 3 literals.
+
+## Mapping 3SAT to AQC
+
+>- How do we construct $H_B$ and $H_P$ so that we can solve our optimisation problem?
+
+## Mapping 3SAT to AQC ($H_B$)
+
+>- We initialise our system in a state that is easy to prepare:
+
+>- $$
+	\ket{\psi} = \ket{z_1} \ket{ z_2} \dots \ket{ z_n}
+$$
+
+>- We couple a magnetic field in the $x-$direction to each qubit. Resulting in the following ground state for $H_B$:
+
+>- $$
+ \ket{\psi_g(T=0)} = \frac{1}{2^{n/2}}\sum_{i=1}^{n}\ket{z_1} \ket{ z_2} \dots \ket{ z_n}
+$$
+
+>- This ground state corresponds to a uniform superposition across all possible qubit assignments.
+
+## Mapping 3SAT to AQC ($H_B$)
+
+>- Mathematically speaking, if we wish to apply an $x$ rotation on the 1st qubit. We define the following Hamiltonian:
+>- $$
+	H_B^{1} = \sigma^X_1 = X^{(1)} \otimes I^{(2)} \otimes I^{(3)} \ldots \otimes I^{(n)}, \qquad X= \begin{pmatrix} 0 & 1 \\ 1 & 0\end{pmatrix}, \enspace I = \begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix}
+$$
+>- This Hamiltonian is of dimensions $2^n \times 2^n$
+>- Thus, our initial Hamiltonian is given by:
+>- $$
+	H_B = \sum_{i=1}^{n} H_B^{i} \enspace, \quad H_B^{i} = \frac{1}{2}\left(1 - \sigma^{X}_{i}\right), \quad \text{where} \enspace\dim(H_B) = 2^n \times 2^n
+$$
+>- *Note:* We have applied a normalisation here.
+
+## Mapping 3SAT to AQC ($H_P$)
+
+>- Recall, $H_P$ must be constructed such that it encodes the solution. Thus we prepare a Hamiltonian, whose lowest energy state corresponds to a state vector containing our solution.
+>- Let's suppose we have a clause $C$ which involves the three bits $i_C$, $j_C$ and $k_C$, and we define the following energy function:
+>- $$
+h_C (z_{i_C}, z_{j_C}, z_{k_C}) = \begin{cases} 0 \qquad &\text{if $i_C$, $j_C$, $k_C$ satisfy $C$} \\ 1 \qquad & \text{if not satisfied} \end{cases}
+$$
+>- Now we let,
+>- $$
+H_P^{C} \ket{z_1} \dots \ket{z_n} = h_C (z_{i_C}, z_{j_C}, z_{k_C})\ket{z_1} \dots \ket{z_n}
+$$
+
+## Mapping 3SAT to AQC ($H_P$)
+
+>- Finally we express our problem Hamiltonian as follows:
+>- $$
+H_P = \sum_{C} H^C_P
+$$
+>- We then evolve our system with the following interpolation:
+>- $$
+H(t) = \left(1 - \frac{t}{T}\right)H_B + \frac{t}{T}H_P
+$$
+>- Finally, complete measurement
+
+## Proposed Research
+
+>- Depending on different structures of instances, classical algorithms may perform differently to Quantum ones.
+>- We are looking to investigate which types of instances are more pre-disposed to being solved on Quantum Computers:
+>- To do this we will simulate AQC and measure the "quantum-ness" of each instance:
+>    1. Minimum Energy Gap $g_{\text{min}}$
+>    2. Maximum Entropy of Entanglement
+
+## Proposed Research
+
+>- This will involve large amounts of generating experimental data
+>- To survey the instances we will deploy the instance space analysis methodology
+>- Ultimately, we can build a prediction model which maps instance features of different 3SAT instances to their inherent "Quantumness"
+
+## Proposed Research
+
+>- Given that we have access to IBM's Quantum Computer, we may also apply a discretized version of AQC and produce results from a *real quantum computer*
+>- This methodology can then be further extended to other optmisation problems such as Quadratic Unconstrained Binary Optimisation (QUBO)
+>- More ideas likely to come...
+
+## Current Progress
+
+>1. Learning Quantum Mechanics and Quantum Computing
+>2. Conducting literature review on current advances in Adiabatic Quantum Computing.
+>3. Developed working environment, set up GitHub, scripts, organizational tools enabling an efficient working environment.
+
+## Current Progress
+
+>4. Developed an architecture to run reproducible experiments at scale
+>5. Provisioned all infrastructure required for above on Melbourne Research Cloud and SPARTAN
+>6. Developed a working implementation of Adiabatic Quantum Computing on different instances of 3SAT.
+
+## Next Steps (till Confirmation)
+
+>1. Complete Literature Review of current advances in AQC.
+>2. Implement scripts to generate **hard** instances of 3SAT with respect to *instance characteristics*.
+>3. Apply Instance Space Methodology from MATILDA to find decision boundaries for *Entanglement Entropy* and *Minimum Energy Gap*
+
+## Next Steps (till Confirmation)
+
+>4. Extend implementation to work on QAOA and VQE (discretized version of AQC)
+>5. Learn C++ effectively, this will be required when implementing larger simulations. 
+>6. Apply Tensor Network methodology on current simulations
+>7. Further advance knowledge of Quantum Physics (possibly through taking a course in Quantum Computing)
+>8. Extend research to look at other optimisation problems
+
+
+## About Me
+- Vivek Katial (vkatial@student.unimelb.edu.au)
+  - PhD Candidate (Optimisation on Quantum Computers)
+- Check out the slides at https://tinyurl.com/vkatial-preconfirmation
+
+# References
+
