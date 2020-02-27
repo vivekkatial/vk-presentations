@@ -120,13 +120,20 @@ $$
 ## Algorithm Selection
 
 >- Given a set of problem instances, predicting which algorithm is most likely to best perform was first explored by Rice [@Rice1976].
->- ![Rice's Framework [@Smith-Miles2015]](rices-framework-for-algorithm-selection.png)
+\pause
+```{r echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics('./rices-framework-for-algorithm-selection.png')
+```
+
 >- However, what we are interested in is probing the strengths and weaknesses of AQC for different instances of SAT.
 
 ## Instance Space Methodology
 
 >- The instance space methodology presented in [@Smith-Miles2015; @Smith-Miles2012; @Smith-Miles2014] extends Rice's framework.
->- ![MATIDLA Framework](instance-space-methodology.png) 
+\pause
+```{r echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics('./instance-space-methodology.png')
+```
 
 ## Hardness Features for 3SAT
 
