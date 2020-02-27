@@ -6,6 +6,7 @@ date: "22/01/2020"
 bibliography: "main.bib"
 csl: aims-mathematics.csl
 header-includes: 
+    - \widowpenalties 1 150
     - \usepackage{amssymb}
     - \usepackage{amsmath}
     - \usepackage{amsthm}
@@ -125,13 +126,32 @@ $$
 ## Instance Space Methodology
 
 >- The instance space methodology presented in [@Smith-Miles2015; @Smith-Miles2012; @Smith-Miles2014] extends Rice's framework.
->- ![MATIDLA Framework](instance-space-methodology.png =250x) 
+>- ![MATIDLA Framework](instance-space-methodology.png) 
 
 ## Hardness Features for 3SAT
 
 >- Selman et. al demonstrated [@Selman1996] the existence of a phase transition for random 3SAT problems.
 >- SATZilla and Nudelman et. al have identified 84 different features for SAT instances [@Xu2008; @Nudelman2004].
 
+\pause
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+\small
+1. Problem Size Features
+2. Variable-Clause Graph Features
+3. Variable Graph Features
+4. Clause Graph Features
+5. Proximity to Horn Formula
+:::
+::: {.column width="50%"}
+\pause
+\small
+6. Balance Features
+7. DPLL Probing Features
+8. Local Search Probing Features
+9. LP-Based Features
+:::
+::::::::::::::
 
 ## Quantum Computing Research into Hard SAT problems
 
@@ -172,4 +192,6 @@ $$
 - Check out the slides at https://tinyurl.com/vkatial-preconfirmation
 
 # References
+
+## References {.allowframebreaks}
 
