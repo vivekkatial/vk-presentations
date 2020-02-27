@@ -82,6 +82,7 @@ $$
 ## Mapping 3SAT to AQC
 
 >- How do we construct $H_B$ and $H_P$ so that we can solve our optimisation problem?
+>- Farhi et al describes it very well.
 
 ## Mapping 3SAT to AQC ($H_P$)
 
@@ -114,15 +115,23 @@ $$
 >- Given that we have access to IBM's Quantum Computer, we may also apply a discretized version of AQC, QAOA and produce results from a *real quantum computer*
 >- This methodology can then be further extended to other optmisation problems that can be mapped to Quadratic Unconstrained Binary Optimisation (QUBO) problems.
 
+
+## Algorithm Selection
+
+>- Given a set of problem instances, predicting which algorithm is most likely to best perform was first explored by Rice [@Rice1976].
+>- ![Rice's Framework [@Smith-Miles2015]](rices-framework-for-algorithm-selection.png)
+>- However, what we are interested in is probing the strengths and weaknesses of AQC for different instances of SAT.
+
 ## Instance Space Methodology
 
->- Traditional framework of Rice 
->- MATILDA Extension
+>- The instance space methodology presented in [@Smith-Miles2015; @Smith-Miles2012; @Smith-Miles2014] extends Rice's framework.
+>- ![MATIDLA Framework](instance-space-methodology.png =250x) 
 
-## Instance Features for 3SAT
+## Hardness Features for 3SAT
 
->- Phase Transition (What makes SAT hard)
->- SAT-Zilla Characteristics
+>- Selman et. al demonstrated [@Selman1996] the existence of a phase transition for random 3SAT problems.
+>- SATZilla and Nudelman et. al have identified 84 different features for SAT instances [@Xu2008; @Nudelman2004].
+
 
 ## Quantum Computing Research into Hard SAT problems
 
