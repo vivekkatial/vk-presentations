@@ -73,6 +73,7 @@ $$
 
 ## 3SAT (Exact Cover Example)
 
+>- Let's start with a trivial example of 2SAT to illustrate the problem.
 >- Consider a 3-bit number with two clauses:
 >    - $z_1 + z_2 = 1$
 >    - $z_1 + z_3 = 1$
@@ -83,39 +84,31 @@ $$
 ## Mapping 3SAT to AQC
 
 >- How do we construct $H_B$ and $H_P$ so that we can solve our optimisation problem?
->- Farhi et al describes it very well.
-
-## Mapping 3SAT to AQC ($H_P$)
-
->- Finally we express our problem Hamiltonian as follows:
->- $$
-H_P = \sum_{C} H^C_P
-$$
+>- This is described in considerable detail in [@Farhi2001].
 >- We then evolve our system with the following interpolation:
 >- $$
 H(t) = \left(1 - \frac{t}{T}\right)H_B + \frac{t}{T}H_P
 $$
->- Finally, complete measurement
+>- Finally, complete measurement and our solution is our final state $\ket{\psi(t=T)}$
 
 ## Proposed Research
 
 >- Depending on different structures of instances, classical algorithms may perform differently to Quantum ones.
 >- We are looking to investigate which types of instances are more pre-disposed to being solved on Quantum Computers:
->- To do this we will simulate AQC and measure the "quantum-ness" of each instance:
+>- To do this we will simulate AQC and probe the "quantumness" of each instance:
 >    1. Minimum Energy Gap $g_{\text{min}}$
 >    2. Maximum Entropy of Entanglement
 
 ## Proposed Research
 
 >- This will involve large amounts of generating experimental data
->- To survey the instances we will deploy the instance space analysis methodology
+>- To survey the instances we will deploy the instance space analysis methodology [@Smith-Miles2015; @Smith-Miles2012; @Smith-Miles2014] 
 >- Ultimately, we can build a prediction model which maps instance features of different 3SAT instances to their inherent "Quantumness"
 
 ## Proposed Research
 
->- Given that we have access to IBM's Quantum Computer, we may also apply a discretized version of AQC, QAOA and produce results from a *real quantum computer*
+>- Given that we have access to IBM's Quantum Computer, we can also use this approach on QAOA and produce results from a *universal quantum computer*.
 >- This methodology can then be further extended to other optmisation problems that can be mapped to Quadratic Unconstrained Binary Optimisation (QUBO) problems.
-
 
 ## Algorithm Selection
 
@@ -124,7 +117,6 @@ $$
 ```{r echo=FALSE, out.width='60%', fig.align='center'}
 knitr::include_graphics('./rices-framework-for-algorithm-selection.png')
 ```
-
 >- However, what we are interested in is probing the strengths and weaknesses of AQC for different instances of SAT.
 
 ## Instance Space Methodology
@@ -162,9 +154,17 @@ knitr::include_graphics('./instance-space-methodology.png')
 
 ## Quantum Computing Research into Hard SAT problems
 
-- Different Paths (Farhi 2009)
-- Hamiltonian Parameters (Choi)
-- Volks group research on SAT 
+>- In their seminal paper [@Farhi2001] Farhi et al. aswell as Hogg et al. [@Hogg2002] touched on the phase transition and showed that the minimum energy gap perhaps scaled polynomially with $n$ as roughly $N^2$.
+>- However in 2009,  Young et al [@Young2009]. demonstrated via monte-carlo simulations of $N=256$ that some USA instances have a *quantum phase transition*.
+>- Their research indicated that as $N \rightarrow \infty$ this fraction may tend to 1. 
+>- Further research done by Farhi et al  [@Farhi2008]. demonstrated that a poor choice of initial Hamiltonian can gurantee failure
+>- Farhi et al. [@Farhi2009] also investigated different evolution paths and their results suggested it is possible to overcome the exponentially small minimum gap by selecting random initial Hamiltonians
+
+## Quantum Computing Research into Hard SAT problems
+>- **More recently:**
+>- Choi et al. [@Choi2020] showed that problem Hamiltonian parameters can affect the minimum spectral gap of AQC.
+>- Gabor et al. [@Gabor2019] shows that the phase transition from 3SAT persists in some form (but possibly to a lesser extent) in AQC via **real experimental results** on D-WAVE.
+>- Most signficant for us is that none of this work approaches instances in a robust manner such as the MATILDA framework
 
 ## Current Progress
 
@@ -201,4 +201,4 @@ knitr::include_graphics('./instance-space-methodology.png')
 # References
 
 ## References {.allowframebreaks}
-
+\small
