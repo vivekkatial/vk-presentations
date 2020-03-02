@@ -33,7 +33,7 @@ output:
 >- The famous *Schrödinger Equation* is well-known to describe the time evolution of a quantum state:
 
 >- $$
-i\hbar \frac{d}{dt} \ket{\psi (t)} = H(t) \ket{\psi{t}}
+i\hbar \frac{d}{dt} \ket{\psi (t)} = H(t) \ket{\psi(t)}
 $$
 
 >- $\ket{\psi(t)}$ is our state vector, $H(t)$ is the time dependent Hamiltonian. A Hamiltonian of an $n$-qubit system $H(t)$ is given by  $2^n \times 2^n$ matrix.
@@ -47,7 +47,7 @@ $$
 \text{known state} &  &  \text{unknown}
 \end{matrix}
 $$
->- Loosely speaking, the adiabatic theorem tells us that if we vary from $H_B$ to $H_P$ *slowly enough* the system will remain in its ground state. This fact is a direct result of the Adiabatic Theorem.
+>- Loosely speaking, the adiabatic theorem tells us that if we vary from $H_B$ to $H_P$ *slowly enough* the system will remain in its ground state. This fact is a direct result of the Adiabatic Theorem [@Born1928].
 
 
 ## Adiabatic Quantum Computing (AQC)
@@ -84,7 +84,7 @@ $$
 ## Mapping 3SAT to AQC
 
 >- How do we construct $H_B$ and $H_P$ so that we can solve our optimisation problem?
->- This is described in considerable detail in [@Farhi2001].
+>- Farhi et al.[@Farhi2001] describe this construction in considerable detail.
 >- We then evolve our system with the following interpolation:
 >- $$
 H(t) = \left(1 - \frac{t}{T}\right)H_B + \frac{t}{T}H_P
@@ -156,12 +156,19 @@ knitr::include_graphics('./instance-space-methodology.png')
 
 >- In their seminal paper [@Farhi2001] Farhi et al. aswell as Hogg et al. [@Hogg2002] touched on the phase transition and showed that the minimum energy gap perhaps scaled polynomially with $n$ as roughly $N^2$.
 >- However in 2009,  Young et al [@Young2009]. demonstrated via monte-carlo simulations of $N=256$ that some USA instances have a *quantum phase transition*.
->- Their research indicated that as $N \rightarrow \infty$ this fraction may tend to 1. 
->- Further research done by Farhi et al  [@Farhi2008]. demonstrated that a poor choice of initial Hamiltonian can gurantee failure
+>- Their research indicated that as $N \rightarrow \infty$ the system is expected to lead to an exponentially small gap, and
+hence an exponential complexity.
 >- Farhi et al. [@Farhi2009] also investigated different evolution paths and their results suggested it is possible to overcome the exponentially small minimum gap by selecting random initial Hamiltonians
 
 ## Quantum Computing Research into Hard SAT problems
->- **More recently:**
+
+>- Latorre et al. probed the entropy of entanglement for 250 USA Instances of Exact-Cover [@Latorre2004], their results showed that entropy of entanglement scales linearly with $N$.
+>- However, their results also showed that for large $N$, the minimum gap scaling is exponential and can be associated with a *quantum phase transition* [@Latorre2004].
+>- Hauke et al. [@Hauke2015] ran simulations of adiabatic quantum optimization with $n=16$. Their results indicated  that large entanglement entropy has little significance for the
+success probability of the optimization task.
+
+## Quantum Computing Research into Hard SAT problems
+
 >- Choi et al. [@Choi2020] showed that problem Hamiltonian parameters can affect the minimum spectral gap of AQC.
 >- Gabor et al. [@Gabor2019] shows that the phase transition from 3SAT persists in some form (but possibly to a lesser extent) in AQC via **real experimental results** on D-WAVE.
 >- Most signficant for us is that none of this work approaches instances in a robust manner such as the MATILDA framework
@@ -196,7 +203,6 @@ knitr::include_graphics('./instance-space-methodology.png')
 ## About Me
 - Vivek Katial (vkatial@student.unimelb.edu.au)
   - PhD Candidate (Optimisation on Quantum Computers)
-- Check out the slides at https://tinyurl.com/vkatial-preconfirmation
 
 # References
 
