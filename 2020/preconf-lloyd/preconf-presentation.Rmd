@@ -21,6 +21,18 @@ output:
 
 # Introduction
 
+## About Me
+- Vivek Katial (vkatial@student.unimelb.edu.au)
+  - PhD Candidate (Optimisation on Quantum Computers)
+
+## Talk Structure
+
+- Background
+- Proposed Research
+- Overview of Literature
+- Current Progress
+- What's next?
+
 ## Main Research Question
 
 - What instances characteristics of optimisation problems make them predisposed to being solved on a Quantum Computer?
@@ -73,13 +85,17 @@ $$
 
 ## 3SAT (Exact Cover Example)
 
->- Let's start with a trivial example of 2SAT to illustrate the problem.
->- Consider a 3-bit number with two clauses:
->    - $z_1 + z_2 = 1$
->    - $z_1 + z_3 = 1$
->- Here we have 8 possible assignments, namely $\{000, 001, 010, 011, 100, 101, 110, 111\}$
->- However, our **satisfying assignments** are $z_1 = 1, z_2 = 0, z_3 = 0$ or $z_1 = 0, z_2 = 1, z_3 =1$
->- The 3-SAT problem in particular is a problem where each clause is comprised of 3 literals.
+>- Consider a 4-bit number with two clauses:
+>    - $z_1 \land z_2  \land z_3$
+>    - $z_1 \land z_3  \land z_4$
+>- Here we have 16 possible assignments, namely:
+>- \begin{align*}
+  \mathcal{Z} = \{\,
+  & 0000, 0001, 0010, 0011, 0100, 0101, 0110, 0111, \\
+  & 1000, 1001, 1010, 1011, 1100, 1101, 1110, 1111 \,\}\enspace
+\end{align*}
+
+>- However, our **satisfying assignment** is only $\vec{z} = 1111$
 
 ## Mapping 3SAT to AQC
 
@@ -95,9 +111,9 @@ $$
 
 >- Depending on different structures of instances, classical algorithms may perform differently to Quantum ones.
 >- We are looking to investigate which types of instances are more pre-disposed to being solved on Quantum Computers:
->- To do this we will simulate AQC and probe the "quantumness" of each instance:
+>- To do this we have simulated AQC and probe the "quantumness" of each instance:
 >    1. Minimum Energy Gap $g_{\text{min}}$
->    2. Maximum Entropy of Entanglement
+>    2.  Entropy of Entanglement
 
 ## Proposed Research
 
@@ -125,6 +141,18 @@ knitr::include_graphics('./rices-framework-for-algorithm-selection.png')
 \pause
 ```{r echo=FALSE, out.width='60%', fig.align='center'}
 knitr::include_graphics('./instance-space-methodology.png')
+```
+
+## Instance Space Methodology
+
+```{r echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics('./Performance-distribution-binary.png')
+```
+
+## Instance Space Methodology
+
+```{r echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics('./Performance-distribution.png')
 ```
 
 ## Hardness Features for 3SAT
@@ -185,24 +213,21 @@ success probability of the optimization task.
 >5. Provisioned all infrastructure required for above on Melbourne Research Cloud and SPARTAN
 >6. Developed a working implementation of Adiabatic Quantum Computing on different instances of 3SAT.
 
-## Next Steps (till Confirmation)
+## Next Steps (untill Confirmation)
 
 >1. Complete Literature Review of current advances in AQC.
 >2. Implement scripts to generate **hard** instances of 3SAT with respect to *instance characteristics*.
 >3. Apply Instance Space Methodology from MATILDA to find decision boundaries for *Entanglement Entropy* and *Minimum Energy Gap*
 
-## Next Steps (till Confirmation)
+## Next Steps (untill Confirmation)
 
->4. Extend implementation to work on QAOA and VQE (discretized version of AQC)
+>4. Extend implementation to work on QAOA and VQE with `QisKit`
 >5. Learn C++ effectively, this will be required when implementing larger simulations. 
 >6. Apply Tensor Network methodology on current simulations
 >7. Further advance knowledge of Quantum Physics (possibly through taking a course in Quantum Computing)
 >8. Extend research to look at other optimisation problems
 
 
-## About Me
-- Vivek Katial (vkatial@student.unimelb.edu.au)
-  - PhD Candidate (Optimisation on Quantum Computers)
 
 # References
 
