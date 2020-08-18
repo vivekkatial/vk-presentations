@@ -69,7 +69,7 @@ $$
 
 ## Adiabatic Quantum Computing (AQC)
 
->- To conduct the computation we evolve $\ket{\psi(t)}$ until time $t=T$ such that $\ket{\psi(t=T)}$ encodes the answer. The computation is done using a Hamiltonian which interpolates between $H_B$ and $H_P$. Specifically as below:
+>- To conduct the computation we evolve $\ket{\psi(t)}$ till time $t=T$ such that $\ket{\psi(t=T)}$ encodes the answer. The computation is done using a Hamiltonian which interpolates between $H_B$ and $H_P$. Specifically as below:
 
 >- $$
     H(t) = \left[1 - \lambda(t)\right]H_B + \lambda(t)H_P, \qquad \lambda (t) = \frac{t}{T}
@@ -161,11 +161,7 @@ success probability of the optimisation task.
 >- Current approaches fail to investigate a suitable class of instances.
 
 
-## Research Environment
-
-```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics('./cluster-experimentation-workflow.png')
-```
+# Research Overview
 
 ## Research Overview 
 
