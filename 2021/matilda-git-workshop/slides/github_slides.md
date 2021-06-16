@@ -35,6 +35,7 @@ output: revealjs::revealjs_presentation
 - Getting Started
 - Basics
 - Branches
+- Getting your repository on SPARTAN
 - Best Practice
 
 # Getting Started
@@ -286,7 +287,24 @@ git merge master <BRANCH_NAME>
 
 **Extra for experts change the background colour and add images of each  of your locations**
 
-# Final Notes and Best Practices
+# Getting your code to run on SPARTAN
+
+## Basic Example
+
+```shell
+ssh <YOUR_USERNAME>@spartan.hpc.unimelb.edu.au
+cd /data/gpfs/projects/<YOUR_PROJECT_FOLDER> #punim1074
+git clone <YOUR_GITHUB_REPOSITORY>
+```
+
+## Tips for a better workflow
+
+- Build a test instance that is small and you can test locally
+- Use `Singularity` containers to encapsulate **all** dependencies in one place
+- Your slurm file should be generalised to run a job on many different instances
+- Think about how to track your data -- not in `.git`!!
+
+# Final Notes and Best Practices on Git
 
 ## Using a `.gitignore`
 
