@@ -1,7 +1,7 @@
 ---
 title: "<h2> What is GitHub anyway? Use GitHub for Reproducible Research </h2> <br> <img src='https://www.seattleawc.org/wp-content/uploads/2019/01/Git-Largest.jpg' height='80' >"
 author: "Vivek Katial"
-date: "10/06/2021"
+date: "16/06/2021"
 output: revealjs::revealjs_presentation
 ---
 <style type="text/css">
@@ -17,7 +17,7 @@ output: revealjs::revealjs_presentation
   }
 </style>
 
-- Check out the slides at https://tinyurl.com/rpoe9jw
+- Check out the slides at https://tinyurl.com/vk-matilda-git
 
 # Introduction
 
@@ -28,7 +28,7 @@ output: revealjs::revealjs_presentation
   - Data Scientist (3 years)
 - I love travelling and trying new types of food and meeting interesting people
 
-<img src="https://scontent.fcbr1-1.fna.fbcdn.net/v/t31.0-8/20424095_10212500176676137_7893046189014254136_o.jpg?_nc_cat=111&_nc_oc=AQlSZg4nvOv_P6t7i26DFdDtREK6Hu86Q7xPrjo37iGxHrMKiXq-aVCVqIzfhb6miU0&_nc_ht=scontent.fcbr1-1.fna&oh=86b20ca3beb035f4a71805747d0b9cb9&oe=5E243E53" alt="Smiley face" height="300" width="300">
+<img src="https://instagram.fsyd1-1.fna.fbcdn.net/v/t51.2885-15/e35/p1080x1080/192058585_1253436895073496_3303453349917652539_n.jpg?tp=1&_nc_ht=instagram.fsyd1-1.fna.fbcdn.net&_nc_cat=100&_nc_ohc=TX9Rexp0RiIAX9jiSRT&tn=9BAzBuJtnHQJn4Rm&edm=AP_V10EBAAAA&ccb=7-4&oh=9dfb256fe7341cf134c21e03cbb3afe8&oe=60D03375&_nc_sid=4f375e" alt="Vivek at Uluru" height="30%" width="30%">
 
 ## Agenda
 
@@ -127,22 +127,12 @@ git config --global --list
 
 \newline
 
-- Checkout Meirians Linux Course to learn more
+- Checkout some of the Unimelb HPC Linux Courses to learn more
 
 ## New Names for things
 
 - Folders are directories
 - Main folder is your "repository"
-
-## UNIX Commands Exercise
-
-1. Navigate to your documents directory
-2. Create a file called `your_favourite_city.txt`
-3. Make a directory called `travel_blog`
-4. Move the file you created into the `travel_blog` directory
-5. Go into the directory and check  that the file is there on your file browser and command line
-6. Delete the directory you just created (**use the -i tag**)
-
 
 ## Creating your own repository!
 
@@ -291,11 +281,15 @@ git merge master <BRANCH_NAME>
 
 ## Basic Example
 
+- SSH (login) into SPARTAN
+- Go to your project folder
+
 ```shell
 ssh <YOUR_USERNAME>@spartan.hpc.unimelb.edu.au
 cd /data/gpfs/projects/<YOUR_PROJECT_FOLDER> #punim1074
 git clone <YOUR_GITHUB_REPOSITORY>
 ```
+- Run your `slurm` script from the root node using `sbatch`
 
 ## Tips for a better workflow
 
@@ -303,6 +297,34 @@ git clone <YOUR_GITHUB_REPOSITORY>
 - Use `Singularity` containers to encapsulate **all** dependencies in one place
 - Your slurm file should be generalised to run a job on many different instances
 - Think about how to track your data -- not in `.git`!!
+
+## Singularity Containers
+
+```shell
+Bootstrap: docker
+From: python:3.9.2
+
+%post
+    apt-get -y update
+    apt-get -y install fortune lolcat
+    ####################################################
+    # Experiment dependence Installation
+    ####################################################
+    pip install --upgrade pip
+    git clone https://gitlab.unimelb.edu.au/unimelbqc/aqted/qaoa-vrp.git
+    cd qaoa-vrp
+    pip install -r requirements.txt
+
+%environment
+    export EXPERIMENT_NAME="example_presentation"
+
+%runscript
+    echo "This is an example" 
+    python main.py --param_one=1 --param_two=2
+
+%labels
+    Author 'Vivek Katial'
+```
 
 # Final Notes and Best Practices on Git
 
