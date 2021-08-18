@@ -10,15 +10,14 @@
 3. Someone says the word 'Muggle.' Nasty context not necessary.
 4. Points are awarded or taken, from all the Houses. 
 5. A ghost floats by. Add extra sips if Nearly Headless Nick.
-6. Hermione reads a book or answers a question in class. 
-7. At least one member of the trio is in the Great Hall, which tends to be for meals. Ron is a hungry boy.
-8. Closest character look-alike casts a spell each time their counter-part casts  a spell -- everyone must drink atleast one sip. If this person fails to cast the spell, other members my "stupefy" them causing them to drink twice.
+6. At least one member of the trio is in the Great Hall, which tends to be for meals. Ron is a hungry boy.
+7. Closest character look-alike casts a spell each time their counter-part casts  a spell -- everyone must drink atleast one sip. If this person fails to cast the spell, other members my "stupefy" them causing them to drink twice.
 
 ## Take two sips
 1. Harry's scar hurts, which happens way more than you think. Get drinking.
 2. Harry catches the Snitch — 160 points to Gryffindor!
 3. A significant cast member dies. RIP Sirius, Lupin, Fred, and all the ones who I curse JK Rowling for killing off.
-
+4. Hermione reads a book or answers a question in class. 
 
 ## Take three sips
 1. Voldemort is mentioned by name, not whatever crazy way a wizard tries to get around saying the actual name.
