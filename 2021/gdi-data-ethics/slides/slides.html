@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Vivek Katial">
+  <meta name="dcterms.date" content="2019-11-11">
+  <title>github_slides</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/black.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title"><h2>
+What is GitHub anyway? Use GitHub for Reproducible Research
+</h2>
+<br> <img src='https://www.seattleawc.org/wp-content/uploads/2019/01/Git-Largest.jpg' height='80' ></h1>
+  <p class="author">Vivek Katial</p>
+  <p class="date">11/11/2019</p>
+</section>
+
+<section class="slide level1">
+
+<style type="text/css">
+  .reveal ul {
+    display: block;
+  }
+  .reveal ol {
+    display: block;
+  }
+  .reveal code {
+    font-family: monospace;
+    color: #48e255;
+  }
+</style>
+<ul>
+<li>Check out the slides at https://tinyurl.com/rpoe9jw</li>
+</ul>
+</section>
+<section id="introduction" class="slide level1">
+<h1>Introduction</h1>
+<h2 id="about-me">About Me</h2>
+<ul>
+<li>Vivek Katial (vkatial@student.unimelb.edu.au)
+<ul>
+<li>PhD Candidate (Optimisation on Quantum Computers)</li>
+<li>Data Scientist (3 years)</li>
+</ul></li>
+<li>I love travelling and trying new types of food and meeting interesting people</li>
+</ul>
+<p><img src="https://scontent.fcbr1-1.fna.fbcdn.net/v/t31.0-8/20424095_10212500176676137_7893046189014254136_o.jpg?_nc_cat=111&_nc_oc=AQlSZg4nvOv_P6t7i26DFdDtREK6Hu86Q7xPrjo37iGxHrMKiXq-aVCVqIzfhb6miU0&_nc_ht=scontent.fcbr1-1.fna&oh=86b20ca3beb035f4a71805747d0b9cb9&oe=5E243E53" alt="Smiley face" height="300" width="300"></p>
+<h2 id="agenda">Agenda</h2>
+<ul>
+<li>Getting Started</li>
+<li>Basics</li>
+<li>Branches</li>
+<li>Best Practice</li>
+</ul>
+</section>
+<section id="getting-started" class="slide level1">
+<h1>Getting Started</h1>
+<h2 id="who-saves-files-like-this">Who saves files like this?</h2>
+<p><img src="images/bad-vc-example.png"></p>
+<h2 id="what-is-version-control-why-is-it-important">What is version control? Why is it important?</h2>
+<ul>
+<li>A system designed to keep track of all your changes</li>
+<li>Designed for collaborative development</li>
+<li>Enables you to know <strong>who</strong> made <strong>what</strong> changes <strong>when</strong></li>
+<li>Enables you to <strong>revert any changes and go back to a previous state</strong></li>
+</ul>
+<h2 id="other-version-control-systems">Other Version Control Systems</h2>
+<ul>
+<li>Subversion (SVN)</li>
+<li>Mercurial</li>
+<li>Dropbox</li>
+<li>Google Drive</li>
+</ul>
+<h2 id="why-git">Why Git?</h2>
+<ul>
+<li>Git is <strong>local</strong>:
+<ul>
+<li>Except pulling and pushing to remote servers</li>
+</ul></li>
+<li>Git is <strong>fast</strong></li>
+<li>Git versions the <em>project</em> not files</li>
+<li>In Git each version is delibaretly tied to a meaningful change</li>
+</ul>
+<h2 id="short-history-of-git">Short History of Git</h2>
+<ul>
+<li>Git was first created in 2005 by <em>Linus Torvalds</em> to aid in Linux Kernel development</li>
+<li>Built for social coding <br>
+<p style="text-align:center;">
+<img src="images/github-linus-quote.jpg" height="450" class="center">
+</p></li>
+</ul>
+<h2 id="short-history-of-github">Short History of Github</h2>
+<ul>
+<li>Github is an American company that provides hosting for software development version control using Git</li>
+<li>Github was acquired by Microsoft in 2018 for $7.5 Billion USD</li>
+<li>Git is now industry standard for any software project</li>
+</ul>
+<h2 id="git-solutions">Git Solutions</h2>
+<ul>
+<li>Git (Local)</li>
+<li>Github</li>
+<li>Bit Bucket</li>
+<li><strong>Git Lab</strong> – Melbourne University has it’s own instance</li>
+</ul>
+</section>
+<section id="basics" class="slide level1">
+<h1>Basics</h1>
+<h2 id="install-git-and-create-github-account">Install git and create GitHub Account</h2>
+<ul>
+<li>Check if Git is installed:
+<ul>
+<li>Command: <code>$ git --version</code></li>
+</ul></li>
+<li>Linux (Debian)
+<ul>
+<li>Command: <code>sudo apt-get install git</code></li>
+</ul></li>
+<li>Linux (Fedora)
+<ul>
+<li>Command: <code>sudo yum install git</code></li>
+</ul></li>
+<li>Mac OSX
+<ul>
+<li>https://git-scm.com/download/mac</li>
+</ul></li>
+<li>Windows
+<ul>
+<li>https://git-scm.com/download/windows</li>
+</ul></li>
+</ul>
+<h2 id="configure-github">Configure Github</h2>
+<pre class="shell"><code>git config --global user.name &#39;Vivek Katial&#39;
+git config --global user.email &#39;vivekkatial@gmail.com&#39;
+git config --global --list</code></pre>
+<h2 id="quick-summary-of-unixterminal-commands">Quick Summary of UNIX/Terminal Commands</h2>
+<ul>
+<li><code>ls</code>: List files (<code>-a</code> List all files <code>-h</code> Human readable)</li>
+<li><code>cd</code>: Change directory</li>
+<li><code>mkdir</code>: Make directory</li>
+<li><code>touch</code>: Make a file</li>
+</ul>
+<h2 id="quick-summary-of-unixterminal-commands-1">Quick Summary of UNIX/Terminal Commands</h2>
+<ul>
+<li><code>rm</code>: Remove file (<code>-i</code> tag)</li>
+<li><code>mv</code>: Move files (Similar to cut)</li>
+<li><code>cp</code>: Copy files</li>
+</ul>
+<ul>
+<li>Checkout Meirians Linux Course to learn more</li>
+</ul>
+<h2 id="new-names-for-things">New Names for things</h2>
+<ul>
+<li>Folders are directories</li>
+<li>Main folder is your “repository”</li>
+</ul>
+<h2 id="unix-commands-exercise">UNIX Commands Exercise</h2>
+<ol type="1">
+<li>Navigate to your documents directory</li>
+<li>Create a file called <code>your_favourite_city.txt</code></li>
+<li>Make a directory called <code>travel_blog</code></li>
+<li>Move the file you created into the <code>travel_blog</code> directory</li>
+<li>Go into the directory and check that the file is there on your file browser and command line</li>
+<li>Delete the directory you just created (<strong>use the -i tag</strong>)</li>
+</ol>
+<h2 id="creating-your-own-repository">Creating your own repository!</h2>
+<p>There are two ways to make your own repository.</p>
+<ol type="1">
+<li>Locally by running <code>git init</code></li>
+<li>Online on Github</li>
+</ol>
+<h2 id="basic-summary-of-git-commands">Basic summary of Git commands</h2>
+<ul>
+<li><code>git clone</code>: Clone a repository into a new directory</li>
+<li><code>git status</code>: Show the working tree status</li>
+<li><code>git add</code>: Stage changes for the commit</li>
+<li><code>git commit</code>: Record changes to the repository</li>
+<li><code>git push</code>: Update remote refs along with associated objects</li>
+</ul>
+<h2 id="basic-summary-of-git-commands-1">Basic Summary of Git Commands</h2>
+<ul>
+<li><code>git pull</code>: Fetch from and integrate with another repository or a local branch</li>
+<li><code>git diff</code>: Show changes between commits</li>
+<li><code>git log</code>: Show commit logs</li>
+<li>Cheat Sheet attached</li>
+</ul>
+<h2 id="git-workflow">Git Workflow</h2>
+<p><img src="images/workflow.png"></p>
+<h2 id="git-workflow-1">Git Workflow</h2>
+<p><img src="images/multiple-changes-workflow.png"></p>
+<h2 id="viewing-your-commit-history">Viewing your commit history</h2>
+<ul>
+<li><code>git log</code></li>
+</ul>
+<h2 id="working-with-remotes">Working with Remotes</h2>
+<ul>
+<li>Let’s write a travel blog!</li>
+</ul>
+<h2 id="git-basics-excercise-1">Git Basics Excercise 1</h2>
+<ol type="1">
+<li>Fork my repository locally: https://github.com/vivekkatial/resplat-github-workshop</li>
+<li>Clone the forked repository onto your computer</li>
+<li>Using command line, move into the folder for exercise one. (Otherwise just use your file browser)</li>
+<li>Find the bug in my file <code>travel-blog.md</code></li>
+<li>After finding the bug, fix it and commit it to your forked repository.</li>
+<li><strong>Extra for experts:</strong> Find the bug in my python code, fix it and commit my changes</li>
+</ol>
+<h2 id="git-basics-excercise-2">Git Basics Excercise 2</h2>
+<ol type="1">
+<li>Create a new repository on Github</li>
+<li>Clone the repository on your local</li>
+<li>Make a new file “YOUR_NAME.txt”</li>
+<li>Save this file and <strong>stage</strong></li>
+<li>Commit this file</li>
+<li>Push changes to your Github repository</li>
+</ol>
+</section>
+<section id="branches" class="slide level1">
+<h1>Branches</h1>
+<h2 id="what-is-a-branch">What is a branch?</h2>
+<ul>
+<li>All git commits live within a branch</li>
+<li>There could be many branches which represent many features</li>
+<li>The main branch in a project is called the <strong>master branch</strong></li>
+</ul>
+<h2 id="why-branching">Why Branching?</h2>
+<ul>
+<li>Try out an idea - experiment</li>
+<li>Isolate work units - (keeping unfinished work separate)</li>
+<li>Working on long running topics</li>
+<li>Allow you to share work in progress without altering live/production code</li>
+</ul>
+<h2 id="why-branching-1">Why Branching?</h2>
+<p><img src="images/git-branch-meme.jpg"></p>
+<h2 id="branch-workflow">Branch Workflow</h2>
+<p><img src="images/feature-branch.png"></p>
+<h2 id="branching-commands">Branching Commands</h2>
+<ul>
+<li>To create a new branch we run the command:</li>
+</ul>
+<pre class="shell"><code>git branch &lt;BRANCH_NAME&gt;</code></pre>
+<ul>
+<li>To switch to a different branch we run the command:</li>
+</ul>
+<pre class="shell"><code>git checkout &lt;BRANCH_NAME&gt;</code></pre>
+<ul>
+<li>To create a new branch and switch to it we run the command:</li>
+</ul>
+<pre class="shell"><code>git checkout -b &lt;BRANCH_NAME&gt;</code></pre>
+<h2 id="branching-commands-1">Branching Commands</h2>
+<ul>
+<li>To list all branches:</li>
+</ul>
+<pre class="shell"><code>git branch -a</code></pre>
+<ul>
+<li>To delete a branch</li>
+</ul>
+<pre class="shell"><code>git branch -d &lt;BRANCH_NAME&gt;</code></pre>
+<ul>
+<li>Finally, remember that branches aren’t available to others <strong>unless</strong> you push to the <em>remote</em>:</li>
+</ul>
+<pre class="shell"><code>git push origin &lt;BRANCH_NAME&gt;</code></pre>
+<h2 id="branch-merging">Branch Merging</h2>
+<ul>
+<li>You have now made all your changes and you want to merge changes into master.</li>
+</ul>
+<pre class="shell"><code>git checkout master
+git merge master &lt;BRANCH_NAME&gt;</code></pre>
+<h2 id="pull-requests">Pull Requests</h2>
+<ul>
+<li>Pull requests are a feature that makes it easier for developers to collaborate using Git</li>
+<li>Once a pull request is sent, stakeholders will review code before deciding to merge.
+<ul>
+<li>GitHub allows permissions to manage who/who can’t merge code into master.</li>
+</ul></li>
+<li>When making pull requests make sure to write meaningful comments on what features you have worked on</li>
+</ul>
+<h2 id="merge-conflicts">Merge Conflicts</h2>
+<p><img src="images/merge-conflict-meme.jpg"></p>
+<h2 id="merge-conflicts-1">Merge Conflicts</h2>
+<ul>
+<li>Happen when you merge branches that have competing commits</li>
+<li>Git needs your help to decide which changes to incorporate in the final merge</li>
+<li>Manually fix the changes by looking at your files as text.</li>
+</ul>
+<h2 id="group-excercise---all-of-github">Group Excercise - All of Github</h2>
+<ol type="1">
+<li>One person add other members in group as colloborators to their forked repository.</li>
+<li>Each person create a branch on their favourite place they have travelled too.</li>
+<li>Inside the HTML file write two sentences about why you love this place.</li>
+<li>Commit your changes on your respective branch.</li>
+<li>Merge changes into your master branch.</li>
+</ol>
+<p><strong>Extra for experts change the background colour and add images of each of your locations</strong></p>
+</section>
+<section id="final-notes-and-best-practices" class="slide level1">
+<h1>Final Notes and Best Practices</h1>
+<h2 id="using-a-.gitignore">Using a <code>.gitignore</code></h2>
+<p>You will often find that sometimes you don’t want <code>git</code> to track everything. These include:</p>
+<ul>
+<li>Passwords</li>
+<li>Tokens/Keys</li>
+<li>Parameter files</li>
+<li>Data</li>
+<li>Log files</li>
+<li>Cache files</li>
+</ul>
+<h2 id="commit-messages">Commit Messages</h2>
+<ul>
+<li><strong>Why?</strong> Good commit messages help you travel back in time and view what each change meant</li>
+<li>Helps your collobarators understand your changes</li>
+<li>Don’t explain how it was done, explain what the intention was and <strong>why</strong></li>
+<li>Use proper english and reference issue identifiers where possible</li>
+<li>If you want to amend a commit message use the following command:</li>
+</ul>
+<pre><code>git commit -a --amend</code></pre>
+<h2 id="readme">README</h2>
+<ul>
+<li>A Readme file gives the user (who visits your repository) a brief idea about what the project is about</li>
+<li>Which language it has used, what are the terms and conditions, licensing</li>
+<li>How many forks/stars the repository has got</li>
+<li>What your project can do, screenshots of your running application</li>
+</ul>
+<p>The extension .md stands for <em>Markdown</em>. Markdown is a lightweight markup language with plain text formatting syntax. It’s a very simple language used to create beautiful and presentable readme files for GitHub.</p>
+<p>(PS: These slides were also made in markdown)</p>
+<h2 id="gitlab-cicd">GitLab CICD</h2>
+<ul>
+<li>GitLab CI (Continuous Integration): <strong>Builds</strong> and <strong>tests</strong> your code whenever you push.</li>
+<li>GitLab CD (Continuous Deployment): Puts the changes of every code in the production which resulting in every day deployment of an application.</li>
+<li>CICD is very powerful and builds testing into your workflow.</li>
+</ul>
+<h2 id="extra-links">Extra Links</h2>
+<ul>
+<li>Github without password: https://help.github.com/en/github/using-git/caching-your-github-password-in-git</li>
+<li>GitLab CICD: https://docs.gitlab.com/ee/ci/</li>
+<li>My Github: https://github.com/vivekkatial</li>
+</ul>
+</section>
+<section id="thank-you" class="slide level1">
+<h1>Thank You!</h1>
+<p>vkatial@student.unimelb.edu.au</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  // reveal.js plugins
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
