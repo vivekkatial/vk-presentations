@@ -27,7 +27,7 @@ output: revealjs::revealjs_presentation
 >- Vivek Katial (vkatial@student.unimelb.edu.au)
 >  - PhD Candidate (Optimisation on Quantum Computers)
 >  - Data Scientist (5 years - Quantiful, Multitudes)
->- I love travelling and trying new types of food and meeting interesting people
+>- I love traveling and trying new types of food and meeting interesting people
 
 >- <img src="https://instagram.fakl8-1.fna.fbcdn.net/v/t51.2885-15/e35/p1080x1080/192174776_835204797412194_5166168999853458133_n.jpg?_nc_ht=instagram.fakl8-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=aIiikwK_zmoAX9zgol2&edm=AP_V10EBAAAA&ccb=7-4&oh=129a3e1eddc5fc89c928a3300df05803&oe=613EC2DF&_nc_sid=4f375e" alt="Vivek at Uluru" height="30%" width="30%">
 
