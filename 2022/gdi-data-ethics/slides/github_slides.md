@@ -217,7 +217,7 @@ Woohoo! We’ve trained up a model, evaluated that it is working effectively, an
   >- Dataset Docs (Gebru 2018)
   >- Model Reporting and Curation
   >- Transparency and reproducibility
->- R&D in algorithm research
+>- R&D in algorithm researcZh
 
 ## Extra Links / Resources
 - [Robert McDaniel](https://www.theverge.com/22444020/chicago-pd-predictive-policing-heat-list)
