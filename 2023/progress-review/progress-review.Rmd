@@ -2,7 +2,7 @@
 title: "Instance Space Analysis on Quantum Algorithms"
 author: 
     - "Vivek Katial"
-date: "31/01/2023"
+date: "02/03/2023"
 bibliography: "main.bib"
 csl: aims-mathematics.csl
 header-includes: 
@@ -11,6 +11,7 @@ header-includes:
     - \usepackage{amsmath}
     - \usepackage{amsthm}
     - \usepackage{braket}
+    - \usepackage{empheq}
 output: 
   beamer_presentation:
     slide_level: 2
@@ -24,10 +25,10 @@ output:
   - Explore the tools needed to develop Quantum Algorithms:
       - Adiabatic  Quantum Algorithms (year 1)
       - Universal Gate Based Quantum Algorithms (year 2)
-      - Explore various optimisation problems, initialisation techniques and instance classes
+      - Explore various optimization problems, initialization techniques and instance classes (year 3)
 
 ## Agenda
->- Explore the Optimisation Problems
+>- Optimization Problems
 >- Quantum Algorithms
 >- Methodology
 >- Results
@@ -36,10 +37,245 @@ output:
 
 ## Optimisation Problems
 
-- Traveling Salesperson Problem (TSP) and Vehicle Routing (VRP)
-- MAXCUT
-- 3SAT - Exact Cover
+- MAXCUT (will explore today)
+- Other studied problems:
+    - Traveling Salesperson Problem (TSP) and Vehicle Routing (VRP)
+    - 3SAT - Exact Cover
+    
+## Quantum Algorithms
 
+>- **Adiabatic Quantum Computing**
+>   - AQC is a specific type of quantum computing that uses adiabatic evolution to solve optimization problems [@Farhi2001].
+>   - AQC relies on the natural evolution of the quantum system, avoiding the need for precise control over individual quantum gates [@Preskill2018].
+>- **Gate Based Quantum Computing**
+>   - Uses a series of quantum gates to manipulate the quantum system and perform specific computations [@Raussendorf2001].
+>   - Requires precise control over individual quantum gates, which can be challenging to implement [@Childs2004].
+>   - Potential for faster performance, as it can use advanced techniques such as error correction and quantum parallelism [@Raussendorf2001].
+
+# MAXCUT
+
+## MAXCUT 
+
+>- Given a graph $G = (V, E)$ with vertices $V$ and edges $E$.
+>- Each edge $(i, j) \in E$ has a weight $w(i, j)$.
+>- Partition the vertices into two disjoint sets $S$ and $T$, such that $S \cup T = V$ and $S \cap T = \emptyset$.
+>   - Assign a binary variable $x_{i,t}$ to represent which the city visited at time step $t$
+>   - Our goal is to find a partition that maximizes the MAXCUT value:
+>   - $$C(\textbf{x}) = \sum_{i,j} w_{i, j} \enspace x_i(1-x_j)$$
+
+>- This problem is NP-hard [@Karp1972]
+
+## MAXCUT Formulation
+
+![MAXCUT](images/maxcut-example.png)
+**Solution:** Two partitions are $S = \{1, 2\}$ and $T = \{2, 4, 5\}$. The size of the cut is 5.
+
+## Classical Limitations of MAXCUT
+
+>- NP-hard to achieve better approximation ratio than [@Hrastad2001]:
+\pause
+$$
+\alpha \sim  0.941
+$$
+>- Best known classical approximation achieved using *Goemans-Williamson* algorithm [@Goemans1995]
+\pause
+$$
+\alpha \sim 0.878
+$$
+
+## Mapping MAXCUT to QUBO
+
+>- To solve this problem on a Quantum Computer we need to map it to a QUBO.
+>- $c_i = \sum_{j=1}^{n} W_{ij}, \enspace Q_{ij} = - W_{ij}$
+\pause
+$$
+C(x) = \sum_{i,j=1}^{n} x_i Q_{ij} x_j + \sum_{i}^{n}c_i x_i = x^{T}Qx + c^{T}x
+$$
+
+>- We can assign a qubit to each decision variable, make a the following substitution $x_{i}=\frac{(I-Z_{i})}{2}$. This gives us the resulting encoding for a problem Hamiltonian $H_c$ that can be encoded onto a quantum circuit.
+\pause
+$$
+H_C=\sum_{i, j=1}^n \frac{1}{4} Q_{i j} Z_i Z_j-\sum_{i=1}^n \frac{1}{2}\left(c_i+\sum_{j=1}^n Q_{i j}\right) Z_i+\left(\sum_{i, j=1}^n \frac{Q_{i j}}{4}+\sum_{i=1}^n \frac{c_i}{2}\right)
+$$
+
+
+## QAOA
+
+>- The QAOA algorithm is characterised by a unitary $U(\beta, \gamma)$ to prepare a quantum state $\ket{\psi(\beta, \gamma)}$
+>- The goal of the algorithm is to find optimal parameters $(\beta_{opt}, \gamma_{opt})$ such that the quantum state  encodes the solution to the problem.
+>- The state is prepared by applying the unitary $p$ times:
+\pause
+$$
+|\psi(\boldsymbol{\beta}, \boldsymbol{\gamma})\rangle=\underbrace{U(\boldsymbol{\beta}) U(\boldsymbol{\gamma}) \cdots U(\boldsymbol{\beta}) U(\boldsymbol{\gamma})}_{p \text { times }}\left|\psi_0\right\rangle
+$$
+>- Where $U(\beta) = e^{-i \beta H_b}$ and $U(\gamma) =e^{-i \gamma H_c}$
+
+
+## QAOA Algorithm
+
+![QAOA Strategy](images/qaoa-summary.png)
+
+
+## Landscape for $p=1$
+
+>- With QAOA we observe periodicity in $\gamma$ and $\beta$
+![Example Optimisation Energy Landscape for QAOA](images/landscape-plot.png)
+For each layer, we have two parameters $\beta_p$ and $\gamma_p$. As dimensionality increases so does the landscape.
+
+# Applying ISA in the Quantum Context
+
+## Quantum Algorithms and Variations Studied
+
+>- QAOA (experimenting with number of layers)
+>   - $p = 1, ..., 10$
+>- QAOA (experimenting with parameter optimization methods)
+>   - `COBYLA`, `SPSA`, `NELDER_MEAD`
+>- QAOA (experimenting Initialisation Techniques)
+>   - Six methods (outlined further)
+>- Variational Quantum Algorithms (VQE-2 Local, F-VQE, QAOA Vanilla)
+>- **22** unique algorithm variations
+>- **Can we measure characteristics of instances that make specific algorithms more suited to solve certain graphs?**
+
+
+## Current Literature
+
+>- Improvements in QAOA and VQE have largely been limited to exploring three types of graphs:
+>- Filtering VQE (uses an additional filtering operator to improve convergence) [@Amaro2022]
+\pause
+```{r echo=FALSE, out.width='50%', fig.align='center'}
+knitr::include_graphics('images/filtering-vqe.jpeg')
+```
+>- Study only investigated using 3-regular graphs
+
+## Current Literature
+
+>- Warm Starting QAOA [@Egger2021] -- seeding initial state 
+>    - Erdős–Rényi Graphs
+>    - $k$-regular graphs
+\pause
+```{r echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics('images/warm-starting-qaoa.png')
+```
+
+## Current Literature
+
+>- Optimal QAOA parameters showing concentration over different problem instances [@Farhi2022], [@Akshay2021], [@Streif2020]
+>- Study only investigated using 3-regular graphs
+\pause
+```{r echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics('images/parameter-concentration.png')
+```
+- **Do new developments in Quantum Algorithms in current literature extend for all classes of instances?**
+
+# Instance Space Analysis
+
+## Algorithm Selection
+
+>- Given a set of problem instances, predicting which algorithm is most likely to best perform was first explored by Rice [@Rice1976].
+\pause
+```{r echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics('images/rices-framework-for-algorithm-selection.png')
+```
+>- However, what we are interested in is probing the strengths and weaknesses of Quantum Algorithms for different instances of MAXCUT, TSP and 3SAT.
+
+## Instance Space Methodology
+
+>- The instance space methodology presented in [@Smith-Miles2015; @Smith-Miles2012; @Smith-Miles2014] extends Rice's framework.
+\pause
+```{r echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics('images/instance-space-methodology.png')
+```
+
+## Metadata: Instances
+
+>- The problem space $\mathcal{P}$ consists of all possible graph instances
+>- The instance space $\mathcal{I} \subset \mathcal{P}$ compromises of \textbf{867} MAXCUT instances.
+>    - Regular Graphs
+>    - Uniform Random Graphs
+>    - Watts-Strogatz Small World
+>    - Nearly Complete Bipartite Graphs
+>    - Power Law Tree Graphs
+>    - Nearly Complete Bipartite Graphs
+>    - Geometric Graphs
+
+
+## Metadata: Features
+>- The feature space $\mathcal{F}$ consists of 21 different instance features generated
+21 features were considered
+![Graph Features](images/graph-features.png)
+
+## Algorithm Portfolio
+>- We produce the following different instance space analyses:
+>   - QAOA, increasing layers $p=1, ..., 10$
+>   - QAOA, optimiser routines `COBYLA`, `NELDER_MEAD`, `SLSQP`
+>   - Initialisation Technique of the ground state 
+>   - Various variational techniques (VQE, F-VQE, QAOA)
+>- The performance metric $y \in \mathcal{Y}$ is energy gap ($E_{\text{gap}} = \frac{\langle \psi|H| \psi\rangle}{\langle \psi_g|H| \psi_g\rangle}$)
+
+    
+# Results
+
+## ISA
+
+![Graph Features](images/distribution_sources.png)
+
+## Feature Distribution
+
+![Features](images/feature-distribution.png)
+
+## Performance Distribution
+
+![Performance](images/performance-compare-vqe-f-vqe.png)
+## Vanilla QAOA, increasing layers
+
+>- These experiments are still currently running on SPARTAN
+>- Run a vanilla QAOA instance for layers $p = 1, ..., 10$
+>   - 5 restarts
+>   - 200 13 node MAXCUT instances of each source
+
+
+## Vanilla QAOA with Classical Optimisation Techniques (`SPSA`, `COBYLA`, `NELDER_MEAD`)
+
+>- Run a vanilla QAOA instance for layers $p = 7$ (optimal result for previous)
+>   - 5 restarts
+>   - 200 13 node MAXCUT instances of each source
+
+## Initialisation Techniques of the ground state (QAOA)
+
+- Run a vanilla QAOA instance for layers $p = 7$ and a classical optimizer of `COBYLA`
+- Trotterized Quantum Annealing (TQA) [@Sack2021]
+- Random Initialisation
+- Perturb from previous layer
+- Ramped up Initialisation,
+- Optimise $\gamma$ and $\beta$ in the Fourier Space (FT)
+
+
+## Thesis Outline
+-Thesis Structure
+    - Introduction
+    - Solving Optimisation Problems using a Quantum Computer
+    - Quantum Algorithms Studied
+    - Instance Space Analysis
+    - ISA: MAXCUT
+    - ISA: TSP
+    - ISA: 3SAT
+    - Conclusion
+  
+## Discuss thesis outline
+- Here is a link to the [thesis outline](https://github.com/vivekkatial/fantastic-enigma/blob/master/thesis/thesis-structure.md)
+
+## Next Steps
+
+>- Complete Instance Space Analysis on existing algorithms and additional adaptations (2 months)
+>- Formalize findings into a paper (currently in progress - 1 month)
+>- Completing and submitting thesis (3 months)
+
+
+# Appendix
+
+# Other Optimisation Problems Explored
+>- TSP
+>- 3SAT
 
 # The Traveling Salesman Problem (TSP)
 
@@ -90,31 +326,6 @@ $$x_{l,t}=\frac{(I-Z_{l,t})}{2}.$$
 >- Solve each cluster independently.
 >- ![VRP Cluster](images/general-instance.png)
 
-
-# MAXCUT
-
-## MAXCUT 
-
->- Given a graph $G = (V, E)$ with vertices $V$ and edges $E$.
->- Each edge $(i, j) \in E$ has a weight $w(i, j)$.
->- Partition the vertices into two disjoint sets $S$ and $T$, such that $S \cup T = V$ and $S \cap T = \emptyset$.
->   - Assign a binary variable $x_{i,t}$ to represent which the city visited at timestep $t$
->   - Our goal is to find a partition that maximizes the MAXCUT value:
->   - $$C(\textbf{x}) = \sum_{i,j} w_{i, j} \enspace x_i(1-x_j)$$
-
->- This problem is NP-hard [@Karp1972]
-
-## MAXCUT Formulation
-
-![MAXCUT](images/maxcut-example.png)
-**Solution:** Two partitions are $S = \{1, 2\}$ and $T = \{2, 4, 5\}$. The size of the cut is 5.
-
-## Mapping MAXCUT to QUBO
-
->- To solve this problem on a Quantum Computer we need to map it to a QUBO.
->- Similar to the TSP we can assign a qubit to each decision variable, make a the following substitution
->    - $$x_{i}=\frac{(I-Z_{i})}{2}.$$
-
 # 3SAT - Exact Cover
 
 ## 3SAT (Exact Cover)
@@ -150,127 +361,6 @@ $$x_{l,t}=\frac{(I-Z_{l,t})}{2}.$$
 $$
 >- Finally, complete measurement and our solution is our final state $\ket{\psi(t=T)}$
 
-
-# Quantum Algorithms
-
-## Quantum Algorithms
-
->- **Adiabatic Quantum Computing**
->   - AQC is a specific type of quantum computing that uses adiabatic evolution to solve optimization problems [@Farhi2001].
->   - AQC relies on the natural evolution of the quantum system, avoiding the need for precise control over individual quantum gates [@Preskill2018].
->- **Gate Based Quantum Computing**
->   - Uses a series of quantum gates to manipulate the quantum system and perform specific computations [@Raussendorf2001].
->   - Requires precise control over individual quantum gates, which can be challenging to implement [@Childs2004].
->   - Potential for faster performance, as it can use advanced techniques such as error correction and quantum parallelism [@Raussendorf2001].
-
-
-## Quantum Algorithms
-
-\begin{table}[]
-\begin{tabular}{ll}
-\hline
-\multicolumn{1}{|l|}{Quantum Algorithm} & \multicolumn{1}{l|}{**Optimisation Problem} \\ \hline
-AQC                                         & 3SAT                                          \\ \hline
-QAOA                                        & MAXCUT                                        \\
-                                            & TSP                                           \\ \hline
-VQE                                         & MAXCUT                                        \\
-                                            & TSP                                           \\ \hline
-F-VQE                                       & MAXCUT                                        \\
-                                            & TSP                                          
-\end{tabular}
-\end{table}
-
-
-## Types of instances investigated (MAXCUT only)
-
-- Regular Graphs
-- Unifrom Random Graphs
-- Watts-Strotgatz Small World
-- Nearly Complete Bipartite Graphs
-- Power Law Tree Graphs
-- Nearly Complete Bipartite Graphs
-- Geometric Graphs
-
-## Classical Optimisers Explored
-
-- SPSA, COBYLA, NELDER_MEAD
-- ![Classical Techniques](images/compare-classical-optimsiation.png)
-
-## Initialisation Techniques Explored (QAOA)
-- Random Initialisation
-- Perturb from previous layer
-- Ramped up Initalisation
-- Fourier Transform
-- Trotterized Quantum Annelaing
-
-# Instance Space Analysis
-
-## Algorithm Selection
-
->- Given a set of problem instances, predicting which algorithm is most likely to best perform was first explored by Rice [@Rice1976].
-\pause
-```{r echo=FALSE, out.width='60%', fig.align='center'}
-knitr::include_graphics('images/rices-framework-for-algorithm-selection.png')
-```
->- However, what we are interested in is probing the strengths and weaknesses of AQC for different instances of SAT.
-
-## Instance Space Methodology
-
->- The instance space methodology presented in [@Smith-Miles2015; @Smith-Miles2012; @Smith-Miles2014] extends Rice's framework.
-\pause
-```{r echo=FALSE, out.width='60%', fig.align='center'}
-knitr::include_graphics('images/instance-space-methodology.png')
-```
-
-
-## Instance Space 
-
->- The problem space $\mathcal{P}$ consists of all possible graph instances
->- The instance space $\mathcal{I} \subset \mathcal{P}$ compromises of \textbf{867} MAXCUT instances.
->- The feature space $\mathcal{F}$ consists of 21 different instance features generated
->- The algorithm portfolio $\mathcal{A}$  includes $F-VQE$, $VQE$ and $QAOA$
->- The performance metric $y \in \mathcal{Y}$ is the probability of success for the algorithm. 
-
-## Graph Features
-
-21 features were considered
-![Graph Features](images/graph-features.png)
-
-## Sources
-![Graph Features](images/distribution_sources.png)
-
-## Feature Distribution
-
-![Features](images/feature-distribution.png)
-
-## Performance Distribution
-
-![Performance](images/performance-compare-vqe-f-vqe.png)
-
-
-
-
- 
-
-## Thesis Outline
-- [Thesis Structure](#thesis-structure)
-  - [Introduction](#introduction)
-  - [Solving Optimisation Problems using a Quantum Computer](#solving-optimisation-problems-using-a-quantum-computer)
-  - [Features and Algorithm Performance of Quantum Algorithms](#features-and-algorithm-performance-of-quantum-algorithms)
-  - [Instance Space Analysis](#instance-space-analysis)
-  - [Frameworks for Evaulating Quantum Algorithms / Discussion](#frameworks-for-evaulating-quantum-algorithms--discussion)
-  - [Evaulation of Other Optimisation Algorithms](#evaulation-of-other-optimisation-algorithms)
-  - [Conclusion](#conclusion)
-  
-## Discuss thesis outline
-- Here is a link to the [thesis outline](https://github.com/vivekkatial/fantastic-enigma/blob/master/thesis/thesis-structure.md)
-
-
-## Next Steps
-
-- Formalise findings into a paper (currently in progress)
-- Solve all existing models on Quantum Hardware
-- Investigate generalised Hamiltonian features
 
 ## References {.allowframebreaks}
 
