@@ -1,0 +1,7 @@
+revealjs::revealjs_presentation:
+  theme: blood
+  highlight: pygments
+  center: true
+  reveal_options:
+    slideNumber: true
+    previewLinks: true
