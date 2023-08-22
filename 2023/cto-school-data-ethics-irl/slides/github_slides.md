@@ -1,7 +1,7 @@
 ---
 title: "<h2>Data ethics IRL: keeping algorithmic bias out of your data products</h2> <br> <img src='https://uploads-ssl.webflow.com/610c8a14b4df1ae46b1a13a3/611af1ae0b315e4a8a2e2b2b_Multitudes-Logo-Horizontal%20Full%20Colour.svg' height='80' >"
 author: "Vivek Katial"
-date: "15/08/2023"
+date: "22/08/2023"
 output: revealjs::revealjs_presentation
 ---
 <style type="text/css">
@@ -69,7 +69,7 @@ output: revealjs::revealjs_presentation
 
 ## More Harmful Example
 
-<img src='https://rss.onlinelibrary.wiley.com/cms/asset/f30ca57c-f0ec-49a5-a444-9f15ca790b9f/sign960-fig-0001-m.jpg' height='600' >
+<img src='https://rss.onlinelibrary.wiley.com/cms/asset/f30ca57c-f0ec-49a5-a444-9f15ca790b9f/sign960-fig-0001-m.jpg'>
 
 
 # The Machine Learning Lifecycle
@@ -102,7 +102,7 @@ output: revealjs::revealjs_presentation
 
 >- Consider a model that predicts whether a police officer should be deployed in a particular suburb based on past incarceration data
 >- A data scientist may claim to have built a model which is “socially neutral” as they have removed all features that correspond to race, age, and gender.
->-  Other features like postal code might also correlate with features such as race (because in the real world, suburbs are segregated by race)
+>- Other features like postal code might also correlate with features such as race (because in the real world, suburbs are segregated by race)
 >- Studies demonstrate the potential for predictive policing to propagate and exacerbate racial biases in law enforcement.
 
 ## How can we mitigate it
@@ -201,6 +201,11 @@ Woohoo! We’ve trained up a model, evaluated that it is working effectively, an
 >- Especially in continous learning systems the distribution of the input data can revert to becoming more biased -- even if you did all the hard work in data collection
 >- Compare the distribution of new input data from production with the training data used in model development
 >- Track, label, version, and date the models being used in production so it is easy to roll back and even switch off models that are performing poorly.
+
+
+# Applying this at Multitudes:
+
+
 
 
 # Tips for starting off!
