@@ -33,15 +33,15 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Pages
         uses: actions/configure-pages@v3
-      - name: Change name of slide.html
+      - name: Change name of slide.html for current presentation
         run: |
-          ls -lhar
+          # When giving new talk CHANGE this
           mv ./2023/cto-school-data-ethics-irl/slides/slides.html index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          # Upload entire repository
-          path: '.2023/cto-school-data-ethics-irl/slides/'
+          # When giving new talk CHANGE this to slides sub-repo
+          path: './2023/cto-school-data-ethics-irl/slides/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
