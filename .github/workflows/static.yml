@@ -36,12 +36,12 @@ jobs:
       - name: Change name of slide.html
         run: |
           ls -lhar
-          mv ./2023/cto-school-data-ethics-irl/slides.html index.html
+          mv ./2023/cto-school-data-ethics-irl/slides/slides.html index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: './2023/cto-school-data-ethics-irl/slides/'
+          path: '.2023/cto-school-data-ethics-irl/slides/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
