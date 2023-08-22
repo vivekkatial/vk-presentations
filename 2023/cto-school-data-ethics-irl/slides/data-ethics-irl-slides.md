@@ -35,7 +35,7 @@ output: revealjs::revealjs_presentation
   
 </style>
 
-- Check out the slides at https://tinyurl.com/data-ethics-irl
+- Check out the slides at https://vivekkatial.github.io/vk-presentations/#/
 
 # Introduction
 
@@ -77,8 +77,9 @@ output: revealjs::revealjs_presentation
 # Algorithimic Bias
 
 ## Algorithimic Bias -- what is it?
-- Algorithmic bias refers to the ability of algorithms to systematically and repeatedly produce outcomes that benefit one particular group over another
-- Already many examples in society where algorithms have harmed marginalized groups  
+
+>- Algorithmic bias refers to the ability of algorithms to systematically and repeatedly produce outcomes that benefit one particular group over another
+>- Already many examples in society where algorithms have harmed marginalized groups  
 
 ## Trivial Example
 
@@ -89,8 +90,7 @@ output: revealjs::revealjs_presentation
 
 ## More Harmful Example
 
-<img src='images/harmful-example.jpeg' height = '600'>
-
+> <img src='images/harmful-example.jpeg' height = '600'>
 [@Lum2016]
 
 
@@ -145,7 +145,7 @@ output: revealjs::revealjs_presentation
 >- Neural Networks can construct latent features which can learn non-linear and complex biases.
 >- You can use things like `SHAP` and `LIME` to asses the influence of demographic variables on model performance.
 
-[@Lundberg2017],[@Ribeiro2016]
+[@Lundberg2017]
 
 ## Test the Bias and Fairness of your model
 
@@ -170,7 +170,7 @@ This means:  $P(\hat{y} = 1 | z = 0, y = 1) = P(\hat{y} = 1 | z = 1, y = 1)$
 >    - This is done to remove the effect of $z$ on the prediction of $y$
 >- Generative Models can be used to uncover latent variables that have biases -- Adaptive Resampling is a technique discussed by [Amini et al.](https://dl.acm.org/doi/pdf/10.1145/3306618.3314243)
 
-[@Amini2019][@Shuang2020]
+[@Shuang2020]
 
 
 # Model Evaluation
@@ -222,7 +222,7 @@ In 2007 a teacher was fired from a Washington DC school due to an algorithm: Des
 >- Product managers, software developers, and designers should have a high-level understanding of the ML system they are building
 >- Many tools available to help understand model behaviour such as SHAP (SHapley Additive exPlanations), which allows for an understanding of the effect of different model features, or LIME is another tool for evaluating black-box techniques
 
-[@Ribeiro2016][@]
+[@Ribeiro2016]
 
 # Model Deployment
 
@@ -263,10 +263,10 @@ Woohoo! We’ve trained up a model, evaluated that it is working effectively, an
 ## Conclusions
 
 >- Follow AI Best practices
-  >- Dataset Docs (Gebru 2018)
+  >- Dataset Docs (Gebru 2018), AJL
   >- Model Reporting and Curation
   >- Transparency and reproducibility
->- R&D in algorithm researcZh
+>- R&D in algorithm research
 
 ## Extra Links / Resources
 - [Robert McDaniel](https://www.theverge.com/22444020/chicago-pd-predictive-policing-heat-list)
@@ -278,3 +278,5 @@ Woohoo! We’ve trained up a model, evaluated that it is working effectively, an
 # Thank You!
 
 vivek@multitudes.co
+
+# References
