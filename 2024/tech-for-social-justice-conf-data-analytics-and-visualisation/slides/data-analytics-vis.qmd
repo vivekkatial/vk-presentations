@@ -1,0 +1,780 @@
+---
+title: "<h2>Data Analytics and Visualisation</h2> <br> <img src='images/gdi-logo.png' height='120'>"
+author: "<h3>Vivek Katial</h3>"
+date: "02/05/2024"
+format: 
+  revealjs:
+      code-block-height: 650px
+      incremental: true   
+institute: "Good Data Institute"
+logo: "images/gdi-logo.png"
+title-slide-attributes:
+  data-background-image: "images/big-data-visualisation.webp"
+  data-background-size: full
+  data-background-opacity: "0.05"
+---
+
+
+# Introduction
+
+## About Me
+
+- Vivek Katial (vivek@gooddatainstitute.com)
+  - Co-founder and Executive Director @ [Good Data Institute](https://www.gooddatainstitute.com/)
+  - Data & Founding Team @ [Multitudes](https://www.multitudes.co/)
+  - PhD Candidate @ Unimelb (Optimisation on Quantum Computers)
+  - Visiting PhD Researcher @ NASA Jet Propulsion lab
+
+## About Me  {.center}
+
+:::columns
+::::column
+- I love traveling with my partner and trying new types of food
+::::
+
+::::column
+
+- <img src="images/vivek-at-zion.jpeg" height='400'>
+- **Doing angels landing at Zion National Park (Utah)**
+::::
+:::
+
+## Who is the Good Data Institute?
+
+- We are nonprofit that empowers other nonprofits and social enterprises to leverage data for social impact.
+- We build data capabilities through our volunteer community by working on data projects for the social sector
+- We are a global community of 150+ data nerds
+
+## Who is the Good Data Institute?
+
+<img src="images/gdi-partners.png" height='600'>
+
+
+
+## Our Impact {.bigger}
+
+:::columns
+::::column
+1. **75+** Data Projects
+2. **50+** Nonprofit Partners
+::::
+
+::::column
+3. **150+** Data Nerds
+4. **10+** Countries
+5. **2500+** Volunteer Hours
+
+::::
+:::
+
+## Today's Agenda {.incremental}
+1. Importance of Data Analytics and Visualisation
+2. Key Tools for Nonprofits
+3. Data Ethics and Algorithmic Bias
+4. Case studies
+4. Best Practices in Data Modeling and Visualisation
+6. Q&A
+
+
+
+# Importance of Data Analytics and Visualisation
+
+# Data Analytics
+
+## What is data analytics
+
+>- Who has heard of ETL?
+
+. . .
+
+<img src="images/ETL.svg" height='400'>
+
+::: {.notes}
+Because im an engineer I like to frame this from the perspective of ETL
+
+ETL stands for Extract, Transform, Load. It's a process that involves extracting data from multiple sources, transforming it into a usable format, and loading it into a database or data warehouse. This process is essential for data analytics because it allows you to gather data from different sources, clean and enrich it, and store it in a way that is easy to access and analyze.
+
+We'll dive into each of these steps in more detail in the next few slides, but the key takeaway is that ETL is a critical part of the data analytics process and is essential for turning raw data into actionable insights.
+:::
+
+
+## What is data analytics (Extraction)?
+
+- <span style="color: green">**Extraction**</span> &#8594; *Data Collection*
+
+. . .
+
+-  Gathering data from multiple sources
+     - Application / website data
+     - APIs
+     - Live datafeeds (e.g. forms, real time data from sensors)
+     - Spreadsheet or CSV files
+
+- Needs to be **robust**,  **reliable** and **scalable**
+
+::: {.notes}
+The data from these sources is often unstructured and needs to be cleaned and transformed before it can be used for analysis
+
+Examples of an app and website data could be data from Google Analytics, Facebook Insights, or other analytics tools. This data can be used to understand how people are interacting with your website or app, what content they're engaging with, and other key metrics that can help you improve your digital presence.
+
+or if you're on the more simple end it could be basic data from a google sheet or a CSV file thats connected to google forms.
+:::
+
+## What is data analytics (Transform)?
+
+- <span style="color: green">**Transformation**</span> &#8594; *Data Cleaning + Enrichment and Aggregation*
+
+. . .
+
+- **Cleaning** -- Removing missing values, duplicates, and outliers, checking for data consistency
+- **Enrichment** -- Adding contextual information to the data; e.g. geocoding, demographic data
+- **Aggregation** -- Creating summaries of the data that can be used for analysis or shared with stakeholders
+
+::: {.notes}
+Cleaning -- this involves removing missing values, duplicates, and outliers, checking for data consistency, and ensuring that the data is in the right format for analysis. Try and keep it all automated as much as possible. Use tools that people know how to use and can be easily maintained.
+
+Examples for cleaning can include basic scripts in python or R, or using tools like Tableau.
+
+Enrichment -- this involves adding contextual information to the data. This could be geocoding, demographic data, or other information that can help you better understand the data. This can be done using APIs or other data sources.
+
+An example here is Caring Kids in Australia, they provide toy boxes to kids who support their family members facing chronic illnesses or disabilities. They have a database of all the kids they've helped and they had addresses for all of them. Using the Google Maps API, they were able to geocode the addresses and create a map of where all the kids are located; they could use this infomration to first calculate travelled by their toy boxes across Australia and they were also able to localise where their efforts were better spent
+
+Aggregation -- this involves creating summaries of the data that can be used for analysis or shared with stakeholders. This could be a summary of the number of people served, the amount of money raised, or other key metrics that are important to your organization. This can be done using tools like Tableau or Power BI.
+
+An example of this would be a nonprofit that provides food to people experiencing homelessness. They could create a summary of the number of meals served, the number of people served, and other key metrics that are important to their organization. This summary could be shared with stakeholders to show the impact of their work. We did this with Lentils As Anything (who have no clsoed down)
+:::
+
+
+## What is data analytics (Load)?
+
+- <span style="color: green">**Loading**</span> &#8594; *Data Storage, Governance and Security*
+
+. . .
+
+- **Storage** -- Storing data in a secure and accessible way
+- **Governance** -- Ensuring data is used ethically and responsibly
+- **Security** -- Protecting data from unauthorized access or misuse
+
+::: {.notes}
+Storage -- this involves storing data in a secure and accessible way. This could be in a data warehouse, a cloud storage solution, or another type of database. It's important to ensure that the data is stored in a way that is easy to access and use for analysis. If you're small think about using simple and scalable tools; we use Airtable for our data storage and it works well for us (in the scale of few hundred projects and few hundred volunteers).
+
+Governance -- this involves ensuring that data is used ethically and responsibly. This could include creating data policies, training staff on data ethics, and ensuring that data is used in a way that respects privacy and confidentiality. This is especially important for nonprofits that work with sensitive data or vulnerable populations.
+
+Security -- this involves protecting data from unauthorized access or misuse. This could include using encryption, access controls, and other security measures to ensure that data is kept safe. It's important to take data security seriously and to ensure that data is protected from cyber threats and other risks. This is especially important for nonprofits that work with sensitive data or vulnerable populations.
+:::
+
+# Data Visualisation
+
+<img src="images/data-visualisation.png" height='300' >
+
+
+## Data Visualisation
+- <span style="color: green">**Data Visualisation**</span> &#8594; Communicating insights **truthfully** and with **beauty**
+
+- **Truthfully** -- Representing data accurately and without bias; avoiding misleading visualizations
+- **Beauty** -- Making data engaging, emphasize key points, and tell a story. Provide context and make it easy to understand
+
+::: {.notes}
+Truthfully -- this involves representing data accurately and without bias. This means avoiding misleading visualizations, using appropriate scales and labels, and ensuring that the data is presented in a way that is clear and easy to understand. It's important to be honest and transparent in how you present data and to avoid misrepresenting the facts.
+
+Beauty -- this involves making data engaging, emphasizing key points, and telling a story. This could include using color, size, and other visual elements to draw attention to important data points, creating interactive visualizations that allow users to explore the data, and using storytelling techniques to make the data more compelling. It's important to make data interesting and engaging so that people are more likely to pay attention and remember the key points.
+
+Need to balance between aesthetic and functionality. The goal is to make the data engaging and easy to understand
+
+:::
+
+## 
+
+
+<img src="images/what-makes-good-data-vis.png" height='700' fig-align='center' >
+
+::: {.notes}
+Frameworks like the one above can help you evaluate your data visualizations and ensure that they are effective and engaging. 
+
+- Information (accuracy and honesty)
+- Story (engagement and context)
+- Goal (focus and function)
+- Visual form (beauty and clarity)
+
+By considering these factors, you can create data visualizations that are informative, engaging, and easy to understand, making it more likely that people will pay attention and remember the key points.
+
+:::
+
+
+## Example - Climate & Conflict {background-color="black"}
+
+<img src="images/climate-conflict.png" height='600' >
+
+::: {.notes}
+This is an example of a data visualization that shows the relationship between climate change and conflict. The visualization uses color, size, and position to show the impact of climate change on conflict around the world. The data is presented in a way that is engaging and easy to understand, making it more likely that people will pay attention and remember the key points.
+:::
+
+## Example - Climate & Conflict {background-color="black"}
+
+<img src="images/climate-impact.png" height='600' >
+
+
+::: {.notes}
+This is an example of a data visualization that shows the impact of climate change on conflict around the world. The visualization uses color, size, and position to show the relationship between climate change and conflict. The data is presented in a way that is engaging and easy to understand, making it more likely that people will pay attention and remember the key points.
+:::
+
+
+## Example - Climate & Conflict {background-color="black"}
+
+<img src="images/climate-full.png" height='600' >
+
+# Key Tools for Nonprofits
+
+## What tools do you use?
+- <span style="color: red">**Poll**</span>: What tools do you use for data analytics and visualisation?
+    - *Microsoft Excel*
+    - *Google Sheets*
+    - *R and Python*
+    - *Looker Studio*
+    - *Tableau*
+    - *Power BI*
+    - *Custom Dashboards*
+
+
+## Tools and Technologies
+- Basic Tools (Google Sheets, Microsoft Excel)
+- Looker Studio
+- Tableau Nonprofit Program
+- Microsoft Power BI
+- Free and Open Source Tools (R, Python libraries)
+- Custom Dashboards and Reports from Salesforce, etc.
+
+::: {.notes}
+Good old Google Sheets and Microsoft Excel are still widely used by nonprofits for data analytics and visualization. They are easy to use and widely available, making them a good choice for organizations with limited resources or technical expertise.
+
+Looker Studio is a cloud-based data analytics and visualization tool that is easy to use and offers a range of pre-built dashboards and reports. It is a good choice for organizations that need a simple and affordable solution for data analytics and visualization.
+
+Tableau and MSFT PowerBI are more powerful but also expensive
+
+Free and open source tools like R and Python libraries are highly customizable and offer a wide range of features for data analytics and visualization. They require coding skills and technical expertise, but they are a good choice for organizations that need a more advanced solution or those who have the technical capacity to use them.
+:::
+
+## How to Choose the Right Tool
+- Where is your data stored already?
+- What are your data visualization needs?
+- What is your budget and technical capacity?
+
+::: {.notes}
+When choosing a data analytics and visualization tool, it's important to consider where your data is stored, what your data visualization needs are, and what your budget and technical capacity are. If you already have data stored in a particular platform, it may make sense to use a tool that integrates with that platform. 
+
+If you have specific data visualization needs, such as interactive dashboards or custom reports, you'll want to choose a tool that can meet those needs. 
+
+
+And if you have a limited budget or technical capacity, you'll want to choose a tool that is easy to use and affordable.
+:::
+
+
+## Pros and Cons of Different Tools
+- **Microsoft Excel and Google Sheets:** Easy to use and widely available, but limited features and not scalable or reliable/reproducible
+- **R and Python:** Highly customizable, but require coding skills and technical expertise
+- **Looker Studio:** Easy to use, but limited customization
+- **Tableau and Power BI:** Powerful features, but can be expensive
+- **Custom Dashboards via ERPs:** Tailored to your needs, but require development resources
+
+::: {.notes}
+Excel and Google Sheets: THese are easy to use and widely available, but they have limited features and are not scalable or reliable. They are good for basic data analytics and visualization, but they may not be suitable for more advanced needs.
+
+R and Python: These are highly customizable and offer a wide range of features, but they require coding skills and technical expertise. They are a good choice for organizations that need a more advanced solution or those who have the technical capacity to use them.
+
+Looker Studio: This is easy to use and offers a range of pre-built dashboards and reports, but it has limited customization options. It is a good choice for organizations that need a simple and affordable solution for data analytics and visualization.
+
+Tableau and Power BI: These tools offer powerful features and a wide range of customization options, but they can be expensive. They are a good choice for organizations that need a more advanced solution and have the budget to support it.
+
+Custom Dashboards via ERPs: These are tailored to your needs and offer a wide range of features, but they require development resources and technical expertise. They are a good choice for organizations that need a highly customized solution and have the resources to support it.
+:::
+
+
+
+
+# Data Ethics and Algorithmic Bias
+
+## What is Data Ethics and Algorithmic Bias?
+- Data ethics refers to the moral and ethical implications of data collection, analysis, and use.
+- Algorithmic bias refers to the ability of algorithms to systematically and repeatedly produce outcomes that benefit one particular group over another
+- Already many examples in society where algorithms have harmed marginalised groups
+
+## Trivial Example
+
+<img src='https://uploads-ssl.webflow.com/610c8a14b4df1af57f1a13c9/61ef3607e563db74c6114c43_Screenshot%202022-01-25%20at%2012.27.34%20PM.png' height='350' >
+
+- Predictions on the image of the Western bride included labels such as “bride”, “wedding”, “ceremony”
+- For the woman wearing a traditional Indian wedding dress, the predicted labels were “costume”, “performing arts”, “event
+
+## More Harmful Example
+
+- Evaluation of a model that uses facial recognition deployed by large technology companies ^[Amini. A, et al. (2019). Uncovering and Mitigating Algorithmic Bias through Learned Latent Structure.]
+
+
+## More Harmful Example
+
+<img src='images/accuracy-no-bias.png' height='400' >
+
+. . . 
+
+$$
+P(\text{Dark}) \lt P(\text{Light})
+$$
+
+## More Harmful Example
+
+<img src='images/accuracy-no-bias.png' height='400' >
+
+$$ 
+P(\text{Dark} \cap \text{Male}) \lt P(\text{Dark} \cap \text{Female}) \lt \\ 
+P(\text{Light} \cap \text{Female}) \lt P(\text{Light} \cap \text{Male})
+$$
+
+:::{.notes}
+- Program A is delivered in other suburbs vs Program B is delivered in other suburbs
+- The importance of asking question of your data, the questions you need to ask your data
+:::
+
+## More Harmful Example
+
+- What happens when you try and use a de-biasing parameter $\alpha$ to reduce that bias.
+
+. . . 
+
+<img src='images/accuracy-debiased.png' height='400' >
+
+
+
+## How to get started on data ethics! {.smaller}
+
+- Create some data principles
+- This is a well-studied field. Get buy-in from leadership using existing research
+- Conduct a **bad actor exercise**
+- Make data labelling fun and diverse
+- Recognize that humans are the ones who create algorithms, so we also recognize the importance of the broader culture and environment we create and operate in.
+- Commit to learning more!
+   - Weapons of Maths Destruction by Cathy O'Neil
+   - Data Feminism by Catherine D'Ignazio and Lauren F. Klein
+
+
+
+# Example 1
+
+# Caring Kids Australia
+
+<img src="images/caring-kids.jpeg" height='400' >
+
+## Caring Kids Australia {.center}
+
+- **Mission:** To provide toy boxes to kids who support their family members facing chronic illnesses or disabilities
+- **Data Challenge:** They had a database of all the kids they've helped and they had addresses for all of them. They wanted to know where all the kids were located and how they could better serve them.
+
+## Caring Kids Australia
+
+<img src="images/caring-kids-approach.png" height='500'>
+
+## Caring Kids Australia
+
+<img src="images/caring-kids-dash.png" height='500'>
+
+# Example 2
+
+# Where are all GDI the projects located?
+- Data Source: [Good Data Institute Project Database](https://www.gooddatainstitute.com/)
+
+# Where are all the projects located?
+
+
+
+## Where are all the projects located?
+- Write a basic `SQL` query to download all project data and write to csv
+
+. . . 
+
+```sql
+SELECT 
+  project_name,
+  charity_name,
+  hq_country, 
+  hq_city, 
+  gdi_branch
+  
+FROM gdi_db.projects
+```
+
+## Where are all the projects located?
+
+<img src="images/ss-data.png" width='600' >
+
+## Real Example (using R)
+
+
+```{r}
+#| echo: true
+#| output-location: fragment	
+
+library(tidyverse)
+d_projects <- read_csv("data/projects.csv")
+```
+
+
+```{r}
+d_projects <- d_projects %>% 
+  janitor::clean_names() %>%
+  # Remove NA
+  filter(!is.na(hq_country))
+  
+d_projects <- d_projects %>% 
+  bind_rows(d_projects %>% sample_n(10)) %>%
+  mutate(project_fee =  "Hide $$") %>%
+  select(project_name, charity_name, hq_country, hq_city, gdi_branch) %>% 
+  mutate(project_id = row_number()) %>% 
+  select(project_id, everything())
+
+```
+
+>- Great! Now lets look at one row of the data
+
+## Real Example (using R)
+
+```{r}
+#| echo: true
+#| output-location: fragment	
+
+d_projects %>% 
+  slice(29) %>% 
+  glimpse()
+```
+
+
+## Real Example (using R)
+
+```{r}
+#| echo: true
+#| output-location: fragment	
+d_projects %>% 
+  count(hq_country) 
+```
+
+## Real Example (using R)
+
+```{r}
+#| echo: true
+#| output-location: fragment	
+plot <- d_projects %>% 
+  count(hq_country) %>% 
+  ggplot(aes(x = "", y = n, fill = hq_country)) + 
+  # Make pie chart
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0)
+```
+
+```{r}
+#| echo: false
+#| output-location: fragment
+
+plot + theme_void()
+```
+
+>-  **What do you think of this visualisation?**
+
+::: {.notes}
+Pie charts are best used when there are 2-3 items that make up a whole. Any more than that, and it’s difficult for the human eye to distinguish between the parts of a circle.
+
+Notice how it’s hard to distinguish the size of these parts. 
+
+It’s hard for our eyes to tell the difference. Lets replace this with a bar chart
+:::
+
+
+## Real Example (using R)
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+d_projects %>% 
+  count(hq_country) %>% 
+  ggplot(aes(x = hq_country, y = n, fill = hq_country)) + 
+  geom_bar(stat="identity") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+:::{.notes}
+It might look pretty, and you might be wondering “what’s wrong with it?”
+
+The more colors you use, the less comprehensible the visualization will be. More colors = more categories the brain must process. 
+:::
+
+## Proper Data Visualisation
+
+```{.R code-line-numbers="3"}
+d_projects %>% 
+  count(hq_country) %>% 
+  ggplot(aes(x = reorder(hq_country,-n), y = n)) + 
+  geom_bar(stat="identity") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    x = "Country",
+    y = "Number of Projects",
+  )
+```
+
+
+## Proper Data Visualisation
+
+```{.R code-line-numbers="7-10"}
+d_projects %>% 
+  count(hq_country) %>% 
+  ggplot(aes(x = reorder(hq_country,-n), y = n)) + 
+  geom_bar(stat="identity") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    x = "Country",
+    y = "Number of Projects",
+  )
+```
+
+## Proper Data Visualisation
+
+```{r}
+#| echo: false
+#| output-location: fragment
+
+d_projects %>% 
+  count(hq_country) %>% 
+  ggplot(aes(x = reorder(hq_country,-n), y = n)) + 
+  geom_bar(stat="identity") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    x = "Country",
+    y = "Number of Projects",
+  )
+```
+
+::: {.notes}
+In this case we've made a few edits
+
+1. We've removed the fill color. This makes the chart easier to read and understand.
+2. We've reordered the countries by the number of projects. This makes it easier to see which countries have the most projects.
+3. We've added labels to the x and y axes. This makes it clear what the chart is showing and how to interpret it.
+
+These changes make the chart easier to read and understand, and help to communicate the data more effectively.
+:::
+
+
+## Comparison {.smaller  .incremental}
+
+:::columns
+::::column 
+<img src="images/pie-chart-gdi.png">
+
+- **Pie Chart 🥧 **
+   - Hard to distinguish between the parts of a circle
+   - So many colors, hard to process
+   - Not the best choice for this data
+::::
+
+::::column
+<img src="images/bar-chart-gdi.png">
+
+- **Bar Chart 📊**
+    - Easier to read and understand
+    - Reordered by number of projects
+    - Clear labels
+::::
+:::
+
+. . . 
+
+<span style="color:green">**Question:**</span> **Whats missing for both?**
+
+::: {.notes}
+Now looking at the two visualizations side by side, it's clear that the bar chart is a much better choice for this data. It's easier to read and understand, and it communicates the data more effectively.
+
+But there are still some things missing. What do you think is missing from both visualizations? 
+
+What would happen if we had 40 countries here? Bar chart would be hard to read; Pie chart would be even harder to read.
+
+So this is where using analytics to encode data into visual elements can help. In this case; we could geocode the data and plot it on a map.
+
+:::
+
+## More advanced visualisation  {background-color="black"}
+
+```{r}
+#| echo: false
+#| output-location: slide
+
+library(maps)
+
+# Map data preparation with country name adjustments
+d_projects <- d_projects %>%
+  mutate(hq_country = case_when(
+    hq_country == "United States" ~ "USA",
+    hq_country == "United Kingdom" ~ "UK",
+    TRUE ~ hq_country
+  ))
+
+
+# Load world map data
+world_map <- map_data("world")
+
+# Join your project data and prepare the map data
+map_data <- world_map %>%
+  left_join(d_projects %>% 
+              count(hq_country, name = "n_projects"), by = c("region" = "hq_country")) %>%
+  replace_na(list(n_projects = NA))
+
+# Plotting the map
+ggplot(map_data, aes(x = long, y = lat, group = group, fill = n_projects)) +
+  geom_polygon(color = "#1C1C1C", size = 0.15) +  # Adjust border color for better visibility on dark background
+  scale_fill_gradient(low = "lightblue", high = "darkblue", name = "Number of Projects", na.value = "#313131") +
+  labs(title = "Number of Projects by Headquarters Country", x = "", y = "") +
+  theme_void() + 
+  theme(
+    text = element_text(color = "white"),  # Changes text color to white
+    plot.background = element_rect(fill = "black", color = NA),  # Dark plot background
+    panel.background = element_rect(fill = "black", color = NA),  # Dark panel background
+    panel.grid.major = element_blank(),  # Adjust grid color and size
+    panel.grid.minor = element_blank(),  # No minor grid
+    plot.title = element_text(color = "white", hjust = 0.5),  # Title in white and centered
+    axis.text = element_blank(),  # Remove axis text
+    axis.ticks = element_blank(),  # Remove axis ticks
+    legend.background = element_rect(fill = "black", color = NA),  # Dark legend background
+    legend.text = element_text(color = "white")  # White legend text
+  )
+```
+
+::: {.notes}
+In this example we're able to see the number of projects by headquarters country on a world map.
+:::
+
+
+# Example 3
+
+# Pipeline Dreams with 
+
+<img src="images/ersilia.png"  >
+
+
+
+## Low income countries produce less than
+
+<span style="font-size:9em; color:navy"> <5% </span>
+
+<p style='text-align:right;'>of the world's scientific research</p>
+
+## Scientific Method
+
+1. Design
+
+2. Test
+
+3. Evaluate
+
+## Example Malaria
+
+<img src="images/malaria-death-rates.png">
+
+## AI can help and accelerate research
+
+- **AI** can help to accelerate research and development in low income countries
+- Accelerate novel drug discovery in low-income countries by providing scientists in these areas with cutting-edge AI models
+- They presently have 100+ models, each tailored for a unique aspect of drug discovery.
+
+## Problem
+
+- Limited compute capacity available to researchers in the Global South
+- We want to build a database of pre-calculated ML predictions for commonly used molecules (reference library of 2M)
+- We should be able to return these predictions over the internet within seconds (not minutes)
+
+## Solution
+
+<img src="images/ersilia-arch.png" height='500' >
+
+## Solution
+
+<img src="images/ersilia-arch-full.png" height='500' >
+
+## Lessons Learned
+
+- **Outcome:** We can now return predictions in under 1 second
+- Technical domains take time to understand
+- Using an evolving architecture diagram can facilitate engineering work
+- `infrastructure_as_code.(Terraform) == Good`
+
+
+
+# Wrapping up
+
+## Best Practices in Data Analytics and Visualisation {.smaller}
+
+1. **Start with a clear goal**
+2. **Understand your data**
+3. **Choose the right tool(s)**
+    - If you can write SQL or use Excel, you can write R or Python
+    - Use scripts to automate repetitive tasks and invest in version control (e.g Github)
+4. **Use the right visualisation for your data**
+    - Avoid pie charts
+    - Use color and size to draw attention to key points
+    - Make it easy to understand
+    - Enhance with exogenous datasets (e.g. geocoding, census data)
+7. **Never forget Data Ethics and Algorithmic Bias**
+
+# Q&A
+
+## Follow us
+- [Good Data Institute](https://www.gooddatainstitute.com/)
+- [LinkedIn](https://www.linkedin.com/company/good-data-institute)
+
+
+## Map code
+
+```{.r}
+library(maps)
+
+# Map data preparation with country name adjustments
+d_projects <- d_projects %>%
+  mutate(hq_country = case_when(
+    hq_country == "United States" ~ "USA",
+    hq_country == "United Kingdom" ~ "UK",
+    TRUE ~ hq_country
+  ))
+
+
+# Load world map data
+world_map <- map_data("world")
+
+# Join your project data and prepare the map data
+map_data <- world_map %>%
+  left_join(d_projects %>% 
+              count(hq_country, name = "n_projects"), by = c("region" = "hq_country")) %>%
+  replace_na(list(n_projects = NA))
+
+# Plotting the map
+ggplot(map_data, aes(x = long, y = lat, group = group, fill = n_projects)) +
+  geom_polygon(color = "#1C1C1C", size = 0.15) +  # Adjust border color for better visibility on dark background
+  scale_fill_gradient(low = "lightblue", high = "darkblue", name = "Number of Projects", na.value = "#313131") +
+  labs(title = "Number of Projects by Headquarters Country", x = "", y = "") +
+  theme_void() + 
+  theme(
+    text = element_text(color = "white"),  # Changes text color to white
+    plot.background = element_rect(fill = "black", color = NA),  # Dark plot background
+    panel.background = element_rect(fill = "black", color = NA),  # Dark panel background
+    panel.grid.major = element_blank(),  # Adjust grid color and size
+    panel.grid.minor = element_blank(),  # No minor grid
+    plot.title = element_text(color = "white", hjust = 0.5),  # Title in white and centered
+    axis.text = element_blank(),  # Remove axis text
+    axis.ticks = element_blank(),  # Remove axis ticks
+    legend.background = element_rect(fill = "black", color = NA),  # Dark legend background
+    legend.text = element_text(color = "white")  # White legend text
+  )
+```
+
+
+

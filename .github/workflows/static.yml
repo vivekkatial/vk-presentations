@@ -36,12 +36,15 @@ jobs:
       - name: Change name of slide.html for current presentation
         run: |
           # When giving new talk CHANGE this
-          mv ./2023/cto-school-data-ethics-irl/slides/data-ethics-irl-slides.html ./2023/cto-school-data-ethics-irl/slides/index.html
+          mv ./2024/tech-for-social-justice-conf-data-analytics-and-visualisation/slides/data-analytics-vis.html ./2024/tech-for-social-justice-conf-data-analytics-and-visualisation/slides/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           # When giving new talk CHANGE this to slides sub-repo
-          path: './2023/cto-school-data-ethics-irl/slides/'
+          path: './2024/tech-for-social-justice-conf-data-analytics-and-visualisation/slides/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
+
+        
