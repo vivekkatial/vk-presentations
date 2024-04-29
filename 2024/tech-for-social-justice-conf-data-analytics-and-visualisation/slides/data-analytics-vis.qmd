@@ -6,6 +6,7 @@ format:
   revealjs:
       code-block-height: 650px
       incremental: true   
+      output-file: data-analytics-vis.html
 institute: "Good Data Institute"
 logo: "images/gdi-logo.png"
 title-slide-attributes:
@@ -15,7 +16,11 @@ title-slide-attributes:
 ---
 
 
-# Introduction
+# Introduction {.center}
+
+# Slides
+
+https://vivekkatial.github.io/vk-presentations/#/
 
 ## About Me
 
