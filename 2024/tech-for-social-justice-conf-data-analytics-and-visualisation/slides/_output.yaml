@@ -1,0 +1,6 @@
+revealjs::revealjs_presentation:
+  center: true
+  reveal_options:
+    slideNumber: true
+    previewLinks: true
+    transition: 'slide'
