@@ -1,0 +1,22 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Viveks Presentations"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - href: slides/data-analytics-vis.qmd
+        text: Data Analytics & Visualization
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
