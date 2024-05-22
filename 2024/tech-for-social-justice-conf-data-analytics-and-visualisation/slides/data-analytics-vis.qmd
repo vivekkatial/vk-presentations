@@ -1,62 +1,40 @@
 ---
-title: "<h2>Data Analytics and Visualisation</h2> <br> <img src='images/gdi-logo.png' height='120'>"
-author: "<h3>Vivek Katial</h3>"
-date: "02/05/2024"
+title: "<h1 style='color: white; text-align: right; position: absolute; top: 0; width: 100%'>Data Analytics and Visualisation</h1>"
 format: 
   revealjs:
       code-block-height: 650px
       incremental: true
       theme: [default]
+      auto-animate: true
       output-file: data-analytics-vis.html
-institute: "Good Data Institute"
-logo: "images/gdi-logo.png"
+      logo: "images/gdi-logo.png"
+      footer: <https://www.gooddatainstitute.com>
 title-slide-attributes:
-  data-background-image: "images/big-data-visualisation.webp"
+  data-background-image: "images/data-bg.webp"
   data-background-size: full
-  data-background-opacity: "0.05"
+  data-background-opacity: "1"
 ---
-
-
-# Introduction {.center}
-
-
 
 # Slides {.center}
 
-[https://vivekkatial.github.io/vk-presentations/#/](https://vivekkatial.github.io/vk-presentations/#/)
+<img src="images/qr-code-t4sj.png" height='400' >
 
 ## About Me
 
 - Vivek Katial (vivek@gooddatainstitute.com)
   - Co-founder and Executive Director @ [Good Data Institute](https://www.gooddatainstitute.com/)
-  - Data & Founding Team @ [Multitudes](https://www.multitudes.co/)
-  - PhD Candidate @ Unimelb (Optimisation on Quantum Computers)
-  - Visiting PhD Researcher @ NASA Jet Propulsion lab
-
-## About Me  {.center}
-
-:::columns
-::::column
-- I love traveling with my partner and trying new types of food
-::::
-
-::::column
-
-- <img src="images/vivek-at-zion.jpeg" height='400'>
-- **Doing angels landing**
-::::
-:::
+  - Lead Data Scientist & Founding Team @ [Multitudes](https://www.multitudes.co/)
+  - QC PhD / visiting PhD @ NASA Jet Propulsion Lab
 
 ## Who is the Good Data Institute?
 
-- We are nonprofit that empowers other nonprofits and social enterprises to leverage data for social impact.
-- We build data capabilities through our volunteer community by working on data projects for the social sector
+- We are NFP that empowers other NFPs to build data capabilities.
+- Our volunteer community by does this by working on bespoke data projects for our NFP partners
 - We are a global community of 150+ data nerds
 
 ## Who is the Good Data Institute?
 
-<img src="images/gdi-partners.png" height='600'>
-
+<img src="images/gdi-partners.png" width='100%'>
 
 
 ## Our Impact {.bigger}
@@ -70,7 +48,7 @@ title-slide-attributes:
 ::::column
 3. **150+** Data Nerds
 4. **10+** Countries
-5. **2500+** Volunteer Hours
+5. **3000+** Volunteer Hours
 
 ::::
 :::
@@ -113,12 +91,13 @@ We'll dive into each of these steps in more detail in the next few slides, but t
 . . .
 
 -  Gathering data from multiple sources
-     - Application / website data
-     - APIs
-     - Live datafeeds (e.g. forms, real time data from sensors)
+     - Application / website data / APIs
+     - Forms and surveys data (SurveyMonkey, Google Forms)
+     - Live datafeeds (e.g. real time data from sensors)
      - Spreadsheet or CSV files
 
 - Needs to be **robust**,  **reliable** and **scalable**
+
 
 ::: {.notes}
 The data from these sources is often unstructured and needs to be cleaned and transformed before it can be used for analysis
@@ -126,6 +105,8 @@ The data from these sources is often unstructured and needs to be cleaned and tr
 Examples of an app and website data could be data from Google Analytics, Facebook Insights, or other analytics tools. This data can be used to understand how people are interacting with your website or app, what content they're engaging with, and other key metrics that can help you improve your digital presence.
 
 or if you're on the more simple end it could be basic data from a google sheet or a CSV file thats connected to google forms.
+
+I'm sure everyone has heard garbage in / garbage out. So we cant stress enough the importance of data collection.
 :::
 
 ## What is data analytics (Transform)?
@@ -134,20 +115,18 @@ or if you're on the more simple end it could be basic data from a google sheet o
 
 . . .
 
-- **Cleaning** -- Removing missing values, duplicates, and outliers, checking for data consistency
+- **Cleaning** -- Removing missing values, duplicates, and outliers, checking for data consistency. Running unit tests!
 - **Enrichment** -- Adding contextual information to the data; e.g. geocoding, demographic data, other datasets from ABS
-- **Aggregation** -- Creating summaries of the data that can be used for analysis or shared with stakeholders
+- **Aggregation** -- Creating summaries of the data that can be used for analysis or shared with stakeholders (especially from an ethics perspective)
 
 ::: {.notes}
 Cleaning -- this involves removing missing values, duplicates, and outliers, checking for data consistency, and ensuring that the data is in the right format for analysis. Try and keep it all automated as much as possible. Use tools that people know how to use and can be easily maintained.
 
-Examples for cleaning can include basic scripts in python or R, or using tools like Tableau.
+Examples for cleaning can include basic scripts in python or R, or using tools like Tableau. More advance tools like dbt can also be used for this.
 
-Enrichment -- this involves adding contextual information to the data. This could be geocoding, demographic data, or other information that can help you better understand the data. This can be done using APIs or other data sources. 
+Enrichment -- this involves adding contextual information to the data. This could be geocoding, demographic data, or other information that can help you better understand the data. This can be done using APIs or other data sources (like the ABS or the Department of Social Services). It could also be computing things -- for example using different date fields to understand how long delivery of services is taking.
 
-An example here is Caring Kids in Australia, they provide toy boxes to kids who support their family members facing chronic illnesses or disabilities. They have a database of all the kids they've helped and they had addresses for all of them. Using the Google Maps API, they were able to geocode the addresses and create a map of where all the kids are located; they could use this infomration to first calculate travelled by their toy boxes across Australia and they were also able to localise where their efforts were better spent
-
-Aggregation -- this involves creating summaries of the data that can be used for analysis or shared with stakeholders. This could be a summary of the number of people served, the amount of money raised, or other key metrics that are important to your organization. This can be done using tools like Tableau or Power BI.
+Aggregation -- this involves creating summaries of the data that can be used for analysis or shared with stakeholders. This could be a summary of the number of people served, the amount of money raised, or other key metrics that are important to your organization. This can be done using tools like Tableau or Power BI or if you have an data pipeline; in tools like dbt/ AWS Step Functions.
 
 An example of this would be a nonprofit that provides food to people experiencing homelessness. They could create a summary of the number of meals served, the number of people served, and other key metrics that are important to their organization. This summary could be shared with stakeholders to show the impact of their work. We did this with Lentils As Anything (who have no clsoed down)
 :::
@@ -173,14 +152,14 @@ Security -- this involves protecting data from unauthorized access or misuse. Th
 
 # Data Visualisation
 
-<img src="images/data-visualisation.png" height='300' >
+<img src="images/data-visualisation.png" height='400' >
 
 
 ## Data Visualisation
 - <span style="color: green">**Data Visualisation**</span> &#8594; Communicating insights **truthfully** and with **beauty**
 
 - **Truthfully** -- Representing data accurately and without bias; avoiding misleading visualisations
-- **Beauty** -- Making data engaging, emphasize key points, and tell a story. Provide context and make it easy to understand
+- **Beauty** -- Making data engaging, emphasise key points, and tell a story. Provide context and make it easy to understand
 
 ::: {.notes}
 Truthfully -- this involves representing data accurately and without bias. This means avoiding misleading visualisations, using appropriate scales and labels, and ensuring that the data is presented in a way that is clear and easy to understand. It's important to be honest and transparent in how you present data and to avoid misrepresenting the facts.
@@ -188,7 +167,6 @@ Truthfully -- this involves representing data accurately and without bias. This 
 Beauty -- this involves making data engaging, emphasizing key points, and telling a story. This could include using color, size, and other visual elements to draw attention to important data points, creating interactive visualisations that allow users to explore the data, and using storytelling techniques to make the data more compelling. It's important to make data interesting and engaging so that people are more likely to pay attention and remember the key points.
 
 Need to balance between aesthetic and functionality. The goal is to make the data engaging and easy to understand
-
 :::
 
 ## 
@@ -222,8 +200,12 @@ This is an example of a data visualisation that shows the relationship between c
 <img src="images/climate-impact.png" height='600' >
 
 
-::: {.notes}cli
-This is an example of a data visualisation that shows the impact of climate change on conflict around the world. The visualisation uses color, size, and position to show the relationship between climate change and conflict. The data is presented in a way that is engaging and easy to understand, making it more likely that people will pay attention and remember the key points.
+::: {.notes}
+This is an example of a data visualisation that shows the impact of climate change on conflict around the world. The visualisation uses color, size, and position to show the relationship between climate change and conflict.
+
+Here we can see that countries that are most vulnerable to climate change are also the most vulnerable to conflict.
+
+Climate change in the context of conflict is therefore considered a potential “threat multiplier” first and foremost.
 :::
 
 
@@ -302,23 +284,23 @@ Custom Dashboards via ERPs: These are tailored to your needs and offer a wide ra
 # Data Ethics and Algorithmic Bias
 
 ## What is Data Ethics and Algorithmic Bias?
-- Data ethics refers to the moral and ethical implications of data collection, analysis, and use.
-- Algorithmic bias refers to the ability of algorithms to systematically and repeatedly produce outcomes that benefit one particular group over another
-- Already many examples in society where algorithms have harmed marginalised groups
+- **Data ethics** refers to the moral and ethical implications of data collection, analysis, and use.
+- **Algorithmic bias** refers to the ability of algorithms to systematically and repeatedly produce outcomes that benefit one particular group over another
+- Already many examples in society where algorithms have harmed marginalised groups!
 
-## Trivial Example
+## Trivial Example {.smaller}
 
 <img src='https://uploads-ssl.webflow.com/610c8a14b4df1af57f1a13c9/61ef3607e563db74c6114c43_Screenshot%202022-01-25%20at%2012.27.34%20PM.png' height='350' >
 
 - Predictions on the image of the Western bride included labels such as “bride”, “wedding”, “ceremony”
-- For the woman wearing a traditional Indian wedding dress, the predicted labels were “costume”, “performing arts”, “event
+- For the woman wearing a traditional Indian wedding dress, the predicted labels were “costume”, “performing arts”, “event"
 
-## More Harmful Example
+## More Harmful Example {background-color="black"}
 
-- Evaluation of a model that uses facial recognition deployed by large technology companies ^[Amini. A, et al. (2019). Uncovering and Mitigating Algorithmic Bias through Learned Latent Structure.]
+- Evaluation of a model that uses facial recognition deployed by large technology companies
 
 
-## More Harmful Example
+## More Harmful Example {background-color="black"}
 
 <img src='images/accuracy-no-bias.png' height='400' >
 
@@ -328,12 +310,13 @@ $$
 P(\text{Dark}) \lt P(\text{Light})
 $$
 
-## More Harmful Example
+## More Harmful Example {background-color="black"}
 
 <img src='images/accuracy-no-bias.png' height='400' >
 
-$$ 
-P(\text{Dark} \cap \text{Male}) \lt P(\text{Dark} \cap \text{Female}) \lt \\ 
+$$  
+\tiny
+P(\text{Dark} \cap \text{Male}) \lt P(\text{Dark} \cap \text{Female}) \lt
 P(\text{Light} \cap \text{Female}) \lt P(\text{Light} \cap \text{Male})
 $$
 
@@ -342,32 +325,33 @@ $$
 - The importance of asking question of your data, the questions you need to ask your data
 :::
 
-## More Harmful Example
+## More Harmful Example {background-color="black"}
 
 - What happens when you try and use a de-biasing parameter $\alpha$ to reduce that bias.
 
 . . . 
 
-<img src='images/accuracy-debiased.png' height='400' >
+<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+  <img src="images/accuracy-debiased.png" height="320">
+</div>
 
-
+^[Amini. A, et al. (2019). Uncovering and Mitigating Algorithmic Bias through Learned Latent Structure.]
 
 ## How to get started on data ethics! {.smaller}
 
 - Create some data principles
-- This is a well-studied field. Get buy-in from leadership using existing research
-- Conduct a **bad actor exercise**
-- Make data labelling fun and diverse
-- Recognize that humans are the ones who create algorithms, so we also recognize the importance of the broader culture and environment we create and operate in.
+- This is a well-studied field. Get buy-in from leadership using existing research.
+  - Timnit Gebru, CAIDE, AJL, etc.
+- Conduct a **bad actor exercise** to identify potential risks
+- Recognise that humans are the ones who create algorithms, so we also recognize the importance of the broader culture and environment we create and operate in.
 - Commit to learning more!
    - Weapons of Maths Destruction by Cathy O'Neil
    - Data Feminism by Catherine D'Ignazio and Lauren F. Klein
 
 
-
 # Example 1
 
-# Caring Kids Australia
+# Caring Kids Australia 
 
 <img src="images/caring-kids.jpeg" height='400' >
 
@@ -673,6 +657,17 @@ In this example we're able to see the number of projects by headquarters country
 
 <img src="images/ersilia.png"  >
 
+## Infectious Diseases are responsible for 
+
+<span style="font-size:9em; color:darkred"> 6/10 </span>
+
+<p style='text-align:right;'>top causes of death in the global south</p>
+
+## Out of the drugs in development
+
+<span style="font-size:9em; color:darkgreen"> 10% </span>
+
+<p style='text-align:right;'>are targeting these disease areas</p>
 
 
 ## Low income countries produce less than
@@ -680,6 +675,10 @@ In this example we're able to see the number of projects by headquarters country
 <span style="font-size:9em; color:navy"> <5% </span>
 
 <p style='text-align:right;'>of the world's scientific research</p>
+
+# 
+
+<img src="images/malaria-death-rates.png" height='700'>
 
 ## Scientific Method
 
@@ -699,19 +698,15 @@ In this example we're able to see the number of projects by headquarters country
 :::
 
 
-# 
-
-<img src="images/malaria-death-rates.png" height='700'>
-
 ## AI can help and accelerate research
 
-- **AI** can help to accelerate research and development in low income countries
+- **AI** can help to accelerate research and development
 - Accelerate novel drug discovery in low-income countries by providing scientists in these areas with cutting-edge AI models
-- They presently have 100+ models, each tailored for a unique aspect of drug discovery.
+- Ersilia's model hub presently have 100+ models, each tailored for a unique aspect of drug discovery.
 
 ## Problem
 
-- Limited compute capacity available to researchers in the Global South
+- Limited compute capacity available to researchers in the Global South means using these models is *slow*
 - We want to build a database of pre-calculated ML predictions for commonly used molecules (reference library of 2M)
 - We should be able to return these predictions over the internet within seconds (not minutes)
 

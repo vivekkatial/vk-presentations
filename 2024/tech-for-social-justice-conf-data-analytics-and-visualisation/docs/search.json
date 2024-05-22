@@ -18,7 +18,7 @@
     "href": "slides/data-analytics-vis.html#about-me",
     "title": "",
     "section": "About Me",
-    "text": "About Me\n\nVivek Katial (vivek@gooddatainstitute.com)\n\nCo-founder and Executive Director @ Good Data Institute\nData & Founding Team @ Multitudes\nPhD Candidate @ Unimelb (Optimisation on Quantum Computers)\nVisiting PhD Researcher @ NASA Jet Propulsion lab"
+    "text": "About Me\n\nVivek Katial (vivek@gooddatainstitute.com)\n\nCo-founder and Executive Director @ Good Data Institute\nLead Data Scientist & Founding Team @ Multitudes\nQC PhD / visiting PhD @ NASA Jet Propulsion Lab"
   },
   {
     "objectID": "slides/data-analytics-vis.html#about-me-1",
@@ -32,7 +32,7 @@
     "href": "slides/data-analytics-vis.html#who-is-the-good-data-institute",
     "title": "",
     "section": "Who is the Good Data Institute?",
-    "text": "Who is the Good Data Institute?\n\nWe are nonprofit that empowers other nonprofits and social enterprises to leverage data for social impact.\nWe build data capabilities through our volunteer community by working on data projects for the social sector\nWe are a global community of 150+ data nerds"
+    "text": "Who is the Good Data Institute?\n\nWe are NFP that empowers other NFPs to build data capabilities.\nOur volunteer community by does this by working on bespoke data projects for our NFP partners\nWe are a global community of 150+ data nerds"
   },
   {
     "objectID": "slides/data-analytics-vis.html#who-is-the-good-data-institute-1",
@@ -46,7 +46,7 @@
     "href": "slides/data-analytics-vis.html#our-impact",
     "title": "",
     "section": "Our Impact",
-    "text": "Our Impact\n\n\n\n75+ Data Projects\n50+ Nonprofit Partners\n\n\n\n150+ Data Nerds\n10+ Countries\n2500+ Volunteer Hours"
+    "text": "Our Impact\n\n\n\n75+ Data Projects\n50+ Nonprofit Partners\n\n\n\n150+ Data Nerds\n10+ Countries\n3000+ Volunteer Hours"
   },
   {
     "objectID": "slides/data-analytics-vis.html#todays-agenda",
@@ -67,14 +67,14 @@
     "href": "slides/data-analytics-vis.html#what-is-data-analytics-extraction",
     "title": "",
     "section": "What is data analytics (Extraction)?",
-    "text": "What is data analytics (Extraction)?\n\nExtraction → Data Collection\n\n\n\nGathering data from multiple sources\n\nApplication / website data\nAPIs\nLive datafeeds (e.g. forms, real time data from sensors)\nSpreadsheet or CSV files\n\nNeeds to be robust, reliable and scalable\n\n\nThe data from these sources is often unstructured and needs to be cleaned and transformed before it can be used for analysis\nExamples of an app and website data could be data from Google Analytics, Facebook Insights, or other analytics tools. This data can be used to understand how people are interacting with your website or app, what content they’re engaging with, and other key metrics that can help you improve your digital presence.\nor if you’re on the more simple end it could be basic data from a google sheet or a CSV file thats connected to google forms."
+    "text": "What is data analytics (Extraction)?\n\nExtraction → Data Collection\n\n\n\nGathering data from multiple sources\n\nApplication / website data / APIs\nForms and surveys data (SurveyMonkey, Google Forms)\nLive datafeeds (e.g. real time data from sensors)\nSpreadsheet or CSV files\n\nNeeds to be robust, reliable and scalable\n\n\nThe data from these sources is often unstructured and needs to be cleaned and transformed before it can be used for analysis\nExamples of an app and website data could be data from Google Analytics, Facebook Insights, or other analytics tools. This data can be used to understand how people are interacting with your website or app, what content they’re engaging with, and other key metrics that can help you improve your digital presence.\nor if you’re on the more simple end it could be basic data from a google sheet or a CSV file thats connected to google forms.\nI’m sure everyone has heard garbage in / garbage out. So we cant stress enough the importance of data collection."
   },
   {
     "objectID": "slides/data-analytics-vis.html#what-is-data-analytics-transform",
     "href": "slides/data-analytics-vis.html#what-is-data-analytics-transform",
     "title": "",
     "section": "What is data analytics (Transform)?",
-    "text": "What is data analytics (Transform)?\n\nTransformation → Data Cleaning + Enrichment and Aggregation\n\n\n\nCleaning – Removing missing values, duplicates, and outliers, checking for data consistency\nEnrichment – Adding contextual information to the data; e.g. geocoding, demographic data, other datasets from ABS\nAggregation – Creating summaries of the data that can be used for analysis or shared with stakeholders\n\n\nCleaning – this involves removing missing values, duplicates, and outliers, checking for data consistency, and ensuring that the data is in the right format for analysis. Try and keep it all automated as much as possible. Use tools that people know how to use and can be easily maintained.\nExamples for cleaning can include basic scripts in python or R, or using tools like Tableau.\nEnrichment – this involves adding contextual information to the data. This could be geocoding, demographic data, or other information that can help you better understand the data. This can be done using APIs or other data sources.\nAn example here is Caring Kids in Australia, they provide toy boxes to kids who support their family members facing chronic illnesses or disabilities. They have a database of all the kids they’ve helped and they had addresses for all of them. Using the Google Maps API, they were able to geocode the addresses and create a map of where all the kids are located; they could use this infomration to first calculate travelled by their toy boxes across Australia and they were also able to localise where their efforts were better spent\nAggregation – this involves creating summaries of the data that can be used for analysis or shared with stakeholders. This could be a summary of the number of people served, the amount of money raised, or other key metrics that are important to your organization. This can be done using tools like Tableau or Power BI.\nAn example of this would be a nonprofit that provides food to people experiencing homelessness. They could create a summary of the number of meals served, the number of people served, and other key metrics that are important to their organization. This summary could be shared with stakeholders to show the impact of their work. We did this with Lentils As Anything (who have no clsoed down)"
+    "text": "What is data analytics (Transform)?\n\nTransformation → Data Cleaning + Enrichment and Aggregation\n\n\n\nCleaning – Removing missing values, duplicates, and outliers, checking for data consistency. Running unit tests!\nEnrichment – Adding contextual information to the data; e.g. geocoding, demographic data, other datasets from ABS\nAggregation – Creating summaries of the data that can be used for analysis or shared with stakeholders (especially from an ethics perspective)\n\n\nCleaning – this involves removing missing values, duplicates, and outliers, checking for data consistency, and ensuring that the data is in the right format for analysis. Try and keep it all automated as much as possible. Use tools that people know how to use and can be easily maintained.\nExamples for cleaning can include basic scripts in python or R, or using tools like Tableau. More advance tools like dbt can also be used for this.\nEnrichment – this involves adding contextual information to the data. This could be geocoding, demographic data, or other information that can help you better understand the data. This can be done using APIs or other data sources (like the ABS or the Department of Social Services). It could also be computing things – for example using different date fields to understand how long delivery of services is taking.\nAggregation – this involves creating summaries of the data that can be used for analysis or shared with stakeholders. This could be a summary of the number of people served, the amount of money raised, or other key metrics that are important to your organization. This can be done using tools like Tableau or Power BI or if you have an data pipeline; in tools like dbt/ AWS Step Functions.\nAn example of this would be a nonprofit that provides food to people experiencing homelessness. They could create a summary of the number of meals served, the number of people served, and other key metrics that are important to their organization. This summary could be shared with stakeholders to show the impact of their work. We did this with Lentils As Anything (who have no clsoed down)"
   },
   {
     "objectID": "slides/data-analytics-vis.html#what-is-data-analytics-load",
@@ -88,7 +88,7 @@
     "href": "slides/data-analytics-vis.html#data-visualisation-1",
     "title": "",
     "section": "Data Visualisation",
-    "text": "Data Visualisation\n\nData Visualisation → Communicating insights truthfully and with beauty\nTruthfully – Representing data accurately and without bias; avoiding misleading visualisations\nBeauty – Making data engaging, emphasize key points, and tell a story. Provide context and make it easy to understand\n\n\nTruthfully – this involves representing data accurately and without bias. This means avoiding misleading visualisations, using appropriate scales and labels, and ensuring that the data is presented in a way that is clear and easy to understand. It’s important to be honest and transparent in how you present data and to avoid misrepresenting the facts.\nBeauty – this involves making data engaging, emphasizing key points, and telling a story. This could include using color, size, and other visual elements to draw attention to important data points, creating interactive visualisations that allow users to explore the data, and using storytelling techniques to make the data more compelling. It’s important to make data interesting and engaging so that people are more likely to pay attention and remember the key points.\nNeed to balance between aesthetic and functionality. The goal is to make the data engaging and easy to understand"
+    "text": "Data Visualisation\n\nData Visualisation → Communicating insights truthfully and with beauty\nTruthfully – Representing data accurately and without bias; avoiding misleading visualisations\nBeauty – Making data engaging, emphasise key points, and tell a story. Provide context and make it easy to understand\n\n\nTruthfully – this involves representing data accurately and without bias. This means avoiding misleading visualisations, using appropriate scales and labels, and ensuring that the data is presented in a way that is clear and easy to understand. It’s important to be honest and transparent in how you present data and to avoid misrepresenting the facts.\nBeauty – this involves making data engaging, emphasizing key points, and telling a story. This could include using color, size, and other visual elements to draw attention to important data points, creating interactive visualisations that allow users to explore the data, and using storytelling techniques to make the data more compelling. It’s important to make data interesting and engaging so that people are more likely to pay attention and remember the key points.\nNeed to balance between aesthetic and functionality. The goal is to make the data engaging and easy to understand"
   },
   {
     "objectID": "slides/data-analytics-vis.html#section",
@@ -109,7 +109,7 @@
     "href": "slides/data-analytics-vis.html#example---climate-conflict-1",
     "title": "",
     "section": "Example - Climate & Conflict",
-    "text": "Example - Climate & Conflict\n\n::: {.notes}cli This is an example of a data visualisation that shows the impact of climate change on conflict around the world. The visualisation uses color, size, and position to show the relationship between climate change and conflict. The data is presented in a way that is engaging and easy to understand, making it more likely that people will pay attention and remember the key points. :::"
+    "text": "Example - Climate & Conflict\n\n\nThis is an example of a data visualisation that shows the impact of climate change on conflict around the world. The visualisation uses color, size, and position to show the relationship between climate change and conflict.\nHere we can see that countries that are most vulnerable to climate change are also the most vulnerable to conflict.\nClimate change in the context of conflict is therefore considered a potential “threat multiplier” first and foremost."
   },
   {
     "objectID": "slides/data-analytics-vis.html#example---climate-conflict-2",
@@ -151,21 +151,21 @@
     "href": "slides/data-analytics-vis.html#what-is-data-ethics-and-algorithmic-bias",
     "title": "",
     "section": "What is Data Ethics and Algorithmic Bias?",
-    "text": "What is Data Ethics and Algorithmic Bias?\n\nData ethics refers to the moral and ethical implications of data collection, analysis, and use.\nAlgorithmic bias refers to the ability of algorithms to systematically and repeatedly produce outcomes that benefit one particular group over another\nAlready many examples in society where algorithms have harmed marginalised groups"
+    "text": "What is Data Ethics and Algorithmic Bias?\n\nData ethics refers to the moral and ethical implications of data collection, analysis, and use.\nAlgorithmic bias refers to the ability of algorithms to systematically and repeatedly produce outcomes that benefit one particular group over another\nAlready many examples in society where algorithms have harmed marginalised groups!"
   },
   {
     "objectID": "slides/data-analytics-vis.html#trivial-example",
     "href": "slides/data-analytics-vis.html#trivial-example",
     "title": "",
     "section": "Trivial Example",
-    "text": "Trivial Example\n\n\nPredictions on the image of the Western bride included labels such as “bride”, “wedding”, “ceremony”\nFor the woman wearing a traditional Indian wedding dress, the predicted labels were “costume”, “performing arts”, “event"
+    "text": "Trivial Example\n\n\nPredictions on the image of the Western bride included labels such as “bride”, “wedding”, “ceremony”\nFor the woman wearing a traditional Indian wedding dress, the predicted labels were “costume”, “performing arts”, “event”"
   },
   {
     "objectID": "slides/data-analytics-vis.html#more-harmful-example",
     "href": "slides/data-analytics-vis.html#more-harmful-example",
     "title": "",
     "section": "More Harmful Example",
-    "text": "More Harmful Example\n\nEvaluation of a model that uses facial recognition deployed by large technology companies 1\n\nAmini. A, et al. (2019). Uncovering and Mitigating Algorithmic Bias through Learned Latent Structure."
+    "text": "More Harmful Example\n\nEvaluation of a model that uses facial recognition deployed by large technology companies"
   },
   {
     "objectID": "slides/data-analytics-vis.html#more-harmful-example-1",
@@ -179,21 +179,21 @@
     "href": "slides/data-analytics-vis.html#more-harmful-example-2",
     "title": "",
     "section": "More Harmful Example",
-    "text": "More Harmful Example\n\n\\[\nP(\\text{Dark} \\cap \\text{Male}) \\lt P(\\text{Dark} \\cap \\text{Female}) \\lt \\\\\nP(\\text{Light} \\cap \\text{Female}) \\lt P(\\text{Light} \\cap \\text{Male})\n\\]\n\n\nProgram A is delivered in other suburbs vs Program B is delivered in other suburbs\nThe importance of asking question of your data, the questions you need to ask your data"
+    "text": "More Harmful Example\n\n\\[  \n\\tiny\nP(\\text{Dark} \\cap \\text{Male}) \\lt P(\\text{Dark} \\cap \\text{Female}) \\lt\nP(\\text{Light} \\cap \\text{Female}) \\lt P(\\text{Light} \\cap \\text{Male})\n\\]\n\n\nProgram A is delivered in other suburbs vs Program B is delivered in other suburbs\nThe importance of asking question of your data, the questions you need to ask your data"
   },
   {
     "objectID": "slides/data-analytics-vis.html#more-harmful-example-3",
     "href": "slides/data-analytics-vis.html#more-harmful-example-3",
     "title": "",
     "section": "More Harmful Example",
-    "text": "More Harmful Example\n\nWhat happens when you try and use a de-biasing parameter \\(\\alpha\\) to reduce that bias."
+    "text": "More Harmful Example\n\nWhat happens when you try and use a de-biasing parameter \\(\\alpha\\) to reduce that bias.\n\n\n\n\n\n1\n\nAmini. A, et al. (2019). Uncovering and Mitigating Algorithmic Bias through Learned Latent Structure."
   },
   {
     "objectID": "slides/data-analytics-vis.html#how-to-get-started-on-data-ethics",
     "href": "slides/data-analytics-vis.html#how-to-get-started-on-data-ethics",
     "title": "",
     "section": "How to get started on data ethics!",
-    "text": "How to get started on data ethics!\n\nCreate some data principles\nThis is a well-studied field. Get buy-in from leadership using existing research\nConduct a bad actor exercise\nMake data labelling fun and diverse\nRecognize that humans are the ones who create algorithms, so we also recognize the importance of the broader culture and environment we create and operate in.\nCommit to learning more!\n\nWeapons of Maths Destruction by Cathy O’Neil\nData Feminism by Catherine D’Ignazio and Lauren F. Klein"
+    "text": "How to get started on data ethics!\n\nCreate some data principles\nThis is a well-studied field. Get buy-in from leadership using existing research.\n\nTimnit Gebru, CAIDE, AJL, etc.\n\nConduct a bad actor exercise to identify potential risks\nRecognise that humans are the ones who create algorithms, so we also recognize the importance of the broader culture and environment we create and operate in.\nCommit to learning more!\n\nWeapons of Maths Destruction by Cathy O’Neil\nData Feminism by Catherine D’Ignazio and Lauren F. Klein"
   },
   {
     "objectID": "slides/data-analytics-vis.html#caring-kids-australia-1",
@@ -249,7 +249,7 @@
     "href": "slides/data-analytics-vis.html#real-example-using-r-2",
     "title": "",
     "section": "Real Example (using R)",
-    "text": "Real Example (using R)\n\nd_projects %&gt;% \n  count(hq_country) \n\n\n\n# A tibble: 9 × 2\n  hq_country         n\n  &lt;chr&gt;          &lt;int&gt;\n1 Australia         35\n2 India              1\n3 New Zealand       23\n4 Spain              2\n5 Taiwan             1\n6 Thailand           1\n7 Uganda             2\n8 United Kingdom     3\n9 United States     12"
+    "text": "Real Example (using R)\n\nd_projects %&gt;% \n  count(hq_country) \n\n\n\n# A tibble: 11 × 2\n   hq_country         n\n   &lt;chr&gt;          &lt;int&gt;\n 1 Australia         35\n 2 Colombia           1\n 3 India              1\n 4 Indonesia          1\n 5 New Zealand       21\n 6 Spain              3\n 7 Taiwan             1\n 8 Thailand           2\n 9 Uganda             2\n10 United Kingdom     2\n11 United States     11"
   },
   {
     "objectID": "slides/data-analytics-vis.html#real-example-using-r-3",
@@ -319,14 +319,14 @@
     "href": "slides/data-analytics-vis.html#ai-can-help-and-accelerate-research",
     "title": "",
     "section": "AI can help and accelerate research",
-    "text": "AI can help and accelerate research\n\nAI can help to accelerate research and development in low income countries\nAccelerate novel drug discovery in low-income countries by providing scientists in these areas with cutting-edge AI models\nThey presently have 100+ models, each tailored for a unique aspect of drug discovery."
+    "text": "AI can help and accelerate research\n\nAI can help to accelerate research and development\nAccelerate novel drug discovery in low-income countries by providing scientists in these areas with cutting-edge AI models\nErsilia’s model hub presently have 100+ models, each tailored for a unique aspect of drug discovery."
   },
   {
     "objectID": "slides/data-analytics-vis.html#problem",
     "href": "slides/data-analytics-vis.html#problem",
     "title": "",
     "section": "Problem",
-    "text": "Problem\n\nLimited compute capacity available to researchers in the Global South\nWe want to build a database of pre-calculated ML predictions for commonly used molecules (reference library of 2M)\nWe should be able to return these predictions over the internet within seconds (not minutes)"
+    "text": "Problem\n\nLimited compute capacity available to researchers in the Global South means using these models is slow\nWe want to build a database of pre-calculated ML predictions for commonly used molecules (reference library of 2M)\nWe should be able to return these predictions over the internet within seconds (not minutes)"
   },
   {
     "objectID": "slides/data-analytics-vis.html#solution",
@@ -368,6 +368,27 @@
     "href": "slides/data-analytics-vis.html#map-code",
     "title": "",
     "section": "Map code",
-    "text": "Map code\nlibrary(maps)\n\n# Map data preparation with country name adjustments\nd_projects &lt;- d_projects %&gt;%\n  mutate(hq_country = case_when(\n    hq_country == \"United States\" ~ \"USA\",\n    hq_country == \"United Kingdom\" ~ \"UK\",\n    TRUE ~ hq_country\n  ))\n\n\n# Load world map data\nworld_map &lt;- map_data(\"world\")\n\n# Join your project data and prepare the map data\nmap_data &lt;- world_map %&gt;%\n  left_join(d_projects %&gt;% \n              count(hq_country, name = \"n_projects\"), by = c(\"region\" = \"hq_country\")) %&gt;%\n  replace_na(list(n_projects = NA))\n\n# Plotting the map\nggplot(map_data, aes(x = long, y = lat, group = group, fill = n_projects)) +\n  geom_polygon(color = \"#1C1C1C\", size = 0.15) +  # Adjust border color for better visibility on dark background\n  scale_fill_gradient(low = \"lightblue\", high = \"darkblue\", name = \"Number of Projects\", na.value = \"#313131\") +\n  labs(title = \"Number of Projects by Headquarters Country\", x = \"\", y = \"\") +\n  theme_void() + \n  theme(\n    text = element_text(color = \"white\"),  # Changes text color to white\n    plot.background = element_rect(fill = \"black\", color = NA),  # Dark plot background\n    panel.background = element_rect(fill = \"black\", color = NA),  # Dark panel background\n    panel.grid.major = element_blank(),  # Adjust grid color and size\n    panel.grid.minor = element_blank(),  # No minor grid\n    plot.title = element_text(color = \"white\", hjust = 0.5),  # Title in white and centered\n    axis.text = element_blank(),  # Remove axis text\n    axis.ticks = element_blank(),  # Remove axis ticks\n    legend.background = element_rect(fill = \"black\", color = NA),  # Dark legend background\n    legend.text = element_text(color = \"white\")  # White legend text\n  )"
+    "text": "Map code\nlibrary(maps)\n\n# Map data preparation with country name adjustments\nd_projects &lt;- d_projects %&gt;%\n  mutate(hq_country = case_when(\n    hq_country == \"United States\" ~ \"USA\",\n    hq_country == \"United Kingdom\" ~ \"UK\",\n    TRUE ~ hq_country\n  ))\n\n\n# Load world map data\nworld_map &lt;- map_data(\"world\")\n\n# Join your project data and prepare the map data\nmap_data &lt;- world_map %&gt;%\n  left_join(d_projects %&gt;% \n              count(hq_country, name = \"n_projects\"), by = c(\"region\" = \"hq_country\")) %&gt;%\n  replace_na(list(n_projects = NA))\n\n# Plotting the map\nggplot(map_data, aes(x = long, y = lat, group = group, fill = n_projects)) +\n  geom_polygon(color = \"#1C1C1C\", size = 0.15) +  # Adjust border color for better visibility on dark background\n  scale_fill_gradient(low = \"lightblue\", high = \"darkblue\", name = \"Number of Projects\", na.value = \"#313131\") +\n  labs(title = \"Number of Projects by Headquarters Country\", x = \"\", y = \"\") +\n  theme_void() + \n  theme(\n    text = element_text(color = \"white\"),  # Changes text color to white\n    plot.background = element_rect(fill = \"black\", color = NA),  # Dark plot background\n    panel.background = element_rect(fill = \"black\", color = NA),  # Dark panel background\n    panel.grid.major = element_blank(),  # Adjust grid color and size\n    panel.grid.minor = element_blank(),  # No minor grid\n    plot.title = element_text(color = \"white\", hjust = 0.5),  # Title in white and centered\n    axis.text = element_blank(),  # Remove axis text\n    axis.ticks = element_blank(),  # Remove axis ticks\n    legend.background = element_rect(fill = \"black\", color = NA),  # Dark legend background\n    legend.text = element_text(color = \"white\")  # White legend text\n  )\n\n\n\n\nhttps://www.gooddatainstitute.com"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#infectious-diseases-is-responsible-for",
+    "href": "slides/data-analytics-vis.html#infectious-diseases-is-responsible-for",
+    "title": "",
+    "section": "Infectious Diseases is responsible for",
+    "text": "Infectious Diseases is responsible for\n 6/10 \n\ntop causes of death in the global south"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#out-of-the-drugs-in-development",
+    "href": "slides/data-analytics-vis.html#out-of-the-drugs-in-development",
+    "title": "",
+    "section": "Out of the drugs in development",
+    "text": "Out of the drugs in development\n 10% \n\nare targeting these disease areas"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#infectious-diseases-are-responsible-for",
+    "href": "slides/data-analytics-vis.html#infectious-diseases-are-responsible-for",
+    "title": "",
+    "section": "Infectious Diseases are responsible for",
+    "text": "Infectious Diseases are responsible for\n 6/10 \n\ntop causes of death in the global south"
   }
 ]
