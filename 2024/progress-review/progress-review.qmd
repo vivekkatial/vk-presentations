@@ -1,0 +1,289 @@
+---
+title: "3.5 Year PhD Progress Review"
+author: "Vivek Katial"
+date: "2024-05-28"
+format: 
+  beamer: 
+    aspectratio: 32
+    navigation: horizontal
+    incremental: true
+    slide-level: 2
+    fontsize: 10pt
+    theme: "metropolis"
+    classoption:
+      - 'xcolor=dvipsnames' 
+---
+
+# Agenda
+
+1.  Introduction
+2.  Aims and Objectives
+3.  Key Contributions
+4.  Results
+5.  Thesis Update
+6.  Thesis Completion Plan
+7.  Feedback!
+
+# Introduction
+
+1.  We focus on the addressing the challenges in **Variational Quantum Algorithms (VQAs)**; a class of quantum algorithms that are expected to be run on near-term quantum devices (NISQ).
+2.  Among prominent VQAs, **Quantum Approximate Optimization Algorithm (QAOA)** and **Variational Quantum Eigensolver (VQE)** are widely studied.
+3.  The main area of focus in this thesis is to study the instance dependence of QAOAs to better understand and stress test its performance.
+
+## MaxCut Problem
+
+Partition a graph $G = (V, E)$ into two sets $S$ and $V \setminus S$ such that the number of edges between the two sets is maximised.
+
+$$
+\max_{\mathbf{x}} \sum_{(i,j) \in E} w_{ij} (1 - x_i x_j)
+$$
+
+where $x_i \in \{-1, 1\}$ and $w_{ij}$ is the weight of edge $(i, j)$.
+
+![An example of a six-node MaxCut problem](images/maxcut-example.pdf)
+
+## QAOA + Our Focus
+
+![A schematic representation of the parameter optimisation process in QAOA.](images/phd-scheme-diagram.svg){height="500"}
+
+# Aims and Objectives {.smaller}
+
+\footnotesize
+
+1.  **Instance Characteristics:** How do the characteristics of specific problem instances influence QAOA performance, and can a tailored strategy based on these characteristics enhance algorithm efficiency? or can we simply transfer from one class of instances to another?
+
+2.  **Parameter Initialisation:** How do initial parameter settings influence QAOA efficiency, and are optimal parameters instance-dependent?
+
+3.  **Circuit Depth Selection:** What is the optimal number of layers for QAOA, considering the trade-off between resource requirements and performance? What is the impact of instance characteristics on the dependence between layers $p$ and $p+1$?
+
+4.  **Classical Optimisers:** Which classical optimisers are most effective in the hybrid optimisation phase of QAOA, and how do they impact solution quality?
+
+## Key Contributions
+
+-   **Instance Space Analysis (ISA) for QAOA Parameter Initialisation**
+    -   First ISA conducted in the quantum context to identify instance characteristics that influence QAOA performance.
+    -   \textit{Submitted to \href{https://pubsonline.informs.org/doi/10.1287/ijoc.2023.cfp.v35.n3}{\textcolor{blue}{INFORMS IJOC}}. Almost complete with revisions}
+-   **Development of Quantum Instance-Based Parameter Initialisation (QIBPI)**
+    -   A new approach to parameter initialisation leveraging specific problem instance characteristics to enhance the efficiency and performance of QAOA.
+    -   \textit{Included in submission to \href{https://pubsonline.informs.org/doi/10.1287/ijoc.2023.cfp.v35.n3}{\textcolor{blue}{INFORMS IJOC}}.}
+
+------------------------------------------------------------------------
+
+## Key Contributions (continued)
+
+-   **Comprehensive test suite of MaxCut Instances for QAOA alongside a feature library**
+    -   We construct a comprehensive and diverse library of MaxCut instances that have yet to be studied by existing research. We also build a feature library to capture that diversity.
+    -   \textit{Included in submission to \href{https://pubsonline.informs.org/doi/10.1287/ijoc.2023.cfp.v35.n3}{\textcolor{blue}{INFORMS IJOC}}.}
+-   **Exploration of Layer Depth in QAOA Circuits**
+    -   Approach for selecting optimal circuit layer depths based on problem instance characteristics. Leveraging ISA.
+    -   \textit{Presenting the findings at \href{https://optima.org.au/outreach-and-events/optima-con2024/}{\textcolor{blue}{OPTIMA-CON 2024}}.}
+
+------------------------------------------------------------------------
+
+## Key Contributions (continued)
+
+-   **Comparative Analysis of Classical Optimisers for QAOA using ISA**
+    -   We offer insights into the performance of different gradient-based and non-gradient based optimization techniques and the influence of instance characteristics on those optimisers.
+-   **Quantum instance space analysis for the resupply optimisation problem**
+    -   Application of ISA and QAOA / Variational Quantum Eigensolver in solving the resupply delivery problem.
+    -   \textit{Presented at \href{https://aip-summer-meeting.com/wp-content/uploads/2021/12/Abstract_booklet_01122021.pdf}{\textcolor{blue}{AIP 2021 and Quantum Australia 2022}}.}
+
+------------------------------------------------------------------------
+
+## Key Contributions (continued)
+
+-   **A FastAPI for Parameter Initialisation of the QAOA algorithm**
+    -   We develop an API that enables researchers to quickly initialize QAOA parameters from recent literature.
+    -   \textit{Intend to submit to \href{https://www.sciencedirect.com/journal/softwarex}{\textcolor{blue}{SoftwareX}}.}
+    -   \textit{Publicly available here: \href{http://115.146.94.114:5000/redoc}{\textcolor{blue}{QAOA Parameter Initialisation API}}.}
+-   **Development of Software for Managing Experimental Workloads**
+    -   A toolkit for automated and reproducible research experiments on HPC clusters, enhancing research scalability and reproducibility in computational research.
+
+# Results
+
+## Instance Space Analysis (ISA)
+
+$$
+\begin{bmatrix}
+Z_1 \\
+Z_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+-0.5225 & 0.2301 \\
+-0.5939 & 0.7398 \\
+0.3977 & -0.2637 \\
+-0.1423 & -0.2023 \\
+-0.0091 & 0.5056 \\
+0.4226 & -0.0190 \\
+0.0843 & 0.6528 \\
+-0.0033 & -0.0937 \\
+-0.2002 & -0.3513 \\
+0.3448 & -0.3839 \\
+\end{bmatrix}^\top
+\begin{bmatrix}
+\text{algebraic connectivity} \\
+\text{average distance} \\
+\text{clique number} \\
+\text{diameter} \\
+\text{maximum degree} \\
+\text{maximum weighted degree} \\
+\text{number of edges} \\
+\text{radius} \\
+\text{skewness weight} \\
+\text{weighted average clustering}
+\end{bmatrix}
+$$
+
+## Instance Space Analysis (ISA) -- Sources
+
+![Source Distribution for MaxCut Instances](images/isa-sources.png){height="250"}
+
+## Instance Space Analysis (ISA) -- Features
+
+![Feature Distribution for MaxCut Instances](images/isa-features.png)
+
+## Instance Space Analysis (ISA) -- Algorithm Performance
+
+![Algorithm Performance for MaxCut Instances (globally normalised)](images/isa-performance.png)
+
+## Instance Space Analysis (ISA) -- Algorithm Footprints
+
+![Algorithm Footprints for MaxCut Instances](images/footprint_portfolio.png){width="300"}
+
+## Instance Space Analysis (ISA) -- SVM
+
+```{=tex}
+\begin{table}[ht]
+    \scriptsize
+    \centering
+    \begin{tabular}{lrrr}
+        \toprule
+        \textbf{Algorithm} & \textbf{Avg Perf (all instances)} & \textbf{Std Perf (all instances)} & \textbf{Probability of Good} \\
+        \midrule
+        Constant & 34323.017 & 47394.475 & 0.032 \\
+        INTERP & 6082.428 & 22217.419 & 0.001 \\
+        QIBPI & 6749.427 & 25023.466 & 0.709 \\
+        Random & 62812.688 & 48268.844 & 0.005 \\
+        3-Regular & 16989.979 & 37511.188 & 0.448 \\
+        TQA & 2138.589 & 14257.964 & 0.111 \\
+        Oracle & 27.734 & 59.506 & 1.000 \\
+        \textcolor{blue}{SVM Selector} & \textcolor{blue}{4998.899} & \textcolor{blue}{21721.862} & \textcolor{blue}{0.767} \\
+        \bottomrule
+    \end{tabular}
+    \caption{Performance Metrics for Different Algorithms}
+\end{table}
+```
+# Results
+
+Lets look at results from other experiments interactively!
+
+\textit{Link here: \href{http://localhost:8501/Instance_Space_Analysis}{\textcolor{blue}{ISA Visualisation}}}
+
+# Thesis Update
+
+## Thesis Update
+
+Writing has started (\~100 pages through...)
+
+![Thesis Structure](images/thesis-structure.png){height="230"}
+
+## Thesis Update
+
+```{=tex}
+\begin{itemize}
+  \item \textcolor{ForestGreen}{\textbf{Chapter 1: Introduction}}
+    \begin{itemize}
+      \item Complete (Draft Stage)
+    \end{itemize}
+  \item \textcolor{orange}{\textbf{Chapter 2: Background and Preliminaries on Quantum Algorithms}}
+    \begin{itemize}
+      \item Writing in progress (60-70\% Complete)
+    \end{itemize}
+  \item \textcolor{ForestGreen}{\textbf{Chapter 3: Instance Space Analysis for QAOA Parameter Initialisation}}
+    \begin{itemize}
+      \item Almost Complete, Needs Revision (Update Results)
+    \end{itemize}
+  \item \textcolor{orange}{\textbf{Chapter 4: Evolving Instances for QAOA Using Genetic Algorithms}}
+    \begin{itemize}
+      \item Writing in progress, Needs Revision (Update Results)
+    \end{itemize}
+\end{itemize}
+```
+## Thesis Update (continued)
+
+```{=tex}
+\begin{itemize}
+  \item \textcolor{red}{\textbf{Chapter 5: The Role of Circuit Depth in QAOA}}
+  \begin{itemize}
+    \item Results Complete, Writing Not Started
+  \end{itemize}
+\item \textcolor{red}{\textbf{Chapter 6: Evaluating Classical Optimisers for QAOA}}
+  \begin{itemize}
+    \item Results Complete, Writing Not Started
+  \end{itemize}
+\item \textcolor{gray}{\textbf{Chapter 7: Conclusions and Future Work}}
+  \begin{itemize}
+    \item Conclusion, Not Started
+  \end{itemize}
+\end{itemize}
+```
+# Thesis Completion Plan
+
+## Thesis GANTT Chart
+
+![PhD GANTT Chart](images/phd-gantt.png){height="600"}
+
+------------------------------------------------------------------------
+
+## Month 1: June
+
+**Primary Focus in June: Submit revision to INFORMS and finalise SoftwareX submission**
+
+-   Finalise revisions for INFORMS and submit (by June 15th)
+-   Compile parameter initialisation API submission
+-   Based on revisions, complete remainder of background
+
+. . .
+
+**Thesis Writing and revising:**
+
+-   **Chapter 2:** Complete writing (30-40%), review and edit
+-   **Chapter 3:** Revise and update results, finalise chapter
+-   **Chapter 4:** Complete writing, revise and update results, review and edit
+
+------------------------------------------------------------------------
+
+## Month 2: July
+
+**Primary Focus: Thesis Writing and revising**
+
+-   **Chapter 5:** Start and complete writing, review and edit
+-   **Chapter 6:** Start and complete writing, review and edit
+-   **Chapter 7:** Draft conclusion, review all chapters for consistency
+
+. . .
+
+**Other tasks**
+
+-   Submit SoftwareX paper
+-   OPTIMA-CON presentation
+-   Conduct any additional experiments required for thesis completion
+
+------------------------------------------------------------------------
+
+## Month 3: August
+
+**Primary Focus: Thesis Writing and revising**
+
+-   Final revisions and edits
+-   Prepare and hopefully submit!
+
+# Feedback and Questions for Discussion
+
+1.  **Stipend and Scholarship:** My current scholarship ends in June 2024 (next week). I've applied for the COVID-19 productivity-loss extension but haven't received a response yet. Any support would be appreciated. I applied for the shorter extension (\textcolor{ForestGreen}{\textit{16 weeks instead of 26}}), but I'm open to suggestions or advice. This extension would last until 23rd September, which I believe is more than enough time to get everything done. \href{https://gradresearch.unimelb.edu.au/scholarships/covid-19-scholarship-extensions}{\textcolor{blue}{Link here }}.
+2.  **PhD Examiners:** Any guidance on finding for potential examiners for my thesis?
+3.  **Thesis Completion Plan:** Any feedback on the completion plan? Any suggestions or advice on how to improve the plan?
+4.  **Thesis Structure:** Any feedback on the thesis structure? Any suggestions on how to improve the structure or content?
+
+# Thank you!
