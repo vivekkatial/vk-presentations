@@ -249,7 +249,7 @@
     "href": "slides/data-analytics-vis.html#real-example-using-r-2",
     "title": "",
     "section": "Real Example (using R)",
-    "text": "Real Example (using R)\n\nd_projects %&gt;% \n  count(hq_country) \n\n\n\n# A tibble: 11 × 2\n   hq_country         n\n   &lt;chr&gt;          &lt;int&gt;\n 1 Australia         35\n 2 Colombia           1\n 3 India              1\n 4 Indonesia          1\n 5 New Zealand       21\n 6 Spain              3\n 7 Taiwan             1\n 8 Thailand           2\n 9 Uganda             2\n10 United Kingdom     2\n11 United States     11"
+    "text": "Real Example (using R)\n\nd_projects %&gt;% \n  count(hq_country) \n\n\n\n# A tibble: 11 × 2\n   hq_country         n\n   &lt;chr&gt;          &lt;int&gt;\n 1 Australia         38\n 2 Colombia           2\n 3 India              1\n 4 Indonesia          1\n 5 New Zealand       20\n 6 Spain              2\n 7 Taiwan             1\n 8 Thailand           1\n 9 Uganda             2\n10 United Kingdom     2\n11 United States     10"
   },
   {
     "objectID": "slides/data-analytics-vis.html#real-example-using-r-3",
