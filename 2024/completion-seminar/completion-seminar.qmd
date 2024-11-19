@@ -1,0 +1,735 @@
+---
+title: "Instance Space Analysis of Quantum Algorithms"
+subtitle: "**Supervisors:** Prof. Kate Smith-Miles, Prof. Lloyd Hollenberg"
+bibliography: references.bib
+author: "Vivek Katial"
+date: "2024-11-26"
+format: 
+  beamer: 
+    aspectratio: 169
+    cite-method: biblatex
+    navigation: horizontal
+    incremental: false
+    slide-level: 2
+    fontsize: 10pt
+    theme: "metropolis"
+    institute: "The University of Melbourne"
+    citecolor: "blue"
+    classoption:
+      - 'xcolor=dvipsnames' 
+    header-includes: |
+      \usepackage{tikz}
+      \usepackage{braket}
+      \usepackage{tcolorbox}
+      \usepackage[utf8]{inputenc}
+      \usepackage{amsmath,amssymb,amsfonts,amsthm}
+      \usebackgroundtemplate{%
+      \begin{tikzpicture}[remember picture,overlay]
+      \fill[right color=white, left color=blue!5] 
+        (current page.south west) rectangle (current page.north east);
+      \end{tikzpicture}}
+---
+
+# Agenda
+
+1.  Introduction
+2.  Background
+3.  Quantum Approximate Optimization Algorithm (QAOA)
+4.  Instance Space Analysis
+5.  Various Instance Spaces
+8.  Software for QAOA Parameter Initialisation
+9.  Conclusion and Future Work
+
+# Introduction
+
+<!-- ## Acknowledgements -->
+
+<!-- ::: {.columns} -->
+
+<!-- ::: {.column width="50%"} -->
+
+<!-- \centering -->
+
+<!-- ![](images/kate.jpg){width=5    0%} -->
+
+<!-- Prof. Kate Smith-Miles AO -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="50%"} -->
+
+<!-- \centering -->
+
+<!-- ![](images/lloyd.jpg){width=50%} -->
+
+<!-- \small Prof. Lloyd Hollenberg -->
+
+<!-- ::: -->
+
+<!-- ::: -->
+
+<!--   \vspace{2cm} -->
+
+<!-- ::: {.columns} -->
+
+<!-- ::: {.column width="45%"} -->
+
+<!-- ![](images/optima.png) -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="45%"} -->
+
+<!-- ![](images/ibm-quantum-hub.png) -->
+
+<!-- ::: -->
+
+<!-- ::: -->
+
+## Why Quantum?
+
+1.  Quantum Computers can *theoretically solve* can solve some problems much faster than classical computers
+2.  What problems?
+    -   **Shor's algorithm** for factoring large numbers - could break RSA encryption [@Shor1994]
+    -   **Grovers Search** - Quadratic speedup over classical search [@Grover1996]
+    -   **Simulation of physical systems** - Quantum Chemistry, Material Science
+3.  What's the catch?
+    -   Hardware is \textcolor{red}{\textbf{hard}} - assuming no errors we need several 1000s of qubits
+    -   With current error rates - need millions of qubits + 100s of millions of gates
+    -   **NISQ** - Noisy Intermediate-Scale Quantum (NISQ) devices - 50-100 qubits, noisy, error-prone
+
+## How does Quantum Computing work?
+
+![](images/superposition.pdf)
+
+## Measurement
+
+::: columns
+::: {.column width="33%"}
+### Wave Function Collapse
+
+When a quantum system is measured, its wavefunction collapses into a single state, and the system loses its superposition.
+:::
+
+::: {.column width="33%"}
+### Probabilistic Outcome
+
+The outcome of a measurement is probabilistic, with the probability determined by the quantum state before the measurement.
+:::
+
+::: {.column width="33%"}
+### Disturbance
+
+The act of measuring a quantum system inevitably disturbs the system, making it impossible to precisely determine the pre-measurement state.
+:::
+:::
+
+## Noisy-intermediate Scale Quantum Era
+
+::: columns
+::: {.column width="50%"}
+\vspace{0.5cm}
+
+\small
+
+-   Currently we’re in the NISQ-era of Quantum Computing
+-   Need to design algorithms that can run on NISQ-devices
+
+\vspace{0.5cm}
+
+\small
+
+1.  Can run on small (100-1000 qubit devices)
+2.  Solve useful problems
+3.  Shouldn’t require extensive error correction
+
+\vspace{0.5cm}
+
+\small
+
+**QAOA** is a low-depth algorithm that can help solve optimisation problems
+:::
+
+::: {.column width="50%"}
+![](images/ibm-qc.png)
+:::
+:::
+
+## Aims of the Thesis
+
+1.  We focus on the addressing the challenges in **Variational Quantum Algorithms (VQAs)** [@Peruzzo2014]; a class of quantum algorithms that are expected to be run on NISQ devices.
+2.  Among prominent VQAs, **Quantum Approximate Optimization Algorithm (QAOA)** [@Farhi2014] and **Variational Quantum Eigensolver (VQE)** are widely studied.
+3.  The main area of focus in this thesis is to study the instance dependence of QAOAs to better understand and stress test its performance.
+
+## MaxCut Problem
+
+Partition a graph $G = (V, E)$ into two sets $S$ and $V \setminus S$ such that the number of edges between the two sets is maximised. $$
+\max_{\mathbf{s}} \sum_{(i,j) \in E} w_{ij} (1 - z_i z_j)
+$$ where $z_i \in \{0, 1\}$ and $w_{ij} \in \mathbb{R}$ is the weight of edge $(i, j)$.
+
+![An example of a six-node MaxCut problem](images/maxcut-example.pdf)
+
+Solution is a binary string $\mathbf{s} = (s_1, s_2, \ldots, s_n)$ where $s_i \in \{0, 1\}$ and the optimal objective value is $C_{\max}$ where $C_{\max} = \sum_{(i,j) \in E} w_{ij}$ for the edges in our **maximum cut**.
+
+## Solving MaxCut on a Quantum Computer
+
+We map the MaxCut problem to a *Hamiltonian* for quantum optimization.
+
+::: columns
+::: {.column width="42%"}
+### Classical Formulation
+
+\color{blue}{Objective:} $${\color{blue}\max_{\mathbf{s}} \sum_{(i,j) \in E} w_{ij} (1 - z_i z_j)}$$
+
+\color{ForestGreen}{State Space:} $${\color{ForestGreen}\mathbf{s} \in \{0, 1\}^n}$$
+
+\color{purple}{Solution:} $${\color{purple}\mathbf{s}^* = \underset{\mathbf{s}}{\text{argmax }} \sum_{(i,j) \in E} w_{ij} (1 - z_i z_j)}$$
+:::
+
+::: {.column width="16%" style="display: flex; align-items: center; justify-content: center;"}
+\vspace{6em}
+
+$\begin{matrix} \\ \xrightarrow{\quad \LARGE \text{ map }  \quad} \\ \phantom{\text{space}} \end{matrix}$
+:::
+
+::: {.column width="42%"}
+### Quantum Formulation
+
+\color{blue}{Objective:} $${\color{blue}H = \sum_{(i,j) \in E} w_{ij} (I - Z_i Z_j)}$$
+
+\color{ForestGreen}{State Space:} $${\color{ForestGreen}|\psi\rangle \in \mathcal{H}_2^{\otimes n}}$$
+
+\color{purple}{Solution:} $${\color{purple}|\psi_{\text{ground}}\rangle = \underset{|\psi\rangle}{\text{argmin }} \langle \psi | H | \psi \rangle}$$
+:::
+:::
+
+# Quantum Approximate Optimization Algorithm (QAOA)
+
+-   QAOA prepares a parameterised "trial" (ansatz) state of the form:
+
+```{=tex}
+\begin{align*}
+    \ket{\psi(\theta)} &= \ket{\psi (\vec{\gamma}, \vec{\beta})} \\
+                   &= \prod_{j=1}^{p} e^{-i\beta_j \hat{H}_B} e^{-i\gamma_j \hat{H}_P} \ket{+}^{\otimes n}
+\end{align*}
+```
+-   Where $\hat{H}_P = \sum_{(i,j) \in E} w_{ij} (1 - \hat{Z}_i \hat{Z}_j)$ is the problem Hamiltonian and $\hat{H}_B = \sum_{i=1}^{n} \hat{X}_i$ is the mixing Hamiltonian. - The parameters $\vec{\gamma} = (\gamma_1, \dots, \gamma_p)$ and $\vec{\beta} = (\beta_1, \dots, \beta_p)$ are optimised to minimise the expectation value of the problem Hamiltonian.
+
+## Quantum Approximate Optimization Algorithm (QAOA)
+
+-   The QAOA Ansatz Energy is given by taking the expectation value of the problem Hamiltonian with respect to the trial state:
+
+```{=tex}
+\begin{align*}
+F_p(\vec{\gamma}, \vec{\beta}) &= \bra{+}^{\otimes n} \left(\prod_{j=1}^p e^{-i\beta_j \hat{H}_B} e^{-i\gamma_j \hat{H}_P}\right)^\dagger \hat{H}_P \left( \prod_{j=1}^{p} e^{-i\beta_j \hat{H}_B} e^{-i\gamma_j \hat{H}_P} \right) \ket{+}^{\otimes n}  \\
+          &= \langle \psi(\vec{\gamma}, \vec{\beta}) | \hat{H}_P | \psi(\vec{\gamma}, \vec{\beta}) \rangle
+\end{align*}
+```
+-   The goal is to find the optimal parameters $\vec{\gamma}^*, \vec{\beta}^*$ that minimise the energy $F_p(\vec{\gamma}, \vec{\beta})$.
+
+$$
+(\vec{\gamma}^*, \vec{\beta}^*) = \arg \min_{\vec{\gamma}, \vec{\beta}} F_p(\vec{\gamma}, \vec{\beta}), \qquad \alpha = \frac{F_p(\vec{\gamma}^*, \vec{\beta}^*)}{C_{\max}}
+$$
+
+## Quantum Approximate Optimization Algorithm (QAOA)
+
+::: {.columns .v-center-container}
+::: {.column .pl-4 width="45%"}
+### Key Design Decisions {.text-primary}
+
+1.  **Circuit Depth** ($p$)
+    -   Controls the expressivity of the ansatz
+    -   As $p \rightarrow \infty$ QAOA can find the exact solution
+2.  **Classical Optimizer**
+    -   Gradient-free: Nelder-Mead, COBYLA
+    -   Gradient-based: ADAM, SPSA
+3.  **Initial Parameters** ($\vec{\gamma_0}, \vec{\beta_0}$)
+    -   Various strategies for initialisation (e.g. TQA [@Sack2021], INTERP [@Zhou2020])\
+:::
+
+::: {.column .pr-4 width="55%"}
+![QAOA Circuit Architecture](images/qaoa-schematic.pdf){.border .border-primary .rounded}
+:::
+:::
+
+## Current State of QAOA Research {.center}
+
+\vspace{0.3cm}
+
+::: block
+### Key Findings
+
+-   Recent studies show optimal QAOA parameters for depth $p$ are \alert{transferable} across typical instances [@Brandao2018]
+-   Optimal QAOA depth is \alert{instance-dependent} [@Shaydulin2021sym]
+-   Algorithm performance heavily influenced by:
+    -   Choice of classical optimizer [@pendas2022]
+    -   Initial parameter selection [@Zhou2020],[@Lee2021],[@Shaydulin2021],[@Sureshbabu2024]
+:::
+
+::: block
+### Current Limitations
+
+-   Narrow focus on specific instance classes ($d-$regular graphs, random graphs, no weights)
+-   Predominantly shallow depth circuits ($p \leq 3$) [@Shaydulin2021sym],[@Sureshbabu2024]
+-   Limited understanding of instance feature impacts on QAOA performance and design decisions
+-   Lack of standardized parameter initialization frameworks [@abbas2023quantum]
+:::
+
+## Research Question
+
+\begin{tcolorbox}[
+    colback=white,
+    colframe=teal!70,
+    boxrule=1pt,
+    arc=3mm,
+    title={\large\textbf{Research Question}},
+    fonttitle=\color{white},
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+]
+\large
+How do problem instance characteristics influence the key design decisions of the QAOA and its performance, \textbf{and} can we develop methods to automatically select optimal parameters based on these characteristics to improve QAOA's performance on diverse MaxCut instances?
+\end{tcolorbox}
+
+## Importance of Instance Diversity?
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+\small
+-   **Parameter Sensitivity:**
+    -   High computational cost for repeated optimization.
+-   **Barren Plateaus and Rugged Landscapes:**
+    -   Flat optimisation landscapes hinder finding optimal parameters [@Brandao2018],[@Bravyi2018]. 
+-   **Benefits of instance-based approaches?**
+    - Reduces calls to quantum devices \rightarrow  *less resource use*
+    
+:::
+
+::: {.column width="55%"}
+
+![Optimisation Landscape for various instances of unweighted MaxCut](images/optimisation-landscape.png)
+
+:::
+
+::::
+
+# Instance Space Analysis
+
+### Instance Space Analysis [@smith2023instance]
+
+- Based on the *No Free Lunch Theorem* [@Wolpert1997]: Algorithms have strengths and weaknesses
+- Identify features that differentiate instances from each other and influence algorithm performance
+- Identifies which algorithms are best suited for which instances
+- Visualised across a 2D plane
+
+## Instance Space Analysis
+
+::: {.content-center}
+![Instance space analysis workflow](images/isa.pdf){height=84% fig-align="center"}
+:::
+
+## Our Approach
+
+::: {.content-center}
+![](images/thesis-flow.pdf){height=140%}
+:::
+
+## Instances $\mathcal{I} \subseteq \mathcal{P}$
+
+:::: {.columns}
+
+::: {.column width="50%"}
+\begin{tcolorbox}[colback=blue!5,colframe=blue!40!black,title=IS I \& II: Unweighted Instances]
+\small
+\begin{itemize}
+\item Random
+\item 3-regular
+\item 4-regular
+\item Geometric
+\item Watts-Strogatz
+\item Nearly complete bipartite
+\end{itemize}
+\end{tcolorbox}
+:::
+
+::: {.column width="50%"}
+\begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=IS III \& IV: Weight Distributions]
+\small
+\begin{itemize}
+\item $\mathcal{U}[0,1]$ (Uniform)
+\item $\mathcal{U}[-1,1]$ (Uniform)
+\item $\text{Exp}(\lambda)$ (Exponential)
+\item $\Gamma(k,\theta)$ (Gamma)
+\item $\mathcal{N}(\mu,\sigma^2)$ (Normal)
+\item $\text{LogNorm}(\mu,\sigma^2)$ (Lognormal)
+\end{itemize}
+\end{tcolorbox}
+:::
+
+::::
+
+\begin{center}
+\textcolor{gray}{\rule{0.8\textwidth}{0.4pt}}
+
+\vspace{0.3cm}
+{\large \textbf{Total Network Classes:} $7 \times 6 = 42$}
+\end{center}
+
+
+## Features $\mathcal{F}$
+
+:::: {.columns}
+::: {.column width="33%"}
+\begin{tcolorbox}[colback=blue!5,colframe=blue!40!black,title=Structural Features, fonttitle=\small]
+\tiny
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\item Number of Edges, Nodes
+\item Bipartite Graph
+\item Clique Number
+\item Connected Graph
+\item Density
+\item Edge Connectivity
+\item Max, Min Degree
+\item Min. Dominating Set size
+\item Regular Graph
+\item Smallest Eigenvalue
+\item Vertex Connectivity
+\end{itemize}
+\end{tcolorbox}
+
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue!40!black,title=Spectral Features, fonttitle=\small]
+\tiny
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\item Algebraic Connectivity
+\item Laplacian Largest Eigenvalue
+\item Ratio of Two Largest Laplacian Eigenvalues
+\item Ratio of Two Smallest Laplacian Eigenvalues
+\end{itemize}
+\end{tcolorbox}
+
+:::
+::: {.column width="33%"}
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue!40!black,title=Cycle \& Path Features, fonttitle=\small]
+\tiny
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\item Acyclic Graph
+\item Average Distance
+\item Diameter
+\item Eulerian Graph
+\item Number of Components
+\item Planar Graph
+\item Radius
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue!40!black,title=Literature, fonttitle=\small]
+\tiny
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\item Distance-Regular Graph
+\item Group Size
+\item Number of Cut Vertices
+\item Number of Minimal Odd Cycles
+\item Number of Orbits
+\item Graph Entropy: $I(G) = \frac{1}{n} \sum_i |A_i| \log |A_i|$
+\end{itemize}
+\end{tcolorbox}
+
+:::
+::: {.column width="33%"}
+
+
+\begin{tcolorbox}[colback=blue!5,colframe=green!40!black,title=Weight Features, fonttitle=\small]
+\tiny
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\item Mean, Median, Standard Deviation, Variance
+\item Min/Max, IQE, Skewness, Kurtosis
+\item Coef. of Variation
+\item Weighted Avg Clustering
+\item Weighted Avg Path Length
+\item Weighted Diameter
+\item Weighted Radius
+\item Max Weighted Degree
+\item Min Weighted Degree
+\end{itemize}
+\vspace{2em}
+
+\textbf{\color{red}{Instance Space III and IV only}}
+
+\end{tcolorbox}
+:::
+::::
+\begin{center}
+\textcolor{gray}{\rule{0.8\textwidth}{0.4pt}}
+\vspace{0.2cm}
+{\small \textbf{Total Features:} 48 graph characteristics across 5 categories}
+\end{center}
+
+## Performance $\mathcal{Y}$
+
+:::: {.columns}
+
+::: {.column width="60%"}
+\begin{tcolorbox}[
+    colback=blue!5,
+    colframe=blue!40!black,
+    arc=0pt,
+    title={\textcolor{white}{\textbf{Novel Performance Metric}}},
+    coltitle=white,
+    colbacktitle=blue!40!black
+]
+\small
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item \textbf{Why?} Most algorithms achieve good approximation ratios
+\item \textbf{Metric Components:}
+    \begin{itemize}
+    \setlength{\itemsep}{1pt}
+    \item Function evaluations
+    \item Approximation ratio ($\alpha$)
+    \end{itemize}
+\item \textbf{Methodology:}
+    \begin{itemize}
+    \setlength{\itemsep}{1pt}
+    \item Find $\alpha_{\max}$ (best ratio achieved)
+    \item Set $\alpha_{\text{acceptable}} = 0.95 \times \alpha_{\max}$
+    \item Count iterations to reach $\alpha_{\text{acceptable}}$
+    \item If never reached: penalty $\kappa = 10^5$
+    \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+:::
+
+::: {.column width="40%"}
+\begin{tcolorbox}[
+    colback=blue!5,
+    colframe=blue!40!black,
+    arc=0pt,
+    title={\textcolor{white}{\textbf{Binary Classification}}},
+    coltitle=white,
+    colbacktitle=blue!40!black
+]
+\small
+Label algorithm as:
+\begin{itemize}
+\item \textbf{``good":} if $\kappa$ within 10\% of best
+\item \textbf{``bad":} otherwise
+\end{itemize}
+
+\vspace{0.2cm}
+\scriptsize
+Example for 4-reg graph (N=12):
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\item $p=2$: \textcolor{red}{bad} ($\kappa$=100k)
+\item $p=5$: \textcolor{red}{bad} ($\kappa$=100k)
+\item $p=15$: \textcolor{DarkGreen}{good} ($\kappa$=4,796)
+\item $p=20$: \textcolor{red}{bad} ($\kappa$=7,029)
+\end{itemize}
+\end{tcolorbox}
+:::
+
+::::
+
+\begin{center}
+\textcolor{gray}{\rule{\textwidth}{0.4pt}}
+{\small Combines function evaluations and approximation ratio for more nuanced performance assessment}
+\end{center}
+
+## Algorithm Design Choices $\mathcal{A}$
+
+:::: {.columns}
+::: {.column width="70%"}
+\begin{tcolorbox}[
+colback=blue!5,
+colframe=blue!40!black,
+arc=0pt,
+title={\textcolor{white}{\textbf{Design Choices Across Independent Studies}}},
+coltitle=white,
+colbacktitle=blue!40!black
+]
+\begin{itemize}
+\setlength{\itemsep}{4pt}
+\item \textbf{IS I:} Layer Depth ($p$)
+\begin{itemize}
+\item Circuit depth and expressivity
+\item $p \in {2, 5, 10, 15, 20}$
+\end{itemize}
+\item \textbf{IS II:} Classical Optimiser Selection
+\begin{itemize}
+\item Which optimiser requires fewer calls to the quantum device?
+\item Nelder-Mead, Conjugate Gradient, Powell, SLSQP, L-BFGS-B
+\end{itemize}
+\item \textbf{IS III/IV:} Initialisation Technique
+\begin{itemize}
+\item Can we have faster convergence to optimal parameters?
+\item Random, TQA, INTERP, Constant, QIBPI, Three-Regular
+\end{itemize}
+\end{itemize}
+\end{tcolorbox}
+:::
+::: {.column width="30%"}
+\begin{tcolorbox}[
+colback=gray!10,
+colframe=gray!50,
+arc=0pt,
+title={\textbf{Constants}},
+coltitle=black
+]
+\begin{itemize}
+\item Features
+\item Instances
+\item Performance Metrics
+\end{itemize}
+\end{tcolorbox}
+\vspace{0.3cm}
+\begin{tikzpicture}
+\node[draw=blue, rounded corners, fill=blue!10, text width=4cm, align=center] {
+\textbf{All choices represent design decisions}
+};
+\end{tikzpicture}
+:::
+::::
+
+\textcolor{gray}{\rule{\textwidth}{0.4pt}}
+\small Each study isolates one key design choice while maintaining other parameters constant
+
+# Instance Space III: Parameter Initialisation
+
+\small
+\begin{align}
+\mathbf{Z} =
+\begin{pmatrix}
+    z_1 \\
+    z_2 
+\end{pmatrix}
+        &= 
+ \left(\begin{array}{@{}c@{\hspace{2em}}c@{}}
+        -0.5225 & 0.2301 \\
+        -0.5939 & 0.7398 \\
+        0.3977 & -0.2637 \\
+        -0.1423 & -0.2023 \\
+        -0.0091 & 0.5056 \\
+        0.4226 & -0.019 \\
+        0.0843 & 0.6528 \\
+        -0.0033 & -0.0937 \\
+        -0.2002 & -0.3513 \\
+        0.3448 & -0.3839
+    \end{array}\right)^{\intercal}
+    \begin{pmatrix}
+        \text{algebraic connectivity} \\
+        \text{average distance} \\
+        \text{clique number} \\
+        \text{diameter} \\
+        \text{maximum degree} \\
+        \text{maximum weighted degree} \\
+        \text{number of edges} \\
+        \text{radius} \\
+        \text{skewness weight} \\
+        \text{weighted average clustering}
+    \end{pmatrix} 
+\label{eq:projection-transformation}
+\end{align}
+
+
+
+## Instance Space III - Features
+
+## Instance Space III - Algorithms
+
+## Instance Space III - Summary
+
+# Evolving Instances 
+
+
+# Software for QAOA Parameter Initialisation
+
+# Appendix
+# Instance Space I: Layer Depth ($p$)
+
+\begin{align}
+\mathbf{Z} =
+\begin{pmatrix}
+    z_1 \\
+    z_2 
+\end{pmatrix}
+        &= 
+ \left(\begin{array}{@{}c@{\hspace{2em}}c@{}}
+        -0.0773 & 0.6222 \\
+        0.0745 & 0.2121 \\
+        -0.2304 & -0.315 \\
+        0.3981 & -0.2411 \\
+        0.0285 & 0.0749 \\
+        0.2204 & 0.2713 \\
+        -0.1895 & 0.3176 \\
+        0.3328 & -0.1081 \\
+        0.221 & -0.0415 \\
+        0.2822 & -0.1511
+    \end{array}\right)^{\intercal}
+    \begin{pmatrix}
+        \text{ratio of two largest laplacian eigenvalues} \\
+        \text{average distance} \\
+        \text{regular} \\
+        \text{density} \\
+        \text{laplacian second largest eigenvalue} \\
+        \text{number of orbits} \\
+        \text{diameter} \\
+        \text{maximum degree} \\
+        \text{number of minimal odd cycles} \\
+        \text{number of edges}
+    \end{pmatrix} 
+\label{eq:projection-transformation-n-layers}
+\end{align}
+
+## Instance Space I - Features
+
+
+## Instance Space I - Algorithms
+
+
+## Instance Space I - Summary
+
+
+# Instance Space II: Classical Optimiser Selection
+
+\small
+\begin{align}
+\mathbf{Z} =
+\begin{pmatrix}
+    z_1 \\
+    z_2 
+\end{pmatrix}
+        &= 
+ \left(\begin{array}{@{}c@{\hspace{2em}}c@{}}
+        -0.1144 & 0.5049 \\
+        -0.0706 & 0.4874 \\
+        0.133 & -0.6791 \\
+        0.3027 & 0.1872 \\
+        -0.2388 & -0.5887 \\
+        -0.558 & -0.1196 \\
+        -0.878 & -0.3254 \\
+        -0.0545 & -0.7915
+    \end{array}\right)^{\intercal}
+    \begin{pmatrix}
+        \text{regular} \\
+        \text{maximum degree} \\
+        \text{average distance} \\
+        \text{laplacian second largest eigenvalue} \\
+        \text{laplacian largest eigenvalue} \\
+        \text{density} \\
+        \text{algebraic connectivity} \\
+        \text{number of edges}
+    \end{pmatrix} 
+\label{eq:projection-transformation-classical-opts}
+\end{align}
+# References
