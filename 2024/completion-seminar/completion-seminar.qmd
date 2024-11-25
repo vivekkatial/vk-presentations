@@ -16,18 +16,9 @@ format:
     institute: "The University of Melbourne"
     citecolor: "blue"
     classoption:
-      - 'xcolor=dvipsnames' 
-    header-includes: |
-      \usepackage{tikz}
-      \usepackage{braket}
-      \usepackage{tcolorbox}
-      \usepackage[utf8]{inputenc}
-      \usepackage{amsmath,amssymb,amsfonts,amsthm}
-      \usebackgroundtemplate{%
-      \begin{tikzpicture}[remember picture,overlay]
-      \fill[right color=white, left color=blue!5] 
-        (current page.south west) rectangle (current page.north east);
-      \end{tikzpicture}}
+      - 'xcolor=dvipsnames'
+    include-in-header: 
+      - header.tex
 ---
 
 # Agenda
@@ -100,7 +91,9 @@ format:
 
 ## How does Quantum Computing work?
 
-![](images/superposition.pdf)
+\centering
+\includegraphics[height=0.7\textheight]{images/superposition.pdf}
+
 
 ## Measurement
 
@@ -151,7 +144,8 @@ The act of measuring a quantum system inevitably disturbs the system, making it 
 :::
 
 ::: {.column width="50%"}
-![](images/ibm-qc.png)
+\centering
+\includegraphics[height=0.7\textheight]{images/ibm-qc.png}
 :::
 :::
 
@@ -206,7 +200,6 @@ $\begin{matrix} \\ \xrightarrow{\quad \LARGE \text{ map }  \quad} \\ \phantom{\t
 # Quantum Approximate Optimization Algorithm (QAOA)
 
 -   QAOA prepares a parameterised "trial" (ansatz) state of the form:
-
 ```{=tex}
 \begin{align*}
     \ket{\psi(\theta)} &= \ket{\psi (\vec{\gamma}, \vec{\beta})} \\
@@ -259,7 +252,7 @@ $$
 ::: block
 ### Key Findings
 
--   Recent studies show optimal QAOA parameters for depth $p$ are \alert{transferable} across typical instances [@Brandao2018]
+-   Recent studies show optimal QAOA parameters for depth $p$ are \alert{transferable} across a small class of instances [@Brandao2018]
 -   Optimal QAOA depth is \alert{instance-dependent} [@Shaydulin2021sym]
 -   Algorithm performance heavily influenced by:
     -   Choice of classical optimizer [@pendas2022]
@@ -275,14 +268,14 @@ $$
 -   Lack of standardized parameter initialization frameworks [@abbas2023quantum]
 :::
 
-## Research Question
+## Research Questions
 
 \begin{tcolorbox}[
     colback=white,
     colframe=teal!70,
     boxrule=1pt,
     arc=3mm,
-    title={\large\textbf{Research Question}},
+    title={\large\textbf{RQ1}},
     fonttitle=\color{white},
     top=3mm,
     bottom=3mm,
@@ -290,7 +283,39 @@ $$
     right=3mm
 ]
 \large
-How do problem instance characteristics influence the key design decisions of the QAOA and its performance, \textbf{and} can we develop methods to automatically select optimal parameters based on these characteristics to improve QAOA's performance on diverse MaxCut instances?
+How can we generate diverse MaxCut instances beyond current QAOA research?
+\end{tcolorbox}
+
+\begin{tcolorbox}[
+    colback=white,
+    colframe=teal!70,
+    boxrule=1pt,
+    arc=3mm,
+    title={\large\textbf{RQ2}},
+    fonttitle=\color{white},
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+]
+\large
+How do instance characteristics influence key QAOA design decisions?
+\end{tcolorbox}
+
+\begin{tcolorbox}[
+    colback=white,
+    colframe=teal!70,
+    boxrule=1pt,
+    arc=3mm,
+    title={\large\textbf{RQ3}},
+    fonttitle=\color{white},
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+]
+\large
+Can we develop methods to automatically optimize QAOA parameters based on instance features?
 \end{tcolorbox}
 
 ## Importance of Instance Diversity?
@@ -305,13 +330,13 @@ How do problem instance characteristics influence the key design decisions of th
 -   **Barren Plateaus and Rugged Landscapes:**
     -   Flat optimisation landscapes hinder finding optimal parameters [@Brandao2018],[@Bravyi2018]. 
 -   **Benefits of instance-based approaches?**
-    - Reduces calls to quantum devices \rightarrow  *less resource use*
-    
+    - Reduces calls to quantum devices \rightarrow  \textbf{less resource use}
+
 :::
 
 ::: {.column width="55%"}
 
-![Optimisation Landscape for various instances of unweighted MaxCut](images/optimisation-landscape.png)
+![\tiny Optimisation Landscape for various instances of unweighted MaxCut](images/optimisation-landscape.png)
 
 :::
 
@@ -319,18 +344,20 @@ How do problem instance characteristics influence the key design decisions of th
 
 # Instance Space Analysis
 
-### Instance Space Analysis [@smith2023instance]
+:::: {.columns}
 
+::: {.column width="50%" .content-center}
 - Based on the *No Free Lunch Theorem* [@Wolpert1997]: Algorithms have strengths and weaknesses
 - Identify features that differentiate instances from each other and influence algorithm performance
 - Identifies which algorithms are best suited for which instances
 - Visualised across a 2D plane
-
-## Instance Space Analysis
-
-::: {.content-center}
-![Instance space analysis workflow](images/isa.pdf){height=84% fig-align="center"}
 :::
+
+::: {.column width="50%"}
+![Instance space analysis workflow](images/isa.pdf){height=75% fig-align="center"}
+:::
+
+::::
 
 ## Our Approach
 
@@ -376,7 +403,7 @@ How do problem instance characteristics influence the key design decisions of th
 \textcolor{gray}{\rule{0.8\textwidth}{0.4pt}}
 
 \vspace{0.3cm}
-{\large \textbf{Total Network Classes:} $7 \times 6 = 42$}
+{\large \textbf{Total Instance Classes:} $7 \times 6 = 42$}
 \end{center}
 
 
@@ -467,13 +494,15 @@ How do problem instance characteristics influence the key design decisions of th
 \textbf{\color{red}{Instance Space III and IV only}}
 
 \end{tcolorbox}
-:::
-::::
+
 \begin{center}
 \textcolor{gray}{\rule{0.8\textwidth}{0.4pt}}
-\vspace{0.2cm}
-{\small \textbf{Total Features:} 48 graph characteristics across 5 categories}
+\\
+{\small \textbf{48 Features}}
 \end{center}
+:::
+::::
+
 
 ## Performance $\mathcal{Y}$
 
@@ -606,6 +635,161 @@ coltitle=black
 
 # Instance Space III: Parameter Initialisation
 
+## Quantum Instance-based Parameter Initialisation (QIBPI)
+
+:::: {.columns}
+
+::: {.column width="48%"}
+\begin{tcolorbox}[
+    colback=white,
+    colframe=blue,
+    arc=0pt,
+    title={\textcolor{white}{\textbf{Methodology}}},
+    coltitle=white,
+    colbacktitle=blue
+]
+\textbf{Key Concept:}
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item Generate diverse instance set
+\item Optimize via simulation
+\item Transfer to larger $N$
+\item Use graph similarity
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Implementation Details:}
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item 100 graphs per class
+\item 42 distinct classes
+\item Median parameters stored
+\item Public parameter repository
+\end{itemize}
+\end{tcolorbox}
+:::
+
+::: {.column width="48%"}
+\begin{tcolorbox}[
+    colback=white,
+    colframe=blue,
+    arc=0pt,
+    title={\textcolor{white}{\textbf{Algorithm Steps}}},
+    coltitle=white,
+    colbacktitle=blue
+]
+\textbf{1. For each instance class $T$:}
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item Generate 100 instances
+\item Run QAOA (random init)
+\item Extract $(\vec{\gamma}^*_G, \vec{\beta}^*_G)$
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Parameter Processing:}
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\item Calculate median values
+\item Store optimal parameters
+\item Enable transfer learning
+\end{itemize}
+\end{tcolorbox}
+:::
+
+::::
+
+## QAOA Initialization Strategies ($p=15$) {.center}
+
+:::: {.columns}
+
+::: {.column width="33%"}
+\begin{tcolorbox}[
+    colback=white,
+    colframe=blue,
+    arc=0pt,
+    title={\textcolor{white}{\textbf{Simple Methods}}},
+    coltitle=white,
+    colbacktitle=blue
+]
+\textbf{Random:}
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+\item $\gamma_i \sim \mathcal{U}(-\pi, \pi)$
+\item $\beta_i \sim \mathcal{U}(-\pi/2, \pi/2)$
+\end{itemize}
+
+\textbf{TQA:}
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+\item $\gamma_i = i \cdot \Delta t / p$
+\item $\beta_i = (1 - i/p) \cdot \Delta t$
+\end{itemize}
+
+\textbf{Constant:}
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+\item $\gamma_i = 0.2$
+\item $\beta_i = -0.2$
+\end{itemize}
+\end{tcolorbox}
+:::
+
+::: {.column width="33%"}
+\begin{tcolorbox}[
+    colback=white,
+    colframe=blue,
+    arc=0pt,
+    title={\textcolor{white}{\textbf{Zhou et al. Methods}}},
+    coltitle=white,
+    colbacktitle=blue
+]
+\textbf{Fourier:}
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+\item Frequency domain approach
+\item $\gamma_i = \sum_k u_k \sin((k-\frac{1}{2})(i-\frac{1}{2})\frac{\pi}{p})$
+\end{itemize}
+
+\textbf{Interpolation:}
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+\item Parameter interpolation
+\item $[\gamma_0^{(p+1)}]_i = \frac{i-1}{p} [\gamma_L^{(p)}]_{i-1}$
+\end{itemize}
+\end{tcolorbox}
+:::
+
+::: {.column width="33%"}
+\begin{tcolorbox}[
+    colback=white,
+    colframe=blue,
+    arc=0pt,
+    title={\textcolor{white}{\textbf{Novel Methods}}},
+    coltitle=white,
+    colbacktitle=blue
+]
+\textbf{QIBPI:}
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+\item Instance-based transfer
+\item Structure-aware approach
+\item Pre-optimized parameters
+\end{itemize}
+
+\textbf{3-Regular:}
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+\item Uses 3-regular optimal
+\item Tests independence
+\end{itemize}
+\end{tcolorbox}
+:::
+
+::::
+
+## Instance Space III: Projection Transformation
+
 \small
 \begin{align}
 \mathbf{Z} =
@@ -641,18 +825,94 @@ coltitle=black
 \label{eq:projection-transformation}
 \end{align}
 
+## Instance Space III - Sources
 
+![Source Distribution](images/informs-ijjoc-isa/source_distribution.png){width=60%}
 
 ## Instance Space III - Features
 
+![](images/informs-ijjoc-isa/feature_algebraic_connectivity_distribution.png){width=20%}
+![](images/informs-ijjoc-isa/feature_average_distance_distribution.png){width=20%}
+![](images/informs-ijjoc-isa/feature_clique_number_distribution.png){width=20%}
+![](images/informs-ijjoc-isa/feature_diameter_distribution.png){width=20%}
+![](images/informs-ijjoc-isa/feature_maximum_degree_distribution.png){width=20%}
+![](images/informs-ijjoc-isa/feature_maximum_weighted_degree_distribution.png){width=20%}
+![](images/informs-ijjoc-isa/feature_number_of_edges_distribution.png){width=20%}
+![](images/informs-ijjoc-isa/feature_radius_distribution.png){width=20%}
+
+::: center
+![](images/informs-ijjoc-isa/feature_skewness_weight_distribution.png){width=20%}
+![](images/informs-ijjoc-isa/feature_weighted_average_clustering_distribution.png){width=20%}
+:::
+
 ## Instance Space III - Algorithms
+
+![Algorithm Distribution](images/informs-ijjoc-isa/svm_selection.png){width=60%}
 
 ## Instance Space III - Summary
 
-# Evolving Instances 
+\begin{table}
+\centering
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Initialisation Strategy & $P_\text{good}$ (\%) & CV Accuracy (\%) & CV Precision (\%) \\
+\midrule
+CONSTANT & 3.20& 96.70& 33.3\\
+INTERP & 0.10 & 99.90 & -- \\
+QIBPI & 70.90& 75.80& 78.00\\
+Three-Regular& 44.80& 78.50& 73.80\\
+TQA & 11.10& 90.10& 87.50\\
+\midrule
+Oracle & 100.00 & -- & -- \\
+Selector & 77.90& -- & 78.10\\
+\bottomrule
+\end{tabular}
+\caption{Performance metrics for various initialisation strategies}
+\label{tab:initialization-strategies}
+\end{table}
 
+
+
+## Evolving Instances for QAOA
+
+![Gaps in Instance Space](images/evolved_instances_targets_only.png){height=80%}
+
+## Evolving Instances for QAOA
+
+![](images/ga-approach.pdf){height=80%}
+
+## Evolving Instances for QAOA
+
+![](images/evolved_instances.png){height=80%}
+
+## Evolving Instances for QAOA
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](images/source_distribution-evolved-vs-inst.png)
+:::
+
+::: {.column width="50%"}
+![](images/svm_selection_evolved.png)
+:::
+::::
 
 # Software for QAOA Parameter Initialisation
+
+## FastAPI Workflow
+
+![FastAPI Workflow](images/fast-api-parameter-initialisation.png){height=80%}
+
+## Conclusion
+
+- Diversity matters
+- Instance-based approaches are beneficial
+- Future work:
+  - Noise models
+  - Other VQAs (e.g. VQE, F-VQE)
+  - Other optimisation problems (e.g. TSP, MaxIndSet, Vehicle Routing)
+
 
 # Appendix
 # Instance Space I: Layer Depth ($p$)

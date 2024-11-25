@@ -1,0 +1,62 @@
+\usepackage{tikz}
+\usepackage{braket}
+\usepackage{tcolorbox}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\useoutertheme{miniframes}
+\usepackage{fancyhdr}
+
+\setbeamertemplate{headline}{}
+
+\setbeamertemplate{title page}{
+  \begin{center}
+    \vspace{0.25em}  % Reduce space at the top
+    \includegraphics[height=1.5cm]{images/unimelb-logo.jpg}\par
+    \vspace{0.1em}
+    \rule{\textwidth}{0.4pt}\par  % First horizontal line
+    \vspace{1em}
+    \begin{beamercolorbox}[sep=8pt,center]{title}
+      \usebeamerfont{title}\inserttitle\par
+    \end{beamercolorbox}
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+    \vspace{0.15em}
+    {\textbf{PhD Completion Seminar}}\par  
+    \vspace{0.15em}
+    \rule{\textwidth}{0.4pt}\par  
+    \vspace{1em}
+    \begin{beamercolorbox}[sep=5pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=5pt,center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=5pt,center]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}
+  \end{center}
+}
+
+% Keep your existing frame title template
+\setbeamertemplate{frametitle}{%
+\nointerlineskip
+\begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,rightskip=0.5cm,ht=3ex,dp=2ex]{frametitle}
+    \vbox to 3ex{
+        \vfill
+        \includegraphics[height=3ex]{images/unimelb-logo.jpg}\hspace{1ex}
+        \usebeamerfont{frametitle}\insertframetitle
+        \hfill \hbox{\scriptsize PhD Completion Seminar}
+        \vfill
+    }
+\end{beamercolorbox}}
+
+\setbeamertemplate{footline}{%
+\begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,rightskip=0.5cm,ht=3ex,dp=2ex]{footline}
+    \vbox to 3ex{
+        \vfill
+        University of Melbourne \hspace{1ex}
+        \usebeamerfont{footline}\textit{\insertshorttitle, V Katial (2024)}
+        \hfill \insertframenumber
+        \vfill
+    }
+\end{beamercolorbox}}
+
