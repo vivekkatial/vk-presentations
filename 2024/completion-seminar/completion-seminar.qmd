@@ -15,6 +15,7 @@ format:
     theme: "metropolis"
     institute: "The University of Melbourne"
     citecolor: "blue"
+    background-color: "white"
     classoption:
       - 'xcolor=dvipsnames'
     include-in-header: 
@@ -24,10 +25,9 @@ format:
 # Agenda
 
 1.  Introduction
-2.  Background
-3.  Quantum Approximate Optimization Algorithm (QAOA)
-4.  Instance Space Analysis
-5.  Various Instance Spaces
+2.  Quantum Approximate Optimisation Algorithm (QAOA)
+3.  Instance Space Analysis
+4.  Evolving Instances for QAOA
 8.  Software for QAOA Parameter Initialisation
 9.  Conclusion and Future Work
 
@@ -91,31 +91,48 @@ format:
 
 ## How does Quantum Computing work?
 
-\centering
-\includegraphics[height=0.7\textheight]{images/superposition.pdf}
+:::: columns
 
-
-## Measurement
-
-::: columns
-::: {.column width="33%"}
-### Wave Function Collapse
-
-When a quantum system is measured, its wavefunction collapses into a single state, and the system loses its superposition.
+::: {.column width="50%"}
+![](images/superposition.pdf){width=100%}
 :::
 
-::: {.column width="33%"}
-### Probabilistic Outcome
+::: {.column width="50%"}
 
-The outcome of a measurement is probabilistic, with the probability determined by the quantum state before the measurement.
+### Superposition
+
+- Quantum bits (qubits) can exist in a superposition of states
+- For $N=2$ qubits: $\ket{\psi} \in \mathbb{C}^2 \otimes \mathbb{C}^2 = \mathbb{C}^4$
+- Represented by a vector in a complex vector space $\ket{\psi} \in [\mathbb{C}^2 ]^{\otimes n}$
+- For $N=300$, there are $2^{300}$ possible states - more than the number of atoms in the universe!
+
 :::
 
-::: {.column width="33%"}
-### Disturbance
+::::
 
-The act of measuring a quantum system inevitably disturbs the system, making it impossible to precisely determine the pre-measurement state.
-:::
-:::
+
+
+<!-- ## Measurement -->
+
+<!-- ::: columns -->
+<!-- ::: {.column width="33%"} -->
+<!-- ### Wave Function Collapse -->
+
+<!-- When a quantum system is measured, its wavefunction collapses into a single state, and the system loses its superposition. -->
+<!-- ::: -->
+
+<!-- ::: {.column width="33%"} -->
+<!-- ### Probabilistic Outcome -->
+
+<!-- The outcome of a measurement is probabilistic, with the probability determined by the quantum state before the measurement. -->
+<!-- ::: -->
+
+<!-- ::: {.column width="33%"} -->
+<!-- ### Disturbance -->
+
+<!-- The act of measuring a quantum system inevitably disturbs the system, making it impossible to precisely determine the pre-measurement state. -->
+<!-- ::: -->
+<!-- ::: -->
 
 ## Noisy-intermediate Scale Quantum Era
 
@@ -132,6 +149,8 @@ The act of measuring a quantum system inevitably disturbs the system, making it 
 
 \small
 
+Need to find algorithms that can:
+
 1.  Can run on small (100-1000 qubit devices)
 2.  Solve useful problems
 3.  Shouldn’t require extensive error correction
@@ -140,20 +159,26 @@ The act of measuring a quantum system inevitably disturbs the system, making it 
 
 \small
 
-**QAOA** is a low-depth algorithm that can help solve optimisation problems
+This has led to the development of **Variational Quantum Algorithms (VQAs)** [@Peruzzo2014], which are hybrid algorithms specifically designed for NISQ devices
+
 :::
 
 ::: {.column width="50%"}
 \centering
-\includegraphics[height=0.7\textheight]{images/ibm-qc.png}
+\includegraphics[height=0.8\textheight]{images/ibm-qc.png}
 :::
 :::
 
 ## Aims of the Thesis
 
-1.  We focus on the addressing the challenges in **Variational Quantum Algorithms (VQAs)** [@Peruzzo2014]; a class of quantum algorithms that are expected to be run on NISQ devices.
-2.  Among prominent VQAs, **Quantum Approximate Optimization Algorithm (QAOA)** [@Farhi2014] and **Variational Quantum Eigensolver (VQE)** are widely studied.
-3.  The main area of focus in this thesis is to study the instance dependence of QAOAs to better understand and stress test its performance.
+\small
+
+- VQAs are a promising class of quantum algorithms tailored for NISQ devices
+- Two prominent examples:
+    1. **Quantum Approximate Optimisation Algorithm (QAOA)** [@Farhi2014]
+    2. **Variational Quantum Eigensolver (VQE)**
+- QAOA in particular is a low-depth algorithm designed to solve optimisation problems
+  - Many problems can be mapped to a Hamiltonian and solved using QAOA (e.g. MaxCut, TSP, Vehicle Routing, 3SAT)
 
 ## MaxCut Problem
 
@@ -167,7 +192,7 @@ Solution is a binary string $\mathbf{s} = (s_1, s_2, \ldots, s_n)$ where $s_i \i
 
 ## Solving MaxCut on a Quantum Computer
 
-We map the MaxCut problem to a *Hamiltonian* for quantum optimization.
+We map the MaxCut problem to a *Hamiltonian* for quantum optimisation.
 
 ::: columns
 ::: {.column width="42%"}
@@ -197,8 +222,16 @@ $\begin{matrix} \\ \xrightarrow{\quad \LARGE \text{ map }  \quad} \\ \phantom{\t
 :::
 :::
 
-# Quantum Approximate Optimization Algorithm (QAOA)
+::: {.notes}
+- Our objective Hamiltonian (blue) represents cost function:
+  - Built from Pauli-Z operators for each graph edge
+  - Terms weighted by w_ij
+  - (I - Z_i Z_j) encodes classical cost
+- State space (green) is n-qubit Hilbert space
+- Solution (purple) is ground state minimizing expectation value
+:::
 
+# Quantum Approximate Optimisation Algorithm (QAOA)
 -   QAOA prepares a parameterised "trial" (ansatz) state of the form:
 ```{=tex}
 \begin{align*}
@@ -206,9 +239,23 @@ $\begin{matrix} \\ \xrightarrow{\quad \LARGE \text{ map }  \quad} \\ \phantom{\t
                    &= \prod_{j=1}^{p} e^{-i\beta_j \hat{H}_B} e^{-i\gamma_j \hat{H}_P} \ket{+}^{\otimes n}
 \end{align*}
 ```
--   Where $\hat{H}_P = \sum_{(i,j) \in E} w_{ij} (1 - \hat{Z}_i \hat{Z}_j)$ is the problem Hamiltonian and $\hat{H}_B = \sum_{i=1}^{n} \hat{X}_i$ is the mixing Hamiltonian. - The parameters $\vec{\gamma} = (\gamma_1, \dots, \gamma_p)$ and $\vec{\beta} = (\beta_1, \dots, \beta_p)$ are optimised to minimise the expectation value of the problem Hamiltonian.
+-   Where $\hat{H}_P = \sum_{(i,j) \in E} w_{ij} (1 - \hat{Z}_i \hat{Z}_j)$ is the problem Hamiltonian and $\hat{H}_B = \sum_{i=1}^{n} \hat{X}_i$ is the mixing Hamiltonian. 
+- The parameters $\vec{\gamma} = (\gamma_1, \dots, \gamma_p)$ and $\vec{\beta} = (\beta_1, \dots, \beta_p)$ are optimised to minimise the expectation value of the problem Hamiltonian.
 
-## Quantum Approximate Optimization Algorithm (QAOA)
+::: {.notes}
+- QAOA is hybrid quantum-classical
+- Key components of ansatz state:
+  1. Start with |+⟩^⊗n state (equal superposition)
+  2. Alternate between:
+     - Problem evolution e^{-iγH_P}
+     - Mixing evolution e^{-iβH_B}
+- H_P encodes optimization objective
+- H_B = sum of X operators, explores solution space
+:::
+
+
+
+## Quantum Approximate Optimisation Algorithm (QAOA)
 
 -   The QAOA Ansatz Energy is given by taking the expectation value of the problem Hamiltonian with respect to the trial state:
 
@@ -224,7 +271,16 @@ $$
 (\vec{\gamma}^*, \vec{\beta}^*) = \arg \min_{\vec{\gamma}, \vec{\beta}} F_p(\vec{\gamma}, \vec{\beta}), \qquad \alpha = \frac{F_p(\vec{\gamma}^*, \vec{\beta}^*)}{C_{\max}}
 $$
 
-## Quantum Approximate Optimization Algorithm (QAOA)
+::: {.notes}
+- F_p measures quality of current parameters
+- Minimizing expectation value of problem Hamiltonian
+- Think: quantum gradient descent in energy landscape
+- α = F_p/C_max measures solution quality
+- Parameters optimized classically
+:::
+
+
+## Quantum Approximate Optimisation Algorithm (QAOA)
 
 ::: {.columns .v-center-container}
 ::: {.column .pl-4 width="45%"}
@@ -233,7 +289,7 @@ $$
 1.  **Circuit Depth** ($p$)
     -   Controls the expressivity of the ansatz
     -   As $p \rightarrow \infty$ QAOA can find the exact solution
-2.  **Classical Optimizer**
+2.  **Classical Optimiser**
     -   Gradient-free: Nelder-Mead, COBYLA
     -   Gradient-based: ADAM, SPSA
 3.  **Initial Parameters** ($\vec{\gamma_0}, \vec{\beta_0}$)
@@ -255,7 +311,7 @@ $$
 -   Recent studies show optimal QAOA parameters for depth $p$ are \alert{transferable} across a small class of instances [@Brandao2018]
 -   Optimal QAOA depth is \alert{instance-dependent} [@Shaydulin2021sym]
 -   Algorithm performance heavily influenced by:
-    -   Choice of classical optimizer [@pendas2022]
+    -   Choice of classical optimiser [@pendas2022]
     -   Initial parameter selection [@Zhou2020],[@Lee2021],[@Shaydulin2021],[@Sureshbabu2024]
 :::
 
@@ -265,7 +321,7 @@ $$
 -   Narrow focus on specific instance classes ($d-$regular graphs, random graphs, no weights)
 -   Predominantly shallow depth circuits ($p \leq 3$) [@Shaydulin2021sym],[@Sureshbabu2024]
 -   Limited understanding of instance feature impacts on QAOA performance and design decisions
--   Lack of standardized parameter initialization frameworks [@abbas2023quantum]
+-   Lack of standardised parameter initialisation frameworks [@abbas2023quantum]
 :::
 
 ## Research Questions
@@ -315,28 +371,33 @@ How do instance characteristics influence key QAOA design decisions?
     right=3mm
 ]
 \large
-Can we develop methods to automatically optimize QAOA parameters based on instance features?
+Can we develop methods to automatically optimise QAOA parameters based on instance features?
 \end{tcolorbox}
 
-## Importance of Instance Diversity?
+## QAOA Landscape Complexity & Instance Diversity
 
 :::: {.columns}
 
 ::: {.column width="45%"}
 
 \small
--   **Parameter Sensitivity:**
-    -   High computational cost for repeated optimization.
--   **Barren Plateaus and Rugged Landscapes:**
-    -   Flat optimisation landscapes hinder finding optimal parameters [@Brandao2018],[@Bravyi2018]. 
--   **Benefits of instance-based approaches?**
-    - Reduces calls to quantum devices \rightarrow  \textbf{less resource use}
+-   **Landscape Evolution with Depth:**
+    -   Higher $p$ -- more complex optimisation landscape [@Bravyi2018]
+    
+-   **Weight Distribution Impact:**
+    -   Cauchy distributions → more rugged landscapes [@Shaydulin2023]
+    -   Weight scaling heuristics show promise
+    -   Convergence to unweighted case under rescaling [@Sureshbabu2024]
+    
+-   **Practical Implications:**
+    - More complex landscapes require more calls to the QPU, classical optimisers can falter \rightarrow more resource use!
 
 :::
 
 ::: {.column width="55%"}
 
-![\tiny Optimisation Landscape for various instances of unweighted MaxCut](images/optimisation-landscape.png)
+\vspace{1em}
+![\tiny QAOA Landscape Variation Across MaxCut Instances (p=1, unweighted)](images/optimisation-landscape.png)
 
 :::
 
@@ -346,18 +407,28 @@ Can we develop methods to automatically optimize QAOA parameters based on instan
 
 :::: {.columns}
 
-::: {.column width="50%" .content-center}
+::: {.column width="40%" .content-center}
+\small
 - Based on the *No Free Lunch Theorem* [@Wolpert1997]: Algorithms have strengths and weaknesses
 - Identify features that differentiate instances from each other and influence algorithm performance
-- Identifies which algorithms are best suited for which instances
-- Visualised across a 2D plane
+- Identifies which algorithms are best suited for which instances - instead of reporting "on-average" performance
+- ISA projects instances onto a 2D space to visualise the strengths and weaknesses of algorithms
 :::
 
-::: {.column width="50%"}
+::: {.column width="60%"}
 ![Instance space analysis workflow](images/isa.pdf){height=75% fig-align="center"}
 :::
 
 ::::
+
+:::{.notes}
+For each instance, we need meta-data. This includes:
+- Instances (what instances show diversity of features), 
+- Features (what features capture instance hardness)
+- Algorithms show diversity
+- Performance (how do I define perforfmance?)
+- Changing each of these helps us answer various questions!
+:::
 
 ## Our Approach
 
@@ -370,7 +441,7 @@ Can we develop methods to automatically optimize QAOA parameters based on instan
 :::: {.columns}
 
 ::: {.column width="50%"}
-\begin{tcolorbox}[colback=blue!5,colframe=blue!40!black,title=IS I \& II: Unweighted Instances]
+\begin{tcolorbox}[colback=blue!5,colframe=blue!40!black,title=IS I \& II: Network Structures]
 \small
 \begin{itemize}
 \item Random
@@ -505,93 +576,51 @@ Can we develop methods to automatically optimize QAOA parameters based on instan
 
 
 ## Performance $\mathcal{Y}$
-
 :::: {.columns}
 
-::: {.column width="60%"}
-\begin{tcolorbox}[
-    colback=blue!5,
-    colframe=blue!40!black,
-    arc=0pt,
-    title={\textcolor{white}{\textbf{Novel Performance Metric}}},
-    coltitle=white,
-    colbacktitle=blue!40!black
-]
-\small
+::: {.column width="35%"}
+
 \begin{itemize}
-\setlength{\itemsep}{2pt}
 \item \textbf{Why?} Most algorithms achieve good approximation ratios
-\item \textbf{Metric Components:}
+\item \textbf{Components:}
+    \small
     \begin{itemize}
-    \setlength{\itemsep}{1pt}
-    \item Function evaluations
-    \item Approximation ratio ($\alpha$)
+      \item Function evaluations
+      \item Approximation ratio ($\alpha$)
     \end{itemize}
-\item \textbf{Methodology:}
-    \begin{itemize}
-    \setlength{\itemsep}{1pt}
-    \item Find $\alpha_{\max}$ (best ratio achieved)
-    \item Set $\alpha_{\text{acceptable}} = 0.95 \times \alpha_{\max}$
-    \item Count iterations to reach $\alpha_{\text{acceptable}}$
-    \item If never reached: penalty $\kappa = 10^5$
-    \end{itemize}
+\item \textbf{Method to compute performance ($\kappa$):}
+    \small
+    \begin{enumerate}
+    \setlength{\itemsep}{0.5pt}
+    \item Find $\alpha_{\max}$ (best ratio)
+    \item Set $\alpha_{\text{acceptable}} = 0.95 \alpha_{\max}$
+    \item Count iterations ($\kappa$) to reach $\alpha_{\text{acceptable}}$
+    \item If never reached, set penalty $\kappa = 10^5$
+    \end{enumerate}
 \end{itemize}
-\end{tcolorbox}
 :::
 
-::: {.column width="40%"}
-\begin{tcolorbox}[
-    colback=blue!5,
-    colframe=blue!40!black,
-    arc=0pt,
-    title={\textcolor{white}{\textbf{Binary Classification}}},
-    coltitle=white,
-    colbacktitle=blue!40!black
-]
-\small
-Label algorithm as:
-\begin{itemize}
-\item \textbf{``good":} if $\kappa$ within 10\% of best
-\item \textbf{``bad":} otherwise
-\end{itemize}
-
-\vspace{0.2cm}
-\scriptsize
-Example for 4-reg graph (N=12):
-\begin{itemize}
-\setlength{\itemsep}{0pt}
-\item $p=2$: \textcolor{red}{bad} ($\kappa$=100k)
-\item $p=5$: \textcolor{red}{bad} ($\kappa$=100k)
-\item $p=15$: \textcolor{DarkGreen}{good} ($\kappa$=4,796)
-\item $p=20$: \textcolor{red}{bad} ($\kappa$=7,029)
-\end{itemize}
-\end{tcolorbox}
+::: {.column width="65%"}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/approximation-ratio-by-each-initialisation-technique.png}
+\caption{Approximation ratio $\alpha$ for various instances}
+\end{figure}
 :::
+
 
 ::::
-
-\begin{center}
-\textcolor{gray}{\rule{\textwidth}{0.4pt}}
-{\small Combines function evaluations and approximation ratio for more nuanced performance assessment}
-\end{center}
 
 ## Algorithm Design Choices $\mathcal{A}$
 
 :::: {.columns}
 ::: {.column width="70%"}
-\begin{tcolorbox}[
-colback=blue!5,
-colframe=blue!40!black,
-arc=0pt,
-title={\textcolor{white}{\textbf{Design Choices Across Independent Studies}}},
-coltitle=white,
-colbacktitle=blue!40!black
-]
+\textbf{Design Choices Across Independent Studies}
 \begin{itemize}
 \setlength{\itemsep}{4pt}
 \item \textbf{IS I:} Layer Depth ($p$)
 \begin{itemize}
-\item Circuit depth and expressivity
+\item How many layers are needed for different instances?
 \item $p \in {2, 5, 10, 15, 20}$
 \end{itemize}
 \item \textbf{IS II:} Classical Optimiser Selection
@@ -601,30 +630,31 @@ colbacktitle=blue!40!black
 \end{itemize}
 \item \textbf{IS III/IV:} Initialisation Technique
 \begin{itemize}
-\item Can we have faster convergence to optimal parameters?
-\item Random, TQA, INTERP, Constant, QIBPI, Three-Regular
+  \item Can we have faster convergence to optimal parameters?
+  \item Random, TQA, INTERP, Constant, QIBPI, Three-Regular
 \end{itemize}
 \end{itemize}
-\end{tcolorbox}
+
 :::
 ::: {.column width="30%"}
 \begin{tcolorbox}[
 colback=gray!10,
 colframe=gray!50,
 arc=0pt,
-title={\textbf{Constants}},
+title={\textbf{Fixed meta-data}},
 coltitle=black
 ]
+\small
 \begin{itemize}
 \item Features
 \item Instances
-\item Performance Metrics
+\item Performance Measure
 \end{itemize}
 \end{tcolorbox}
 \vspace{0.3cm}
 \begin{tikzpicture}
 \node[draw=blue, rounded corners, fill=blue!10, text width=4cm, align=center] {
-\textbf{All choices represent design decisions}
+\small \textbf{All choices represent design decisions}
 };
 \end{tikzpicture}
 :::
@@ -637,81 +667,52 @@ coltitle=black
 
 ## Quantum Instance-based Parameter Initialisation (QIBPI)
 
-:::: {.columns}
+\tiny
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetAlgoLined
+\caption{\small Generate Initial QAOA Parameters using QIBPI}
+\KwIn{Number of nodes $N = 8$, Allowed Number of layers $L=15$}
+\KwOut{Median optimal parameters $\vec{\gamma}$ and $\vec{\beta}$ for each class}
+\SetKwFunction{FMain}{GenerateGraphInstances}
+\SetKwFunction{Foptimise}{optimiseQAOAParameters}
+\SetKwFunction{FMedian}{CalculateMedianParameters}
+\SetKwProg{Fn}{Procedure}{:}{}
+\Fn{\FMain{}}{
+\For{$p \leftarrow 1$ \KwTo $L$}{
+\ForEach{graph type $T$ in ${ T_1, \ldots, T_{42}}$}{
+\For{$i \leftarrow 1$ \KwTo $100$}{
+Generate graph instance $G_{i,T}$ with $N$ nodes;
+\Foptimise{$G_{i, T}$, $p$};
+}
+\FMedian{$T_p$};
+}
+}
+}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\Foptimise{$G$, $p$}}{
+\KwIn{Graph instance $G$}
+\KwOut{Optimal parameters $(\vec{\gamma}_G, \vec{\beta}_G) = (\gamma_1, \ldots, \gamma_p), (\beta_1, \ldots, \beta_p)$}
+Run QAOA on graph instance $G$ with random initialisation to find optimal parameters for depth $p$;
+\KwRet{$(\vec{\gamma}_G, \vec{\beta}_G) = (\gamma_1, \ldots, \gamma_p), (\beta_1, \ldots, \beta_p)$};
+}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FMedian{$T$}}{
+\KwIn{Graph type $T$, Set of parameters ${\vec{\gamma}{i, p, T}}$, ${\vec{\beta}{i, p, T}}$}
+\KwOut{Median parameters $\vec{\gamma}{\text{median}, T}$, $\vec{\beta}{\text{median}, T}$}
+Calculate the \text{median} of the parameters $\gamma_{i, p, T}$ and $\beta_{i, p, T}$ for all instances of type $T$;
+Store \text{median} parameters in a parameter class corresponding to $T$;
+\KwRet{$\vec{\gamma}{\text{median}, T}$, $\vec{\beta}{\text{median}, T}$};
+}
+\end{algorithm}
 
-::: {.column width="48%"}
-\begin{tcolorbox}[
-    colback=white,
-    colframe=blue,
-    arc=0pt,
-    title={\textcolor{white}{\textbf{Methodology}}},
-    coltitle=white,
-    colbacktitle=blue
-]
-\textbf{Key Concept:}
-\begin{itemize}
-\setlength{\itemsep}{2pt}
-\item Generate diverse instance set
-\item Optimize via simulation
-\item Transfer to larger $N$
-\item Use graph similarity
-\end{itemize}
-
-\vspace{0.2cm}
-\textbf{Implementation Details:}
-\begin{itemize}
-\setlength{\itemsep}{2pt}
-\item 100 graphs per class
-\item 42 distinct classes
-\item Median parameters stored
-\item Public parameter repository
-\end{itemize}
-\end{tcolorbox}
-:::
-
-::: {.column width="48%"}
-\begin{tcolorbox}[
-    colback=white,
-    colframe=blue,
-    arc=0pt,
-    title={\textcolor{white}{\textbf{Algorithm Steps}}},
-    coltitle=white,
-    colbacktitle=blue
-]
-\textbf{1. For each instance class $T$:}
-\begin{itemize}
-\setlength{\itemsep}{2pt}
-\item Generate 100 instances
-\item Run QAOA (random init)
-\item Extract $(\vec{\gamma}^*_G, \vec{\beta}^*_G)$
-\end{itemize}
-
-\vspace{0.2cm}
-\textbf{2. Parameter Processing:}
-\begin{itemize}
-\setlength{\itemsep}{2pt}
-\item Calculate median values
-\item Store optimal parameters
-\item Enable transfer learning
-\end{itemize}
-\end{tcolorbox}
-:::
-
-::::
-
-## QAOA Initialization Strategies ($p=15$) {.center}
+## QAOA Initialisation Strategies ($p=15$) {.center}
 
 :::: {.columns}
 
 ::: {.column width="33%"}
-\begin{tcolorbox}[
-    colback=white,
-    colframe=blue,
-    arc=0pt,
-    title={\textcolor{white}{\textbf{Simple Methods}}},
-    coltitle=white,
-    colbacktitle=blue
-]
+
+\small
 \textbf{Random:}
 \begin{itemize}
 \setlength{\itemsep}{1pt}
@@ -719,79 +720,64 @@ coltitle=black
 \item $\beta_i \sim \mathcal{U}(-\pi/2, \pi/2)$
 \end{itemize}
 
-\textbf{TQA:}
+\textbf{TQA} [@Sack2021]:
 \begin{itemize}
 \setlength{\itemsep}{1pt}
 \item $\gamma_i = i \cdot \Delta t / p$
 \item $\beta_i = (1 - i/p) \cdot \Delta t$
 \end{itemize}
 
-\textbf{Constant:}
+\textbf{CONSTANT} [@Gaidai2023]:
 \begin{itemize}
 \setlength{\itemsep}{1pt}
 \item $\gamma_i = 0.2$
 \item $\beta_i = -0.2$
 \end{itemize}
-\end{tcolorbox}
 :::
 
 ::: {.column width="33%"}
-\begin{tcolorbox}[
-    colback=white,
-    colframe=blue,
-    arc=0pt,
-    title={\textcolor{white}{\textbf{Zhou et al. Methods}}},
-    coltitle=white,
-    colbacktitle=blue
-]
-\textbf{Fourier:}
+\small
+\textbf{FOURIER:} [@Zhou2020]
 \begin{itemize}
 \setlength{\itemsep}{1pt}
 \item Frequency domain approach
 \item $\gamma_i = \sum_k u_k \sin((k-\frac{1}{2})(i-\frac{1}{2})\frac{\pi}{p})$
 \end{itemize}
 
-\textbf{Interpolation:}
+\textbf{INTERP:} [@Zhou2020]
 \begin{itemize}
 \setlength{\itemsep}{1pt}
 \item Parameter interpolation
 \item $[\gamma_0^{(p+1)}]_i = \frac{i-1}{p} [\gamma_L^{(p)}]_{i-1}$
 \end{itemize}
-\end{tcolorbox}
 :::
 
 ::: {.column width="33%"}
-\begin{tcolorbox}[
-    colback=white,
-    colframe=blue,
-    arc=0pt,
-    title={\textcolor{white}{\textbf{Novel Methods}}},
-    coltitle=white,
-    colbacktitle=blue
-]
+\small
 \textbf{QIBPI:}
 \begin{itemize}
 \setlength{\itemsep}{1pt}
-\item Instance-based transfer
-\item Structure-aware approach
-\item Pre-optimized parameters
+\item Uses QIBPI pre-optimised parameters
 \end{itemize}
-
 \textbf{3-Regular:}
 \begin{itemize}
 \setlength{\itemsep}{1pt}
-\item Uses 3-regular optimal
-\item Tests independence
+\item Uses 3-regular pre-optimised parameters
 \end{itemize}
-\end{tcolorbox}
 :::
 
 ::::
 
 ## Instance Space III: Projection Transformation
 
-\small
-\begin{align}
+:::: {.columns}
+
+::: {.column width="50%"}
+
+The projection transformation is given by the matrix $\mathbf{Z}$:
+
+\scriptsize
+\begin{align*}
 \mathbf{Z} =
 \begin{pmatrix}
     z_1 \\
@@ -822,35 +808,49 @@ coltitle=black
         \text{skewness weight} \\
         \text{weighted average clustering}
     \end{pmatrix} 
-\label{eq:projection-transformation}
-\end{align}
+\end{align*}
 
-## Instance Space III - Sources
+Plotting 4,200 instances across $\mathbb{R}^2$.
+:::
 
-![Source Distribution](images/informs-ijjoc-isa/source_distribution.png){width=60%}
+::: {.column width="50%"}
+
+![Source Distribution](images/informs-ijjoc-isa/source_distribution.png){width=80%}
+
+:::
+
+::::
 
 ## Instance Space III - Features
 
-![](images/informs-ijjoc-isa/feature_algebraic_connectivity_distribution.png){width=20%}
-![](images/informs-ijjoc-isa/feature_average_distance_distribution.png){width=20%}
-![](images/informs-ijjoc-isa/feature_clique_number_distribution.png){width=20%}
-![](images/informs-ijjoc-isa/feature_diameter_distribution.png){width=20%}
-![](images/informs-ijjoc-isa/feature_maximum_degree_distribution.png){width=20%}
-![](images/informs-ijjoc-isa/feature_maximum_weighted_degree_distribution.png){width=20%}
-![](images/informs-ijjoc-isa/feature_number_of_edges_distribution.png){width=20%}
-![](images/informs-ijjoc-isa/feature_radius_distribution.png){width=20%}
+![](images/informs-ijjoc-isa/feature_algebraic_connectivity_distribution.png){width=19%}
+![](images/informs-ijjoc-isa/feature_average_distance_distribution.png){width=19%}
+![](images/informs-ijjoc-isa/feature_clique_number_distribution.png){width=19%}
+![](images/informs-ijjoc-isa/feature_diameter_distribution.png){width=19%}
+![](images/informs-ijjoc-isa/feature_maximum_degree_distribution.png){width=19%}
+![](images/informs-ijjoc-isa/feature_maximum_weighted_degree_distribution.png){width=19%}
+![](images/informs-ijjoc-isa/feature_number_of_edges_distribution.png){width=19%}
+![](images/informs-ijjoc-isa/feature_radius_distribution.png){width=19%}
+![](images/informs-ijjoc-isa/feature_skewness_weight_distribution.png){width=19%}
+![](images/informs-ijjoc-isa/feature_weighted_average_clustering_distribution.png){width=19%}
 
-::: center
-![](images/informs-ijjoc-isa/feature_skewness_weight_distribution.png){width=20%}
-![](images/informs-ijjoc-isa/feature_weighted_average_clustering_distribution.png){width=20%}
-:::
 
 ## Instance Space III - Algorithms
 
-![Algorithm Distribution](images/informs-ijjoc-isa/svm_selection.png){width=60%}
+:::: {.columns}
 
+::: {.column width="50%"}
+![Best Algorithm](images/informs-ijjoc-isa/best_algorithm_distribution.png){width=80%}
+:::
+
+::: {.column width="50%"}
+![Algorithm Distribution](images/informs-ijjoc-isa/svm_selection.png){width=80%}
+:::
+
+::::
 ## Instance Space III - Summary
 
+\small
 \begin{table}
 \centering
 \begin{tabular}{@{}lrrr@{}}
@@ -863,8 +863,7 @@ QIBPI & 70.90& 75.80& 78.00\\
 Three-Regular& 44.80& 78.50& 73.80\\
 TQA & 11.10& 90.10& 87.50\\
 \midrule
-Oracle & 100.00 & -- & -- \\
-Selector & 77.90& -- & 78.10\\
+\textbf{Selector} & \textbf{77.90} & -- & \textbf{78.10}\\
 \bottomrule
 \end{tabular}
 \caption{Performance metrics for various initialisation strategies}
@@ -872,19 +871,40 @@ Selector & 77.90& -- & 78.10\\
 \end{table}
 
 
+# Evolving Instances for QAOA
+
+:::: {.columns}
+
+::: {.column width="60%"}
+![](images/ga-approach.pdf){height=90%}
+:::
+
+::: {.column width="40%"}
+![Gaps in Instance Space](images/evolved_instances_targets_only.png){height=75%}
+
+ 
+\footnotesize
+We identify 360 target points in the instance space and evolve instances to reach these targets.
+
+:::
+
+::::
 
 ## Evolving Instances for QAOA
 
-![Gaps in Instance Space](images/evolved_instances_targets_only.png){height=80%}
+:::: {.columns}
 
-## Evolving Instances for QAOA
+::: {.column width="50%"}
+\vspace{1cm}
+![Fitness over Generations](images/fitness_over_generations.png){height=80%}
+:::
 
-![](images/ga-approach.pdf){height=80%}
+::: {.column width="50%"}
+![Gaps in Instance Space](images/evolved_instances.png){height=80%}
 
-## Evolving Instances for QAOA
+:::
 
-![](images/evolved_instances.png){height=80%}
-
+::::
 ## Evolving Instances for QAOA
 
 :::: {.columns}
@@ -900,96 +920,121 @@ Selector & 77.90& -- & 78.10\\
 
 # Software for QAOA Parameter Initialisation
 
+## Problem and Motivation
+
+- Parameter initialisation significantly impacts QAOA's performance and convergence
+- Current challenges:
+  - Overwhelming number of initialisation techniques
+  - Implementations are coupled with the various quantum libraries (e.g. Cirq, Qiskit, PyQuil)
+  - Lack of standardization and comparison across different techniques
+  
+## QAOA-GamBet: A Fast API
+
+Key Features:
+
+- Consolidates multiple strategies (Random, QIBPI, QAOAKit, TQA, Constant)
+- RESTful API for easy integration
+- Modular and extensible 
+- Built-in validation and error handling
+- Automatic documentation generation
+
 ## FastAPI Workflow
 
 ![FastAPI Workflow](images/fast-api-parameter-initialisation.png){height=80%}
 
-## Conclusion
+## Example Usage
 
-- Diversity matters
-- Instance-based approaches are beneficial
-- Future work:
-  - Noise models
-  - Other VQAs (e.g. VQE, F-VQE)
-  - Other optimisation problems (e.g. TSP, MaxIndSet, Vehicle Routing)
+:::: {.columns}
 
-
-# Appendix
-# Instance Space I: Layer Depth ($p$)
-
-\begin{align}
-\mathbf{Z} =
-\begin{pmatrix}
-    z_1 \\
-    z_2 
-\end{pmatrix}
-        &= 
- \left(\begin{array}{@{}c@{\hspace{2em}}c@{}}
-        -0.0773 & 0.6222 \\
-        0.0745 & 0.2121 \\
-        -0.2304 & -0.315 \\
-        0.3981 & -0.2411 \\
-        0.0285 & 0.0749 \\
-        0.2204 & 0.2713 \\
-        -0.1895 & 0.3176 \\
-        0.3328 & -0.1081 \\
-        0.221 & -0.0415 \\
-        0.2822 & -0.1511
-    \end{array}\right)^{\intercal}
-    \begin{pmatrix}
-        \text{ratio of two largest laplacian eigenvalues} \\
-        \text{average distance} \\
-        \text{regular} \\
-        \text{density} \\
-        \text{laplacian second largest eigenvalue} \\
-        \text{number of orbits} \\
-        \text{diameter} \\
-        \text{maximum degree} \\
-        \text{number of minimal odd cycles} \\
-        \text{number of edges}
-    \end{pmatrix} 
-\label{eq:projection-transformation-n-layers}
-\end{align}
-
-## Instance Space I - Features
-
-
-## Instance Space I - Algorithms
-
-
-## Instance Space I - Summary
-
-
-# Instance Space II: Classical Optimiser Selection
-
+::: {.column width="50%"}
 \small
-\begin{align}
-\mathbf{Z} =
-\begin{pmatrix}
-    z_1 \\
-    z_2 
-\end{pmatrix}
-        &= 
- \left(\begin{array}{@{}c@{\hspace{2em}}c@{}}
-        -0.1144 & 0.5049 \\
-        -0.0706 & 0.4874 \\
-        0.133 & -0.6791 \\
-        0.3027 & 0.1872 \\
-        -0.2388 & -0.5887 \\
-        -0.558 & -0.1196 \\
-        -0.878 & -0.3254 \\
-        -0.0545 & -0.7915
-    \end{array}\right)^{\intercal}
-    \begin{pmatrix}
-        \text{regular} \\
-        \text{maximum degree} \\
-        \text{average distance} \\
-        \text{laplacian second largest eigenvalue} \\
-        \text{laplacian largest eigenvalue} \\
-        \text{density} \\
-        \text{algebraic connectivity} \\
-        \text{number of edges}
-    \end{pmatrix} 
-\label{eq:projection-transformation-classical-opts}
-\end{align}
-# References
+
+### Request
+
+```python
+# Prepare the request data
+data = {
+    "adjacency_matrix": adjacency_matrix,
+    "p": 2,
+    "graph_type": "three_regular_graph",
+    "weight_type": "uniform"
+}
+
+# Send a request to get optimal angles
+response = requests.post(
+    "http://localhost:5000/graph/QIBPI",
+    json=data,
+    auth=('username', 'password')
+)
+```
+:::
+
+::: {.column width="50%"}
+\small
+
+### Response
+
+```python
+{
+  "beta": [0.1, 0.15, 0.2],
+  "gamma": [0.3, 0.35, 0.4],
+  "source": "QIBPI"
+}
+```
+:::
+
+::::
+
+## Example
+
+:::: {.columns}
+
+::: {.column width="60%"}
+\vspace{2em}
+\begin{center}
+\includegraphics[width=\textwidth]{images/docs-example.png}
+\end{center}
+:::
+
+::: {.column width="40%"}
+
+\vspace{1cm}
+- Auto-generated documentation from docstrings
+- Rendered using Swagger UI and redoc
+
+\vspace{1em}
+![](images/fast-api-qr-code.png){height=20%}
+:::
+::::
+
+
+# Conclusion
+
+- Key Contributions:
+  - Expanded QAOA research scope with diverse test suite of MaxCut instances
+  - Conducted Instance Space Analysis (ISA) to understand instance-feature impacts on QAOA design choices
+  - Quantum Instance-based Parameter Initialisation (QIBPI)
+  - FastAPI for QAOA Parameter Initialisation
+- Instance Space Analysis:
+  - Parameter transfer effective within instance classes, but not across
+  - Gaps in instance space identified and applied instance evolution 
+
+## Future Work
+
+- Expand analysis scope
+  - Extend to larger problem sizes
+  - Include more weight distributions and network structures
+  - Apply ISA to other quantum algorithms (VQE, F-VQE)
+- Bridge theory-practice gap
+  - Test on real quantum hardware (e.g., IBM's 128-qubit machine [@Sachdeva2024])
+  - Create ML-based approaches leveraging experimental data
+
+# Thank You - Questions? {.center background-color="white"}
+
+- [Link to QAOA-GamBet](http://115.146.94.114:5000/redoc)
+- [Link to ISA's](http://localhost:8501/Instance_Space_Analysis)
+
+# References {.center}
+
+
+
