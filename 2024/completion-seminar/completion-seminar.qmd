@@ -410,9 +410,10 @@ Can we develop methods to automatically optimise QAOA parameters based on instan
 ::: {.column width="40%" .content-center}
 \small
 - Based on the *No Free Lunch Theorem* [@Wolpert1997]: Algorithms have strengths and weaknesses
-- Identify features that differentiate instances from each other and influence algorithm performance
-- Identifies which algorithms are best suited for which instances - instead of reporting "on-average" performance
+- Identify **features** that differentiate instances from each other and influence algorithm performance
+- Identifies which **algorithms** are best suited for which instances - instead of reporting "on-average" performance
 - ISA projects instances onto a 2D space to visualise the strengths and weaknesses of algorithms
+- Based on meta-data $\{ \mathcal{I}, \mathcal{F},\mathcal{A},\mathcal{Y} \}$
 :::
 
 ::: {.column width="60%"}
@@ -422,7 +423,7 @@ Can we develop methods to automatically optimise QAOA parameters based on instan
 ::::
 
 :::{.notes}
-For each instance, we need meta-data. This includes:
+For each instance, we need meta-data $\{ \mathcal{I}, \mathcal{F},\mathcal{A},\mathcal{Y} \}$. This includes:
 - Instances (what instances show diversity of features), 
 - Features (what features capture instance hardness)
 - Algorithms show diversity
@@ -834,6 +835,18 @@ Plotting 4,200 instances across $\mathbb{R}^2$.
 ![](images/informs-ijjoc-isa/feature_skewness_weight_distribution.png){width=19%}
 ![](images/informs-ijjoc-isa/feature_weighted_average_clustering_distribution.png){width=19%}
 
+## Instance Space III - Performance
+
+::: {.content-center}
+![](images/performance-all.png){width=80%}
+:::
+
+## Instance Space III - Performance
+
+
+::: {.content-center}
+![](images/performance-svm.png){width=80%}
+:::
 
 ## Instance Space III - Algorithms
 

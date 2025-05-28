@@ -1,5 +1,6 @@
 ---
-title: "<h1 style='color: white; text-align: right; position: absolute; top: 0; width: 100%'>Data Analytics and Visualisation</h1>"
+title: "<h1 style='color: black; text-align: right; position: absolute; top: 0; width: 100%'>Data Analytics and Visualisation</h1>"
+self-contained: true
 format: 
   revealjs:
       code-block-height: 650px
@@ -9,10 +10,6 @@ format:
       output-file: data-analytics-vis.html
       logo: "images/gdi-logo.png"
       footer: <https://www.gooddatainstitute.com>
-title-slide-attributes:
-  data-background-image: "images/data-bg.webp"
-  data-background-size: full
-  data-background-opacity: "1"
 ---
 
 # Slides {.center}

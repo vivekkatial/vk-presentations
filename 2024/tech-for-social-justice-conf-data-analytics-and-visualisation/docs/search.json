@@ -60,7 +60,7 @@
     "href": "slides/data-analytics-vis.html#what-is-data-analytics",
     "title": "",
     "section": "What is data analytics",
-    "text": "What is data analytics\n\nWho has heard of ETL?\n\n\n\n\nBecause im an engineer I like to frame this from the perspective of ETL\nETL stands for Extract, Transform, Load. It’s a process that involves extracting data from multiple sources, transforming it into a usable format, and loading it into a database or data warehouse. This process is essential for data analytics because it allows you to gather data from different sources, clean and enrich it, and store it in a way that is easy to access and analyze.\nWe’ll dive into each of these steps in more detail in the next few slides, but the key takeaway is that ETL is a critical part of the data analytics process and is essential for turning raw data into actionable insights."
+    "text": "What is data analytics\n\nWho has heard of ETL?\n\n\nExtractTransformLoad\n\nBecause im an engineer I like to frame this from the perspective of ETL\nETL stands for Extract, Transform, Load. It’s a process that involves extracting data from multiple sources, transforming it into a usable format, and loading it into a database or data warehouse. This process is essential for data analytics because it allows you to gather data from different sources, clean and enrich it, and store it in a way that is easy to access and analyze.\nWe’ll dive into each of these steps in more detail in the next few slides, but the key takeaway is that ETL is a critical part of the data analytics process and is essential for turning raw data into actionable insights."
   },
   {
     "objectID": "slides/data-analytics-vis.html#what-is-data-analytics-extraction",
@@ -249,7 +249,7 @@
     "href": "slides/data-analytics-vis.html#real-example-using-r-2",
     "title": "",
     "section": "Real Example (using R)",
-    "text": "Real Example (using R)\n\nd_projects %&gt;% \n  count(hq_country) \n\n\n\n# A tibble: 11 × 2\n   hq_country         n\n   &lt;chr&gt;          &lt;int&gt;\n 1 Australia         38\n 2 Colombia           2\n 3 India              1\n 4 Indonesia          1\n 5 New Zealand       20\n 6 Spain              2\n 7 Taiwan             1\n 8 Thailand           1\n 9 Uganda             2\n10 United Kingdom     2\n11 United States     10"
+    "text": "Real Example (using R)\n\nd_projects %&gt;% \n  count(hq_country) \n\n\n\n# A tibble: 11 × 2\n   hq_country         n\n   &lt;chr&gt;          &lt;int&gt;\n 1 Australia         39\n 2 Colombia           1\n 3 India              1\n 4 Indonesia          1\n 5 New Zealand       19\n 6 Spain              2\n 7 Taiwan             1\n 8 Thailand           1\n 9 Uganda             2\n10 United Kingdom     2\n11 United States     11"
   },
   {
     "objectID": "slides/data-analytics-vis.html#real-example-using-r-3",
