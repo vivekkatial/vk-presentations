@@ -1,0 +1,312 @@
+---
+title: "AI Impact Research Round-Up"
+subtitle: "Understanding the Landscape & Identifying Gaps for Our Pilot Study"
+author: "Vivek"
+format: 
+  revealjs:
+    theme: default
+    transition: slide
+    slide-number: true
+    chalkboard: true
+    code-block-height: 650px
+    fontsize: 1.8em
+    incremental: true
+    auto-animate: true
+    output-file: ai-impact.html
+    logo: "images/multitudes-logo.png"
+    footer: www.multitudes.com
+  pdf:
+    pdf-engine: weasyprint
+     geometry: margin=1in
+---
+
+## Executive Summary
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Key Research Findings**
+
+- **DORA 2024:** 25% AI adoption → +2.2% job satisfaction, but -7.2% delivery stability
+- **GitHub Copilot RCT:** 55.8% faster completion, but on trivial tasks only
+- **CISCO Study:** 26-35% efficiency gains, struggles with proprietary code
+- **Most studies are already obsolete** - conducted on weaker models
+:::
+
+::: {.column width="50%"}
+**Critical Gaps We Can Fill**
+
+- **Modern tool comparison** (Cursor, Windsurf vs just Copilot)
+- **Real-world tasks** vs synthetic problems
+- **Comprehensive org metrics** - individual, team, and delivery impact
+- **PR size analysis** (DORA's key concern about delivery performance)
+:::
+
+::::
+
+. . .
+
+### **Bottom Line:** Research lags reality. Models are much more capable than when most studies were conducted. Perfect timing for Multitudes to lead, but also TALK about this openly as something we're looking to address. {style="color: #00a5a5;"}
+
+
+---
+
+## Motivation for Multitudes
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Why This Matters**
+
+- 89% of organizations prioritizing AI integration
+- 76% of tech professionals using AI tools
+- $1T investment from big tech in next 5 years
+:::
+
+::: {.column width="50%"}
+**Our Opportunity**
+
+- Large volume of existing research, but gaps remain
+- Most studies focus on constrained tasks
+- Limited understanding of real-world organizational impact
+- **Perfect timing for Multitudes pilot study**
+:::
+
+::::
+
+::: {style="position: absolute; bottom: 20px; left: 20px; font-size: 0.7em; color: #666;"}
+*Source: DORA Generative AI Report 2025*
+:::
+---
+
+## The Research Landscape
+
+### Three Categories of AI Impact Studies
+
+1. **Controlled Experiments** (RCTs)
+   - High internal validity, low external validity
+   - Often focus on trivial, constrained tasks
+
+2. **Observational Studies** (Corporate deployments)
+   - Real-world context, harder to establish causality
+   - Better breadth of tasks and contexts
+
+3. **Large-Scale Surveys** (Industry reports)
+   - Broad coverage, self-reported metrics
+   - Good for trends, limited for mechanisms
+
+---
+
+## Research Reality Check: The Lag Problem
+
+. . .
+
+### Studies Are Already Obsolete
+
+- **GitHub Copilot study (2022):** Based on Codex, pre-GPT-4, Cursor, Windsurf
+- **CISCO study (2023):** 20x smaller context windows than today
+- **Usability study (2022):** Participants struggled with code that modern tools handle easily
+
+### **What This Means**
+- Current productivity gains likely **much higher** than reported by research
+- User experience and LLM performance dramatically improved with modern interfaces
+- Google ERP research highlights that more AI usage links to better performance
+- **Opportunity** for Multitudes to study current-gen AI
+
+::: {style="position: absolute; bottom: 20px; left: 20px; font-size: 0.7em; color: #666;"}
+*Source: ML-Enhanced Code Completion Improves Developer Productivity (2022)*
+:::
+---
+
+## Study #1: DORA Generative AI Report (2025)
+*Impact of Generative AI in Software Development (data collected in mid-2024)*
+
+### The Most Comprehensive Study to Date
+
+**For a 25% increase in AI adoption:**
+
+| Metric | Individual Impact | Organizational Impact |
+|--------|------------------|---------------------|
+| Job Satisfaction | **+2.2%** | |
+| Flow State | **+2.6%** | |
+| Productivity | **+2.1%** | |
+| Code Quality | | **+3.4%** |
+| Documentation | | **+7.5%** |
+| **Delivery Throughput** | | **-1.5%** ⚠️ |
+| **Delivery Stability** | | **-7.2%** ⚠️ |
+
+---
+
+## DORA: The Delivery Performance Problem
+
+### DORA's Hypothesis
+> "AI allows respondents to produce much greater amount of code... changelists (CLs) are growing in size. DORA has consistently shown that larger changes are slower and more prone to creating instability."
+
+### **Critical Insight for Multitudes:** 
+- Individual productivity ↑, but delivery performance ↓
+- **PR size likely the culprit** - we MUST measure this
+- Need to distinguish "busy work" from "valuable work"
+
+---
+
+## DORA: Trust & Adoption Insights
+
+### Trust Drives Productivity
+- Only **39% trust AI output quality**
+- **Key finding:** High-trust developers are measurably more productive
+- Trust correlates with acceptance rate and reduced information seeking
+
+### AI Impact on Work Value
+- **Positive:** Utilitarian and reputational value through speed
+- **Negative:** -2.6% time on "valuable work" (but +2.1% productivity?)
+- **Challenge:** Developers report less time on meaningful tasks despite feeling more productive
+
+---
+
+## Study #2: GitHub Copilot RCT (2022)
+
+*The Impact of AI on Developer Productivity (most cited paper on AI Impact)*
+
+1. Ran an RCT on spinning up a JS server.
+1. Participants were instructed to write an HTTP server in JavaScript
+1. The treatment group, with access to the AI pair programmer, completed the task 55.8% faster than the control group
+1. Metrics for success:
+	- Task success and Task Completion Time
+1. Geographically and age-constrained demographic
+1. People who used CoPilot were willing to pay signficantly higher for the product ($)
+
+
+::: {style="position: absolute; bottom: 20px; left: 20px; font-size: 0.7em; color: #666;"}
+*Source: The Impact of AI on Developer Productivity: Evidence from GitHub Copilot (2023)*
+:::
+
+
+## Study #2: GitHub Copilot RCT (2022)
+
+*The Impact of AI on Developer Productivity (most cited paper on AI Impact)*
+
+1. Task was very constrained to a trivial thing, which we know AI is good at.
+1. Found people through UpWork (seems non-legit) not a huge N (~95),  Paper was also from 2022.
+1. Success measures for comparison and randomized nature of tasks are pretty good! 
+1. Unsure on the robustness of the modelling approaches taken though.
+	- MSFT + MIT --> would expect better? The paper has 500+ citiations.
+1. Interesting regression approach that apparently is designed to be more robust for heterogeneous causal effects.
+
+
+::: {style="position: absolute; bottom: 20px; left: 20px; font-size: 0.7em; color: #666;"}
+*Source: The Impact of AI on Developer Productivity: Evidence from GitHub Copilot (2023)*
+:::
+
+---
+
+## Study #3: CISCO Real-World Study (2023)
+*Transforming Software Development: Evaluating Efficiency and Challenges*
+
+### **Key Findings** 
+- Studied 26 developers across wide range of tasks (Docs, testing, refactoring, prototyping)
+- **26-35% efficiency gains** could be realized using GitHub Copilot
+- **Best performance:** CI/CD tasks (50%+ time savings)
+- **Language performance:** JavaScript (50%) > Java (45%) > Go/Python (37-33%) > C/C++ (poor)
+
+### **Insights**
+- **Least acceptance:** Code that didn't follow existing public/private patterns
+- **Struggles with proprietary codebases** - especially large, complex contexts
+- **Unit testing issues:** Failed when objects needed to be mocked for tests
+- **C/C++ failures:** No null checking, very basic explanations for high-performance code
+
+## Study #3: CISCO Real-World Study (2023)
+*Transforming Software Development: Evaluating Efficiency and Challenges*
+
+### **Methodology Issues**
+
+- **Small sample size** - underlying work distribution can induce noise
+- **Study Design Robustness**: The study design established a baseline for coding efficiency by comparing it to work on similar tasks but without Copilot.
+- **Still doesn't relate to wider organizational goals**
+
+### My thoughts on this paper
+
+- Certainly a better analysis in terms of where they explore the impact AI
+- A great breadth of tasks and taxonomy for how they think about this
+- They still don't talk much about how this relates to wider organisation goals
+- Unit of comparison seems quite shakey and the authors don't address how underlying distribution in work can induce noise -- especially at a small sample size
+
+## Study #4: ANZ Bank A/B Test (2024)
+*The Impact of AI Tool on Engineering at ANZ Bank An Empirical Study on GitHub Copilot within Corporate Environment (2024)*
+
+### **Experimental Design**
+- **Proper A/B test** with clear null/alternative hypotheses
+- **Null:** No significant difference in productivity or code quality
+- **Alternative:** Statistically significant difference exists
+- **Productivity defined as "time spent"**
+
+### **Results**
+- **42.36% productivity improvement** on average
+- **Code quality:** Not statistically significant overall, but **junior developers benefited most**
+- **Bug reduction:** Descriptive stats show fewer bugs in Copilot-assisted code but not signficant
+
+::: {style="position: absolute; bottom: 20px; left: 20px; font-size: 0.7em; color: #666;"}
+*Source: The Impact of AI Tool on Engineering at ANZ Bank An Empirical Study on GitHub Copilot within Corporate Environment (2024)*
+:::
+
+## Study #4: ANZ Bank A/B Test (2024)
+*The Impact of AI Tool on Engineering at ANZ Bank An Empirical Study on GitHub Copilot within Corporate Environment (2024)*
+
+### **The "Studied Environment" Problem**
+- Overall a strong paper that had a really robust methodology. They spoke about the limitations of their sample size explicitly and commented where results were more anecodotal rather than statistically significant
+- **Tension:** Can run controlled trials BUT not representative of actual IRL development
+- Mentioned a key study: Dakhel et al. concluded that the utility of GitHub Copilot varies depending on the user's expertise.
+
+::: {style="position: absolute; bottom: 20px; left: 20px; font-size: 0.7em; color: #666;"}
+*Source: GitHub Copilot AI pair programmer: Asset or Liability? (2023)*
+:::
+
+---
+
+## Our Pilot Study: Closing the Research Gap
+
+### What We Can Uniquely Address
+
+**Modern AI Reality:**
+
+- **Current-gen tools:** Current version of CoPilot, Cursor, Windsurf, Claude 3.5, GPT-4o
+- **Real tasks:** Actual enterprise development, not synthetic problems
+- **Comprehensive scope:** Individual + team + organizational metrics
+
+**Critical Measurements:**
+
+- **DORA Performance Metrics:** Correlating AI tools with performance measures
+- **PR size analysis** (solving DORA's delivery performance puzzle)
+- **Modern tool comparison** (beyond just Copilot)
+- **Usage/Trust vs productivity correlation** with current capabilities
+- **Real-world task complexity** impact
+
+---
+
+## Research gaps we could also answer
+
+### The DORA Paradox
+- Why do individuals feel more productive while delivery performance degrades?
+- **Is PR size the culprit?** (We'll be first to measure this properly)
+- How does AI change the value equation, namely the quality vs quantity balance?
+
+### Modern Tool Landscape
+- Which tools work best for which tasks and languages?
+- How does context window size affect real-world utility?
+- What makes "AI power users" different from average users?
+
+### Organizational Impact
+- How does AI adoption cascade through team dynamics?
+- What training and change management actually works?
+- **Real ROI** including training, maintenance, and quality costs
+
+---
+
+## Conclusions
+1. **Studies are obsolete** before they're published
+2. **Synthetic tasks** don't reflect enterprise reality  
+3. **Comprehensive metrics missing** (PR size, modern tools, org impact)
+4. **No one has current-gen data** on enterprise adoption
+
+---
+
+# Q&A

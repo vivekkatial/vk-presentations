@@ -1,0 +1,373 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": ".",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#about-me",
+    "href": "slides/data-analytics-vis.html#about-me",
+    "title": "",
+    "section": "About Me",
+    "text": "About Me\n\nVivek Katial (vivek@gooddatainstitute.com)\n\nCo-founder and Executive Director @ Good Data Institute\nData & Founding Team @ Multitudes\nPhD Candidate @ Unimelb (Optimisation on Quantum Computers)\nVisiting PhD Researcher @ NASA Jet Propulsion lab"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#about-me-1",
+    "href": "slides/data-analytics-vis.html#about-me-1",
+    "title": "",
+    "section": "About Me",
+    "text": "About Me\n\n\n\nI love traveling with my partner and trying new types of food\n\n\n\n\nDoing angels landing"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#who-is-the-good-data-institute",
+    "href": "slides/data-analytics-vis.html#who-is-the-good-data-institute",
+    "title": "",
+    "section": "Who is the Good Data Institute?",
+    "text": "Who is the Good Data Institute?\n\nWe are nonprofit that empowers other nonprofits and social enterprises to leverage data for social impact.\nWe build data capabilities through our volunteer community by working on data projects for the social sector\nWe are a global community of 150+ data nerds"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#who-is-the-good-data-institute-1",
+    "href": "slides/data-analytics-vis.html#who-is-the-good-data-institute-1",
+    "title": "",
+    "section": "Who is the Good Data Institute?",
+    "text": "Who is the Good Data Institute?"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#our-impact",
+    "href": "slides/data-analytics-vis.html#our-impact",
+    "title": "",
+    "section": "Our Impact",
+    "text": "Our Impact\n\n\n\n75+ Data Projects\n50+ Nonprofit Partners\n\n\n\n150+ Data Nerds\n10+ Countries\n2500+ Volunteer Hours"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#todays-agenda",
+    "href": "slides/data-analytics-vis.html#todays-agenda",
+    "title": "",
+    "section": "Today’s Agenda",
+    "text": "Today’s Agenda\n\nImportance of Data Analytics and Visualisation\nKey Tools for Nonprofits\nData Ethics and Algorithmic Bias\nCase studies\nBest Practices in Data Modeling and Visualisation\nQ&A"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#what-is-data-analytics",
+    "href": "slides/data-analytics-vis.html#what-is-data-analytics",
+    "title": "",
+    "section": "What is data analytics",
+    "text": "What is data analytics\n\nWho has heard of ETL?\n\n\n\n\nBecause im an engineer I like to frame this from the perspective of ETL\nETL stands for Extract, Transform, Load. It’s a process that involves extracting data from multiple sources, transforming it into a usable format, and loading it into a database or data warehouse. This process is essential for data analytics because it allows you to gather data from different sources, clean and enrich it, and store it in a way that is easy to access and analyze.\nWe’ll dive into each of these steps in more detail in the next few slides, but the key takeaway is that ETL is a critical part of the data analytics process and is essential for turning raw data into actionable insights."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#what-is-data-analytics-extraction",
+    "href": "slides/data-analytics-vis.html#what-is-data-analytics-extraction",
+    "title": "",
+    "section": "What is data analytics (Extraction)?",
+    "text": "What is data analytics (Extraction)?\n\nExtraction → Data Collection\n\n\n\nGathering data from multiple sources\n\nApplication / website data\nAPIs\nLive datafeeds (e.g. forms, real time data from sensors)\nSpreadsheet or CSV files\n\nNeeds to be robust, reliable and scalable\n\n\nThe data from these sources is often unstructured and needs to be cleaned and transformed before it can be used for analysis\nExamples of an app and website data could be data from Google Analytics, Facebook Insights, or other analytics tools. This data can be used to understand how people are interacting with your website or app, what content they’re engaging with, and other key metrics that can help you improve your digital presence.\nor if you’re on the more simple end it could be basic data from a google sheet or a CSV file thats connected to google forms."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#what-is-data-analytics-transform",
+    "href": "slides/data-analytics-vis.html#what-is-data-analytics-transform",
+    "title": "",
+    "section": "What is data analytics (Transform)?",
+    "text": "What is data analytics (Transform)?\n\nTransformation → Data Cleaning + Enrichment and Aggregation\n\n\n\nCleaning – Removing missing values, duplicates, and outliers, checking for data consistency\nEnrichment – Adding contextual information to the data; e.g. geocoding, demographic data, other datasets from ABS\nAggregation – Creating summaries of the data that can be used for analysis or shared with stakeholders\n\n\nCleaning – this involves removing missing values, duplicates, and outliers, checking for data consistency, and ensuring that the data is in the right format for analysis. Try and keep it all automated as much as possible. Use tools that people know how to use and can be easily maintained.\nExamples for cleaning can include basic scripts in python or R, or using tools like Tableau.\nEnrichment – this involves adding contextual information to the data. This could be geocoding, demographic data, or other information that can help you better understand the data. This can be done using APIs or other data sources.\nAn example here is Caring Kids in Australia, they provide toy boxes to kids who support their family members facing chronic illnesses or disabilities. They have a database of all the kids they’ve helped and they had addresses for all of them. Using the Google Maps API, they were able to geocode the addresses and create a map of where all the kids are located; they could use this infomration to first calculate travelled by their toy boxes across Australia and they were also able to localise where their efforts were better spent\nAggregation – this involves creating summaries of the data that can be used for analysis or shared with stakeholders. This could be a summary of the number of people served, the amount of money raised, or other key metrics that are important to your organization. This can be done using tools like Tableau or Power BI.\nAn example of this would be a nonprofit that provides food to people experiencing homelessness. They could create a summary of the number of meals served, the number of people served, and other key metrics that are important to their organization. This summary could be shared with stakeholders to show the impact of their work. We did this with Lentils As Anything (who have no clsoed down)"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#what-is-data-analytics-load",
+    "href": "slides/data-analytics-vis.html#what-is-data-analytics-load",
+    "title": "",
+    "section": "What is data analytics (Load)?",
+    "text": "What is data analytics (Load)?\n\nLoading → Data Storage, Governance and Security\n\n\n\nStorage – Storing data in a secure and accessible way\nGovernance – Ensuring data is used ethically and responsibly\nSecurity – Protecting data from unauthorized access or misuse\n\n\nStorage – this involves storing data in a secure and accessible way. This could be in a data warehouse, a cloud storage solution, or another type of database. It’s important to ensure that the data is stored in a way that is easy to access and use for analysis. If you’re small think about using simple and scalable tools; we use Airtable for our data storage and it works well for us (in the scale of few hundred projects and few hundred volunteers).\nGovernance – this involves ensuring that data is used ethically and responsibly. This could include creating data policies, training staff on data ethics, and ensuring that data is used in a way that respects privacy and confidentiality. This is especially important for nonprofits that work with sensitive data or vulnerable populations.\nSecurity – this involves protecting data from unauthorized access or misuse. This could include using encryption, access controls, and other security measures to ensure that data is kept safe. It’s important to take data security seriously and to ensure that data is protected from cyber threats and other risks. This is especially important for nonprofits that work with sensitive data or vulnerable populations."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#data-visualisation-1",
+    "href": "slides/data-analytics-vis.html#data-visualisation-1",
+    "title": "",
+    "section": "Data Visualisation",
+    "text": "Data Visualisation\n\nData Visualisation → Communicating insights truthfully and with beauty\nTruthfully – Representing data accurately and without bias; avoiding misleading visualisations\nBeauty – Making data engaging, emphasize key points, and tell a story. Provide context and make it easy to understand\n\n\nTruthfully – this involves representing data accurately and without bias. This means avoiding misleading visualisations, using appropriate scales and labels, and ensuring that the data is presented in a way that is clear and easy to understand. It’s important to be honest and transparent in how you present data and to avoid misrepresenting the facts.\nBeauty – this involves making data engaging, emphasizing key points, and telling a story. This could include using color, size, and other visual elements to draw attention to important data points, creating interactive visualisations that allow users to explore the data, and using storytelling techniques to make the data more compelling. It’s important to make data interesting and engaging so that people are more likely to pay attention and remember the key points.\nNeed to balance between aesthetic and functionality. The goal is to make the data engaging and easy to understand"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#section",
+    "href": "slides/data-analytics-vis.html#section",
+    "title": "",
+    "section": "",
+    "text": "Frameworks like the one above can help you evaluate your data visualisations and ensure that they are effective and engaging.\n\nInformation (accuracy and honesty)\nStory (engagement and context)\nGoal (focus and function)\nVisual form (beauty and clarity)\n\nBy considering these factors, you can create data visualisations that are informative, engaging, and easy to understand, making it more likely that people will pay attention and remember the key points."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#example---climate-conflict",
+    "href": "slides/data-analytics-vis.html#example---climate-conflict",
+    "title": "",
+    "section": "Example - Climate & Conflict",
+    "text": "Example - Climate & Conflict\n\n\nThis is an example of a data visualisation that shows the relationship between climate change and conflict. The visualisation uses color, size, and position to show the impact of climate change on conflict around the world. The data is presented in a way that is engaging and easy to understand, making it more likely that people will pay attention and remember the key points."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#example---climate-conflict-1",
+    "href": "slides/data-analytics-vis.html#example---climate-conflict-1",
+    "title": "",
+    "section": "Example - Climate & Conflict",
+    "text": "Example - Climate & Conflict\n\n::: {.notes}cli This is an example of a data visualisation that shows the impact of climate change on conflict around the world. The visualisation uses color, size, and position to show the relationship between climate change and conflict. The data is presented in a way that is engaging and easy to understand, making it more likely that people will pay attention and remember the key points. :::"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#example---climate-conflict-2",
+    "href": "slides/data-analytics-vis.html#example---climate-conflict-2",
+    "title": "",
+    "section": "Example - Climate & Conflict",
+    "text": "Example - Climate & Conflict"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#what-tools-do-you-use",
+    "href": "slides/data-analytics-vis.html#what-tools-do-you-use",
+    "title": "",
+    "section": "What tools do you use?",
+    "text": "What tools do you use?\n\nPoll: What tools do you use for data analytics and visualisation?\n\nMicrosoft Excel\nGoogle Sheets\nR and Python\nLooker Studio\nTableau\nPower BI\nCustom Dashboards"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#tools-and-technologies",
+    "href": "slides/data-analytics-vis.html#tools-and-technologies",
+    "title": "",
+    "section": "Tools and Technologies",
+    "text": "Tools and Technologies\n\nBasic Tools (Google Sheets, Microsoft Excel)\nLooker Studio\nTableau Nonprofit Program\nMicrosoft Power BI\nFree and Open Source Tools (R, Python libraries)\nCustom Dashboards and Reports from Salesforce, etc.\n\n\nGood old Google Sheets and Microsoft Excel are still widely used by nonprofits for data analytics and visualisation. They are easy to use and widely available, making them a good choice for organizations with limited resources or technical expertise.\nLooker Studio is a cloud-based data analytics and visualisation tool that is easy to use and offers a range of pre-built dashboards and reports. It is a good choice for organizations that need a simple and affordable solution for data analytics and visualisation.\nTableau and MSFT PowerBI are more powerful but also expensive\nFree and open source tools like R and Python libraries are highly customizable and offer a wide range of features for data analytics and visualisation. They require coding skills and technical expertise, but they are a good choice for organizations that need a more advanced solution or those who have the technical capacity to use them."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#how-to-choose-the-right-tool",
+    "href": "slides/data-analytics-vis.html#how-to-choose-the-right-tool",
+    "title": "",
+    "section": "How to Choose the Right Tool",
+    "text": "How to Choose the Right Tool\n\nWhere is your data stored already?\nWhat are your data visualisation needs?\nWhat is your budget and technical capacity?\n\n\nWhen choosing a data analytics and visualisation tool, it’s important to consider where your data is stored, what your data visualisation needs are, and what your budget and technical capacity are. If you already have data stored in a particular platform, it may make sense to use a tool that integrates with that platform.\nIf you have specific data visualisation needs, such as interactive dashboards or custom reports, you’ll want to choose a tool that can meet those needs.\nAnd if you have a limited budget or technical capacity, you’ll want to choose a tool that is easy to use and affordable."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#pros-and-cons-of-different-tools",
+    "href": "slides/data-analytics-vis.html#pros-and-cons-of-different-tools",
+    "title": "",
+    "section": "Pros and Cons of Different Tools",
+    "text": "Pros and Cons of Different Tools\n\nMicrosoft Excel and Google Sheets: Easy to use and widely available, but limited features and not scalable or reliable/reproducible\nR and Python: Highly customizable, but require coding skills and technical expertise\nLooker Studio: Easy to use, but limited customization\nTableau and Power BI: Powerful features, but can be expensive\nCustom Dashboards via ERPs: Tailored to your needs, but require development resources\n\n\nExcel and Google Sheets: THese are easy to use and widely available, but they have limited features and are not scalable or reliable. They are good for basic data analytics and visualisation, but they may not be suitable for more advanced needs.\nR and Python: These are highly customizable and offer a wide range of features, but they require coding skills and technical expertise. They are a good choice for organizations that need a more advanced solution or those who have the technical capacity to use them.\nLooker Studio: This is easy to use and offers a range of pre-built dashboards and reports, but it has limited customization options. It is a good choice for organizations that need a simple and affordable solution for data analytics and visualisation.\nTableau and Power BI: These tools offer powerful features and a wide range of customization options, but they can be expensive. They are a good choice for organizations that need a more advanced solution and have the budget to support it.\nCustom Dashboards via ERPs: These are tailored to your needs and offer a wide range of features, but they require development resources and technical expertise. They are a good choice for organizations that need a highly customized solution and have the resources to support it."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#what-is-data-ethics-and-algorithmic-bias",
+    "href": "slides/data-analytics-vis.html#what-is-data-ethics-and-algorithmic-bias",
+    "title": "",
+    "section": "What is Data Ethics and Algorithmic Bias?",
+    "text": "What is Data Ethics and Algorithmic Bias?\n\nData ethics refers to the moral and ethical implications of data collection, analysis, and use.\nAlgorithmic bias refers to the ability of algorithms to systematically and repeatedly produce outcomes that benefit one particular group over another\nAlready many examples in society where algorithms have harmed marginalised groups"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#trivial-example",
+    "href": "slides/data-analytics-vis.html#trivial-example",
+    "title": "",
+    "section": "Trivial Example",
+    "text": "Trivial Example\n\n\nPredictions on the image of the Western bride included labels such as “bride”, “wedding”, “ceremony”\nFor the woman wearing a traditional Indian wedding dress, the predicted labels were “costume”, “performing arts”, “event"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#more-harmful-example",
+    "href": "slides/data-analytics-vis.html#more-harmful-example",
+    "title": "",
+    "section": "More Harmful Example",
+    "text": "More Harmful Example\n\nEvaluation of a model that uses facial recognition deployed by large technology companies 1\n\nAmini. A, et al. (2019). Uncovering and Mitigating Algorithmic Bias through Learned Latent Structure."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#more-harmful-example-1",
+    "href": "slides/data-analytics-vis.html#more-harmful-example-1",
+    "title": "",
+    "section": "More Harmful Example",
+    "text": "More Harmful Example\n\n\n\\[\nP(\\text{Dark}) \\lt P(\\text{Light})\n\\]"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#more-harmful-example-2",
+    "href": "slides/data-analytics-vis.html#more-harmful-example-2",
+    "title": "",
+    "section": "More Harmful Example",
+    "text": "More Harmful Example\n\n\\[\nP(\\text{Dark} \\cap \\text{Male}) \\lt P(\\text{Dark} \\cap \\text{Female}) \\lt \\\\\nP(\\text{Light} \\cap \\text{Female}) \\lt P(\\text{Light} \\cap \\text{Male})\n\\]\n\n\nProgram A is delivered in other suburbs vs Program B is delivered in other suburbs\nThe importance of asking question of your data, the questions you need to ask your data"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#more-harmful-example-3",
+    "href": "slides/data-analytics-vis.html#more-harmful-example-3",
+    "title": "",
+    "section": "More Harmful Example",
+    "text": "More Harmful Example\n\nWhat happens when you try and use a de-biasing parameter \\(\\alpha\\) to reduce that bias."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#how-to-get-started-on-data-ethics",
+    "href": "slides/data-analytics-vis.html#how-to-get-started-on-data-ethics",
+    "title": "",
+    "section": "How to get started on data ethics!",
+    "text": "How to get started on data ethics!\n\nCreate some data principles\nThis is a well-studied field. Get buy-in from leadership using existing research\nConduct a bad actor exercise\nMake data labelling fun and diverse\nRecognize that humans are the ones who create algorithms, so we also recognize the importance of the broader culture and environment we create and operate in.\nCommit to learning more!\n\nWeapons of Maths Destruction by Cathy O’Neil\nData Feminism by Catherine D’Ignazio and Lauren F. Klein"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#caring-kids-australia-1",
+    "href": "slides/data-analytics-vis.html#caring-kids-australia-1",
+    "title": "",
+    "section": "Caring Kids Australia",
+    "text": "Caring Kids Australia\n\nMission: To provide toy boxes to kids who support their family members facing chronic illnesses or disabilities\nData Challenge: They had a database of all the kids they’ve helped and they had addresses for all of them. They wanted to know where all the kids were located and how they could better serve them."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#caring-kids-australia-2",
+    "href": "slides/data-analytics-vis.html#caring-kids-australia-2",
+    "title": "",
+    "section": "Caring Kids Australia",
+    "text": "Caring Kids Australia"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#caring-kids-australia-3",
+    "href": "slides/data-analytics-vis.html#caring-kids-australia-3",
+    "title": "",
+    "section": "Caring Kids Australia",
+    "text": "Caring Kids Australia"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#where-are-all-the-projects-located-1",
+    "href": "slides/data-analytics-vis.html#where-are-all-the-projects-located-1",
+    "title": "",
+    "section": "Where are all the projects located?",
+    "text": "Where are all the projects located?\n\nWrite a basic SQL query to download all project data and write to csv\n\n\nSELECT \n  project_name,\n  charity_name,\n  hq_country, \n  hq_city, \n  gdi_branch\n  \nFROM gdi_db.projects"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#where-are-all-the-projects-located-2",
+    "href": "slides/data-analytics-vis.html#where-are-all-the-projects-located-2",
+    "title": "",
+    "section": "Where are all the projects located?",
+    "text": "Where are all the projects located?"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#real-example-using-r",
+    "href": "slides/data-analytics-vis.html#real-example-using-r",
+    "title": "",
+    "section": "Real Example (using R)",
+    "text": "Real Example (using R)\n\nlibrary(tidyverse)\nd_projects &lt;- read_csv(\"data/projects.csv\")\n\n\n\n\n\nGreat! Now lets look at one row of the data"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#real-example-using-r-1",
+    "href": "slides/data-analytics-vis.html#real-example-using-r-1",
+    "title": "",
+    "section": "Real Example (using R)",
+    "text": "Real Example (using R)\n\nd_projects %&gt;% \n  slice(29) %&gt;% \n  glimpse()\n\n\n\nRows: 1\nColumns: 6\n$ project_id   &lt;int&gt; 29\n$ project_name &lt;chr&gt; \"Biden-Harris Transition DEI\"\n$ charity_name &lt;chr&gt; \"Inclusive America\"\n$ hq_country   &lt;chr&gt; \"United States\"\n$ hq_city      &lt;chr&gt; \"Washington DC\"\n$ gdi_branch   &lt;chr&gt; \"Melbourne\""
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#real-example-using-r-2",
+    "href": "slides/data-analytics-vis.html#real-example-using-r-2",
+    "title": "",
+    "section": "Real Example (using R)",
+    "text": "Real Example (using R)\n\nd_projects %&gt;% \n  count(hq_country) \n\n\n\n# A tibble: 9 × 2\n  hq_country         n\n  &lt;chr&gt;          &lt;int&gt;\n1 Australia         38\n2 India              1\n3 New Zealand       23\n4 Spain              2\n5 Taiwan             1\n6 Thailand           1\n7 Uganda             2\n8 United Kingdom     2\n9 United States     10"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#real-example-using-r-3",
+    "href": "slides/data-analytics-vis.html#real-example-using-r-3",
+    "title": "",
+    "section": "Real Example (using R)",
+    "text": "Real Example (using R)\n\n\n\n\n\nWhat do you think of this visualisation?\n\n\nPie charts are best used when there are 2-3 items that make up a whole. Any more than that, and it’s difficult for the human eye to distinguish between the parts of a circle.\nNotice how it’s hard to distinguish the size of these parts.\nIt’s hard for our eyes to tell the difference. Lets replace this with a bar chart"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#real-example-using-r-4",
+    "href": "slides/data-analytics-vis.html#real-example-using-r-4",
+    "title": "",
+    "section": "Real Example (using R)",
+    "text": "Real Example (using R)\n\n\nIt might look pretty, and you might be wondering “what’s wrong with it?”\nThe more colors you use, the less comprehensible the visualisation will be. More colors = more categories the brain must process."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#proper-data-visualisation",
+    "href": "slides/data-analytics-vis.html#proper-data-visualisation",
+    "title": "",
+    "section": "Proper Data Visualisation",
+    "text": "Proper Data Visualisation\nd_projects %&gt;% \n  count(hq_country) %&gt;% \n  ggplot(aes(x = reorder(hq_country,-n), y = n)) + \n  geom_bar(stat=\"identity\") +\n  theme_minimal() +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +\n  labs(\n    x = \"Country\",\n    y = \"Number of Projects\",\n  )"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#proper-data-visualisation-1",
+    "href": "slides/data-analytics-vis.html#proper-data-visualisation-1",
+    "title": "",
+    "section": "Proper Data Visualisation",
+    "text": "Proper Data Visualisation\nd_projects %&gt;% \n  count(hq_country) %&gt;% \n  ggplot(aes(x = reorder(hq_country,-n), y = n)) + \n  geom_bar(stat=\"identity\") +\n  theme_minimal() +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +\n  labs(\n    x = \"Country\",\n    y = \"Number of Projects\",\n  )"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#proper-data-visualisation-2",
+    "href": "slides/data-analytics-vis.html#proper-data-visualisation-2",
+    "title": "",
+    "section": "Proper Data Visualisation",
+    "text": "Proper Data Visualisation\n\n\nIn this case we’ve made a few edits\n\nWe’ve removed the fill color. This makes the chart easier to read and understand.\nWe’ve reordered the countries by the number of projects. This makes it easier to see which countries have the most projects.\nWe’ve added labels to the x and y axes. This makes it clear what the chart is showing and how to interpret it.\n\nThese changes make the chart easier to read and understand, and help to communicate the data more effectively."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#comparison",
+    "href": "slides/data-analytics-vis.html#comparison",
+    "title": "",
+    "section": "Comparison",
+    "text": "Comparison\n\n\n\n\nPie Chart 🥧 \n\nHard to distinguish between the parts of a circle\nSo many colors, hard to process\nNot the best choice for this data\n\n\n\n\n\nBar Chart 📊\n\nEasier to read and understand\nReordered by number of projects\nClear labels\n\n\n\n\n\nQuestion: Whats missing for both?\n\nNow looking at the two visualisations side by side, it’s clear that the bar chart is a much better choice for this data. It’s easier to read and understand, and it communicates the data more effectively.\nBut there are still some things missing. What do you think is missing from both visualisations?\nWhat would happen if we had 40 countries here? Bar chart would be hard to read; Pie chart would be even harder to read.\nSo this is where using analytics to encode data into visual elements can help. In this case; we could geocode the data and plot it on a map."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#more-advanced-visualisation",
+    "href": "slides/data-analytics-vis.html#more-advanced-visualisation",
+    "title": "",
+    "section": "More advanced visualisation",
+    "text": "More advanced visualisation\n\n\nWhat might this visualisation struggle to communicate?\n\nIn this example we’re able to see the number of projects by headquarters country on a world map."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#low-income-countries-produce-less-than",
+    "href": "slides/data-analytics-vis.html#low-income-countries-produce-less-than",
+    "title": "",
+    "section": "Low income countries produce less than",
+    "text": "Low income countries produce less than\n &lt;5% \n\nof the world’s scientific research"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#scientific-method",
+    "href": "slides/data-analytics-vis.html#scientific-method",
+    "title": "",
+    "section": "Scientific Method",
+    "text": "Scientific Method\n\n\n Design \n\n Test \n\n Evaluate"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#ai-can-help-and-accelerate-research",
+    "href": "slides/data-analytics-vis.html#ai-can-help-and-accelerate-research",
+    "title": "",
+    "section": "AI can help and accelerate research",
+    "text": "AI can help and accelerate research\n\nAI can help to accelerate research and development in low income countries\nAccelerate novel drug discovery in low-income countries by providing scientists in these areas with cutting-edge AI models\nThey presently have 100+ models, each tailored for a unique aspect of drug discovery."
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#problem",
+    "href": "slides/data-analytics-vis.html#problem",
+    "title": "",
+    "section": "Problem",
+    "text": "Problem\n\nLimited compute capacity available to researchers in the Global South\nWe want to build a database of pre-calculated ML predictions for commonly used molecules (reference library of 2M)\nWe should be able to return these predictions over the internet within seconds (not minutes)"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#solution",
+    "href": "slides/data-analytics-vis.html#solution",
+    "title": "",
+    "section": "Solution",
+    "text": "Solution"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#solution-1",
+    "href": "slides/data-analytics-vis.html#solution-1",
+    "title": "",
+    "section": "Solution",
+    "text": "Solution"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#lessons-learned",
+    "href": "slides/data-analytics-vis.html#lessons-learned",
+    "title": "",
+    "section": "Lessons Learned",
+    "text": "Lessons Learned\n\nOutcome: We can now return predictions in under 1 second\nTechnical domains take time to understand\nUsing an evolving architecture diagram can facilitate engineering work\ninfrastructure_as_code.(Terraform) == Good"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#best-practices-in-data-analytics-and-visualisation",
+    "href": "slides/data-analytics-vis.html#best-practices-in-data-analytics-and-visualisation",
+    "title": "",
+    "section": "Best Practices in Data Analytics and Visualisation",
+    "text": "Best Practices in Data Analytics and Visualisation\n\nStart with a clear goal\nUnderstand your data\nChoose the right tool(s)\n\nIf you can write SQL or use Excel, you can write R or Python\nUse scripts to automate repetitive tasks and invest in version control (e.g Github)\n\nUse the right visualisation for your data\n\nAvoid pie charts\nUse color and size to draw attention to key points\nMake it easy to understand\nEnhance with exogenous datasets (e.g. geocoding, census data)\n\nNever forget Data Ethics and Algorithmic Bias"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#follow-us",
+    "href": "slides/data-analytics-vis.html#follow-us",
+    "title": "",
+    "section": "Follow us",
+    "text": "Follow us\n\nGood Data Institute\nLinkedIn"
+  },
+  {
+    "objectID": "slides/data-analytics-vis.html#map-code",
+    "href": "slides/data-analytics-vis.html#map-code",
+    "title": "",
+    "section": "Map code",
+    "text": "Map code\nlibrary(maps)\n\n# Map data preparation with country name adjustments\nd_projects &lt;- d_projects %&gt;%\n  mutate(hq_country = case_when(\n    hq_country == \"United States\" ~ \"USA\",\n    hq_country == \"United Kingdom\" ~ \"UK\",\n    TRUE ~ hq_country\n  ))\n\n\n# Load world map data\nworld_map &lt;- map_data(\"world\")\n\n# Join your project data and prepare the map data\nmap_data &lt;- world_map %&gt;%\n  left_join(d_projects %&gt;% \n              count(hq_country, name = \"n_projects\"), by = c(\"region\" = \"hq_country\")) %&gt;%\n  replace_na(list(n_projects = NA))\n\n# Plotting the map\nggplot(map_data, aes(x = long, y = lat, group = group, fill = n_projects)) +\n  geom_polygon(color = \"#1C1C1C\", size = 0.15) +  # Adjust border color for better visibility on dark background\n  scale_fill_gradient(low = \"lightblue\", high = \"darkblue\", name = \"Number of Projects\", na.value = \"#313131\") +\n  labs(title = \"Number of Projects by Headquarters Country\", x = \"\", y = \"\") +\n  theme_void() + \n  theme(\n    text = element_text(color = \"white\"),  # Changes text color to white\n    plot.background = element_rect(fill = \"black\", color = NA),  # Dark plot background\n    panel.background = element_rect(fill = \"black\", color = NA),  # Dark panel background\n    panel.grid.major = element_blank(),  # Adjust grid color and size\n    panel.grid.minor = element_blank(),  # No minor grid\n    plot.title = element_text(color = \"white\", hjust = 0.5),  # Title in white and centered\n    axis.text = element_blank(),  # Remove axis text\n    axis.ticks = element_blank(),  # Remove axis ticks\n    legend.background = element_rect(fill = \"black\", color = NA),  # Dark legend background\n    legend.text = element_text(color = \"white\")  # White legend text\n  )"
+  }
+]
